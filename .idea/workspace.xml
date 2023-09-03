@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25c940cd-25de-422e-af5a-5778dfbdf4d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Apostador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Conta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Jogo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Loterica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Aposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Aposta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/EntityId.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/EntityId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Aposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Aposta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Apostador.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Apostador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Bicho.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Conta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Conta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Historico.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Historico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Jogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/jogo/Jogo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Loterica.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Loterica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/NumeroAposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/NumeroAposta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/NumeroResultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/NumeroResultado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/Resultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/Resultado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/bicho/bet/bicho/bet/ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/bicho/bet/bicho/bet/ApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,11 +35,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -43,6 +50,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -108,6 +118,8 @@
     </configuration>
     <list>
       <item itemvalue="Compound.back &amp; frontend" />
+      <item itemvalue="npm.frontend" />
+      <item itemvalue="Spring Boot.backend" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -121,7 +133,8 @@
       <workItem from="1693437031710" duration="13000" />
       <workItem from="1693437077606" duration="335000" />
       <workItem from="1693528371618" duration="645000" />
-      <workItem from="1693760355700" duration="1289000" />
+      <workItem from="1693760355700" duration="2329000" />
+      <workItem from="1693780709983" duration="1217000" />
     </task>
     <servers />
   </component>

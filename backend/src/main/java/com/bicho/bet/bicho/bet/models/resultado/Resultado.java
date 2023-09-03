@@ -1,13 +1,12 @@
-package com.bicho.bet.bicho.bet.models;
+package com.bicho.bet.bicho.bet.models.resultado;
 
-import org.hibernate.mapping.Array;
+import com.bicho.bet.bicho.bet.models.core.EntityId;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Resultado extends EntityId{
+public class Resultado extends EntityId {
     private Long idJogo;
     private Double valorAcumulado;
     private LocalDateTime data;

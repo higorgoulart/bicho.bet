@@ -1,4 +1,6 @@
-package com.bicho.bet.bicho.bet.models;
+package com.bicho.bet.bicho.bet.models.conta;
+
+import com.bicho.bet.bicho.bet.models.core.EntityId;
 
 public abstract class Conta extends EntityId {
     private String nome;

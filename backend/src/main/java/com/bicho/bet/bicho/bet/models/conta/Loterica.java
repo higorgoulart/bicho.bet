@@ -1,4 +1,6 @@
-package com.bicho.bet.bicho.bet.models;
+package com.bicho.bet.bicho.bet.models.conta;
+
+import com.bicho.bet.bicho.bet.models.jogo.Jogo;
 
 import java.time.LocalDateTime;
 

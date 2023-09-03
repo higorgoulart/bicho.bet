@@ -1,4 +1,6 @@
-package com.bicho.bet.bicho.bet.models;
+package com.bicho.bet.bicho.bet.models.jogo;
+
+import com.bicho.bet.bicho.bet.models.core.EntityId;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +14,7 @@ public class Jogo extends EntityId {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
     }
+
     public Long getIdLoterica() {
         return idLoterica;
     }
