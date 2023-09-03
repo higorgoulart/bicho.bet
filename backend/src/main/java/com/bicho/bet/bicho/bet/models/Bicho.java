@@ -1,4 +1,4 @@
-package com.bicho.bet.bicho.bet.model;
+package com.bicho.bet.bicho.bet.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
