@@ -20,4 +20,4 @@ Utilizado [dbdiagram](https://dbdiagram.io/), confira o nosso [Modelo Físico](h
 ### Colaboradores:
 
 - [@higorgoulart](https://github.com/higorgoulart)
-- 
+- [@guilherme-savio](https://github.com/guilherme-savio)
