@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Aposta extends Entity {
+public class Aposta extends EntityId {
     private Long idApostador;
     private Long idJogo;
     private Double valor;

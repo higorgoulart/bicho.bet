@@ -1,6 +1,6 @@
 package com.bicho.bet.bicho.bet.models;
 
-public class Entity {
+public class EntityId {
     private Long id;
 
     private Long getId() {
