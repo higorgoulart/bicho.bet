@@ -1,4 +1,4 @@
-package com.bicho.bet.bicho.bet.models;
+package com.bicho.bet.bicho.bet.enums;
 
 public enum TipoAposta {
     GRUPO, 
