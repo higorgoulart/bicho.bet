@@ -1,20 +1,27 @@
 package com.bicho.bet.bicho.bet.models.resultado;
 
 import com.bicho.bet.bicho.bet.models.core.EntityId;
+import com.bicho.bet.bicho.bet.models.jogo.Jogo;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Resultado extends EntityId {
-    private Long idJogo;
-    private Double valorAcumulado;
-    private LocalDateTime data;
-    private List<NumeroResultado> numeros = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "jogo_id")
+    private Jogo jogo;
 
-    public Long getIdJogo() {
-        return idJogo;
-    }
+    @Column(name = "valor_acumulado")
+    private Double valorAcumulado;
+
+    @Column(name = "data")
+    private LocalDateTime data;
+
+    @OneToMany(mappedBy = "resultado")
+    private List<NumeroResultado> numeros = new ArrayList<>();
 
     public Double getValorAcumulado() {
         return valorAcumulado;

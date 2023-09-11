@@ -2,9 +2,18 @@ package com.bicho.bet.bicho.bet.models.conta;
 
 import com.bicho.bet.bicho.bet.models.core.EntityId;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Conta extends EntityId {
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "telefone")
     private String telefone;
+
+    @Column(name = "saldo")
     private double saldo;
 
     public String getNome() {

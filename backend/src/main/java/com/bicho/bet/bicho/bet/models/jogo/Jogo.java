@@ -1,26 +1,34 @@
 package com.bicho.bet.bicho.bet.models.jogo;
 
+import com.bicho.bet.bicho.bet.models.conta.Loterica;
 import com.bicho.bet.bicho.bet.models.core.EntityId;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+@Entity
 public class Jogo extends EntityId {
-    private Long idLoterica;
+    @ManyToOne
+    @JoinColumn(name = "loterica_id")
+    private Loterica loterica;
+
+    @Column(name = "dt_inicio")
     private LocalDateTime dataInicio;
+
+    @Column(name = "dt_fim")
     private LocalDateTime dataFim;
 
-    public Jogo(Long idLoterica, LocalDateTime dataInicio, LocalDateTime dataFim) {
-        this.idLoterica = idLoterica;
+    public Jogo(Loterica loterica, LocalDateTime dataInicio, LocalDateTime dataFim) {
+        this.loterica = loterica;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
     }
 
-    public Long getIdLoterica() {
-        return idLoterica;
-    }
+    public Jogo() {
 
-    public void setIdLoterica(Long idLoterica) {
-        this.idLoterica = idLoterica;
     }
 
     public LocalDateTime getDataInicio() {
