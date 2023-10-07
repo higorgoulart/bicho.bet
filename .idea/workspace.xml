@@ -5,17 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25c940cd-25de-422e-af5a-5778dfbdf4d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/AbstractService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/utils/ListUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Aposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Aposta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Historico.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Historico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/NumeroAposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/NumeroAposta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Apostador.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Apostador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Conta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Conta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Loterica.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Loterica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/core/EntityId.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/core/EntityId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/jogo/Jogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/jogo/Jogo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/NumeroResultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/NumeroResultado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/Resultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/Resultado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostadorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostadorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/JogoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/JogoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/ApostaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/ApostaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/JogoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/JogoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -62,29 +63,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Higor/Documents/Codigo/bicho.bet&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;2879187a0207711c157e63322522fc31&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Git/bicho.bet",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "spring.configuration.checksum": "2879187a0207711c157e63322522fc31",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.bicho.bet.bicho.bet.models" />
@@ -136,6 +137,7 @@
       <workItem from="1693760355700" duration="2329000" />
       <workItem from="1693780709983" duration="1217000" />
       <workItem from="1694443268985" duration="1094000" />
+      <workItem from="1696699552023" duration="1617000" />
     </task>
     <servers />
   </component>

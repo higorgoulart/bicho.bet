@@ -11,18 +11,23 @@ import com.bicho.bet.bicho.bet.models.resultado.NumeroResultado;
 import com.bicho.bet.bicho.bet.repositories.ApostaRepository;
 
 @Service
-public class ApostaService {
+public class ApostaService extends AbstractService<Aposta, Long> {
     @Autowired
     private ApostaRepository repository;
+
+    @Override
+    public ApostaRepository getRepository() {
+        return repository;
+    }
 
     public void premiarVencedores(List<NumeroResultado> numeros) {
         obterApostasCorretasPosicao(numeros)
             .forEach(pair -> {
-                var posicao = pair.getFirst();
+                var posicoes = pair.getFirst();
                 var aposta = pair.getSecond();
 
                 var apostador = aposta.getApostador();
-                var multiplicador = aposta.obterMultiplicador(posicao);
+                var multiplicador = aposta.obterMultiplicador(posicoes);
 
                 apostador.setSaldo(apostador.getSaldo() + (aposta.getValor() * multiplicador));
 
@@ -32,5 +37,6 @@ public class ApostaService {
 
     private List<Pair<List<Integer>, Aposta>> obterApostasCorretasPosicao(List<NumeroResultado> numeros) {
         // TODO: fazer select que retorne apostas com sucesso e posição
+        return null;
     }
 }

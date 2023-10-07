@@ -10,9 +10,14 @@ import com.bicho.bet.bicho.bet.models.resultado.Resultado;
 import com.bicho.bet.bicho.bet.repositories.JogoRepository;
 
 @Service
-public class JogoService {
+public class JogoService extends AbstractService<Jogo, Long> {
     @Autowired
     private JogoRepository repository;
+
+    @Override
+    public JogoRepository getRepository() {
+        return repository;
+    }
 
     @Autowired
     private ApostaService apostaService;

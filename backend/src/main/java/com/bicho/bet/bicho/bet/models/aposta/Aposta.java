@@ -6,6 +6,7 @@ import com.bicho.bet.bicho.bet.models.conta.Apostador;
 import com.bicho.bet.bicho.bet.models.core.EntityId;
 import com.bicho.bet.bicho.bet.models.jogo.Jogo;
 import com.bicho.bet.bicho.bet.models.resultado.NumeroResultado;
+import com.bicho.bet.bicho.bet.utils.ListUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -45,6 +46,10 @@ public class Aposta extends EntityId {
         this.numeros = numeros;
     }
 
+    public Aposta() {
+
+    }
+
     public Apostador getApostador() {
         return apostador;
     }
@@ -70,58 +75,80 @@ public class Aposta extends EntityId {
     }
 
     public Double obterMultiplicador(List<Integer> posicoes) {
-        switch (tipo) {
-            case GRUPO: 
-            return posicoes.contains(1) ? 12.0 : 3.0;
-            case DUQUE: 
-            return posicoes.contains(1) && posicoes.contains(2)
-                ? 95.0
-                : posicoes.size() == 2
-                    ? 12.0
-                    : 1.0;
-            case TERNO:
-            return posicoes.contains(1) && posicoes.contains(2) && posicoes.contains(3)
-                ? 700.0
-                : posicoes.size() == 3
-                    ? 42.0
-                    : posicoes.size() == 2
-                        ? 3.0
-                        : 0.75;
-            case QUADRA:
-            return posicoes.contains(1) && posicoes.contains(2) && posicoes.contains(3) && posicoes.contains(4)
-                ? 4000.0
-                : posicoes.size() == 4
-                    ? 500.0
-                    : posicoes.size() == 3
-                        ? 22.0
-                        : posicoes.size() == 2
-                            ? 1.5
-                            : 0.2;
-            case QUINA:
-            return posicoes.contains(1) && posicoes.contains(2) && posicoes.contains(3) && posicoes.contains(4) && posicoes.contains(5)
-                ? 17000.0
-                : posicoes.size() == 4
-                    ? 150.0
-                    : posicoes.size() == 3
-                        ? 8.0
-                        : posicoes.size() == 2
-                            ? 1.0
-                            : 0.2;
-            case DEZENA:
-            return obterMultiplicadorNumerico(posicoes, 50.0, 7.0);
-            case CENTENA:
-            return obterMultiplicadorNumerico(posicoes, 500.0, 60.0);
-            case MILHAR:
-            return obterMultiplicadorNumerico(posicoes, 5000.0, 600.0);
-        }
+        return switch (tipo) {
+            case GRUPO -> obterMultiplicadorGrupo(posicoes);
+            case DUQUE -> obterMultiplicadorDuque(posicoes);
+            case TERNO -> obterMultiplicadorTerno(posicoes);
+            case QUADRA -> obterMultiplicadorQuadra(posicoes);
+            case QUINA -> obterMultiplicadorQuina(posicoes);
+            case DEZENA -> obterMultiplicadorDezena(posicoes);
+            case CENTENA -> obterMultiplicadorCentena(posicoes);
+            case MILHAR -> obterMultiplicadorMilhar(posicoes);
+        };
+    }
 
-        return 0.0;
+    private Double obterMultiplicadorGrupo(List<Integer> posicoes) {
+        return posicoes.contains(1) ? 12.0 : 3.0;
+    }
+
+    private Double obterMultiplicadorDuque(List<Integer> posicoes) {
+        return ListUtils.containsAll(posicoes, 1, 2)
+            ? 95.0
+            : posicoes.size() == 2
+                ? 12.0
+                : 1.0;
+    }
+
+    private Double obterMultiplicadorTerno(List<Integer> posicoes) {
+        return ListUtils.containsAll(posicoes, 1, 2, 3)
+            ? 700.0
+            : posicoes.size() == 3
+                ? 42.0
+                : posicoes.size() == 2
+                    ? 3.0
+                    : 0.75;
+    }
+
+    private Double obterMultiplicadorQuadra(List<Integer> posicoes) {
+        return ListUtils.containsAll(posicoes, 1, 2, 3, 4)
+            ? 4000.0
+            : posicoes.size() == 4
+                ? 500.0
+                : posicoes.size() == 3
+                    ? 22.0
+                    : posicoes.size() == 2
+                        ? 1.5
+                        : 0.2;
+    }
+
+    private Double obterMultiplicadorQuina(List<Integer> posicoes) {
+        return ListUtils.containsAll(posicoes, 1, 2, 3, 4, 5)
+            ? 17000.0
+            : posicoes.size() == 4
+                ? 150.0
+                : posicoes.size() == 3
+                    ? 8.0
+                    : posicoes.size() == 2
+                        ? 1.0
+                        : 0.2;
+    }
+
+    private Double obterMultiplicadorDezena(List<Integer> posicoes) {
+        return obterMultiplicadorNumerico(posicoes, 50.0, 7.0);
+    }
+
+    private Double obterMultiplicadorCentena(List<Integer> posicoes) {
+        return obterMultiplicadorNumerico(posicoes, 500.0, 60.0);
+    }
+
+    private Double obterMultiplicadorMilhar(List<Integer> posicoes) {
+        return obterMultiplicadorNumerico(posicoes, 5000.0, 600.0);
     }
 
     private Double obterMultiplicadorNumerico(List<Integer> posicoes, Double valorPrimeiro, Double valorOutro) {
         return posicoes.contains(1) 
             ? valorPrimeiro
-            : posicoes.contains(2) || posicoes.contains(3) || posicoes.contains(4) || posicoes.contains(5) 
+            : ListUtils.containsAny(posicoes, 2, 3, 4, 5)
                 ? valorOutro
                 : 1.0;
     }
