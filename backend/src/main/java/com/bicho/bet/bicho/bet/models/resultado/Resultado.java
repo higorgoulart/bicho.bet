@@ -23,6 +23,10 @@ public class Resultado extends EntityId {
     @OneToMany(mappedBy = "resultado")
     private List<NumeroResultado> numeros = new ArrayList<>();
 
+    public Resultado(Jogo jogo) {
+        this.jogo = jogo;
+    }
+
     public Double getValorAcumulado() {
         return valorAcumulado;
     }
