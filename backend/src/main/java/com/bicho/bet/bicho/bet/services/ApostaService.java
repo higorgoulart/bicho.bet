@@ -2,8 +2,10 @@ package com.bicho.bet.bicho.bet.services;
 
 import java.util.List;
 
+import com.bicho.bet.bicho.bet.exceptions.JogoSemApostaException;
+import com.bicho.bet.bicho.bet.models.aposta.QAposta;
+import com.bicho.bet.bicho.bet.repositories.ApostadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import com.bicho.bet.bicho.bet.models.aposta.Aposta;
@@ -15,28 +17,39 @@ public class ApostaService extends AbstractService<Aposta, Long> {
     @Autowired
     private ApostaRepository repository;
 
+    @Autowired
+    private ApostadorRepository apostadorRepository;
+
     @Override
     public ApostaRepository getRepository() {
         return repository;
     }
 
-    public void premiarVencedores(List<NumeroResultado> numeros) {
-        obterApostasCorretasPosicao(numeros)
-            .forEach(pair -> {
-                var posicoes = pair.getFirst();
-                var aposta = pair.getSecond();
+    public Double premiarVencedores(Long idJogo, List<NumeroResultado> resultados) throws JogoSemApostaException {
+        var total = 0.0;
 
-                var apostador = aposta.getApostador();
-                var multiplicador = aposta.obterMultiplicador(posicoes);
+        for (Aposta aposta : obterApostasJogo(idJogo)) {
+            var apostador = aposta.getApostador();
 
-                apostador.setSaldo(apostador.getSaldo() + (aposta.getValor() * multiplicador));
+            var premio = aposta.obterPremio(resultados);
 
-                // TODO: fazer saves
-            });
+            apostador.depositar(premio);
+
+            apostadorRepository.save(apostador);
+
+            total += premio;
+        }
+
+        return total;
     }
 
-    private List<Pair<List<Integer>, Aposta>> obterApostasCorretasPosicao(List<NumeroResultado> numeros) {
-        // TODO: fazer select que retorne apostas com sucesso e posição
-        return null;
+    private List<Aposta> obterApostasJogo(Long idJogo) throws JogoSemApostaException {
+        var apostas = repository.findAll(QAposta.aposta.jogo.id.eq(idJogo));
+
+        if (apostas.isEmpty()) {
+            throw new JogoSemApostaException();
+        }
+
+        return apostas;
     }
 }

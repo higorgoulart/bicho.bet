@@ -1,25 +1,16 @@
 package com.bicho.bet.bicho.bet.utils;
 
+import com.bicho.bet.bicho.bet.enums.TipoResultado;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class ListUtils {
-    public static boolean containsAll(List<Integer> list, Integer... elements) {
-        for (Integer element : elements) {
-            if (!list.contains(element)) {
-                return false;
-            }
-        }
-
-        return true;
+    public static boolean containsAll(List<TipoResultado> list, TipoResultado... elements) {
+        return Arrays.stream(elements).allMatch(list::contains);
     }
 
-    public static boolean containsAny(List<Integer> list, Integer... elements) {
-        for (Integer element : elements) {
-            if (list.contains(element)) {
-                return true;
-            }
-        }
-
-        return false;
+    public static boolean containsAny(List<TipoResultado> list, TipoResultado... elements) {
+        return Arrays.stream(elements).anyMatch(list::contains);
     }
 }

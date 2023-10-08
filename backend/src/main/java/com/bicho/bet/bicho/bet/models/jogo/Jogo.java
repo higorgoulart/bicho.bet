@@ -21,6 +21,9 @@ public class Jogo extends EntityId {
     @Column(name = "dt_fim")
     private LocalDateTime dataFim;
 
+    @Column(name = "valor_acumulado")
+    private Double valorAcumulado;
+
     public Jogo(Loterica loterica, LocalDateTime dataInicio, LocalDateTime dataFim) {
         this.loterica = loterica;
         this.dataInicio = dataInicio;
@@ -45,5 +48,21 @@ public class Jogo extends EntityId {
 
     public void setDataFim(LocalDateTime dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public Double getValorAcumulado() {
+        return valorAcumulado;
+    }
+
+    public void setValorAcumulado(Double valorAcumulado) {
+        this.valorAcumulado = valorAcumulado;
+    }
+
+    public Loterica getLoterica() {
+        return loterica;
+    }
+
+    public void setLoterica(Loterica loterica) {
+        this.loterica = loterica;
     }
 }

@@ -2,6 +2,9 @@ package com.bicho.bet.bicho.bet.services;
 
 import java.time.LocalDateTime;
 
+import com.bicho.bet.bicho.bet.exceptions.JogoSemApostaException;
+import com.bicho.bet.bicho.bet.repositories.LotericaRepository;
+import com.bicho.bet.bicho.bet.repositories.ResultadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,12 @@ import com.bicho.bet.bicho.bet.repositories.JogoRepository;
 public class JogoService extends AbstractService<Jogo, Long> {
     @Autowired
     private JogoRepository repository;
+
+    @Autowired
+    private LotericaRepository lotericaRepository;
+
+    @Autowired
+    private ResultadoRepository resultadoRepository;
 
     @Override
     public JogoRepository getRepository() {
@@ -32,13 +41,19 @@ public class JogoService extends AbstractService<Jogo, Long> {
         // TODO: fazer saves
     }
 
-    public void fecharJogo(Jogo jogo) {
+    public void fecharJogo(Jogo jogo) throws JogoSemApostaException {
         jogo.setDataFim(LocalDateTime.now());
 
         var resultado = new Resultado(jogo);
         var numeros = resultado.getNumeroResultados();
-        apostaService.premiarVencedores(numeros);
 
-        // TODO: fazer saves
+        resultadoRepository.save(resultado);
+
+        var totalPremiado = apostaService.premiarVencedores(jogo.getId(), numeros);
+        var lucroLoterica = jogo.getValorAcumulado() - totalPremiado;
+
+        var loterica = jogo.getLoterica();
+        loterica.depositar(lucroLoterica);
+        lotericaRepository.save(loterica);
     }
 }

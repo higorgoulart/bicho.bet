@@ -27,9 +27,9 @@ public enum Bicho {
     VEADO(93, 94, 95, 96),
     VACA(97, 98, 99, 0);
 
-    private final Object[] values;
+    private final Integer[] values;
 
-    Bicho(Object... vals) {
+    Bicho(Integer... vals) {
         values = vals;
     }
 }
