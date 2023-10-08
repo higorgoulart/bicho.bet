@@ -3,6 +3,7 @@ package com.bicho.bet.bicho.bet.services;
 import java.time.LocalDateTime;
 
 import com.bicho.bet.bicho.bet.exceptions.JogoSemApostaException;
+import com.bicho.bet.bicho.bet.exceptions.JogoEmExecucaoException;
 import com.bicho.bet.bicho.bet.repositories.LotericaRepository;
 import com.bicho.bet.bicho.bet.repositories.ResultadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,29 +32,42 @@ public class JogoService extends AbstractService<Jogo, Long> {
     @Autowired
     private ApostaService apostaService;
 
-    public Jogo abrirJogo() {
-        var jogo = new Jogo();
+    private Jogo jogoEmExecucao;
 
+    public Jogo abrirJogo() throws JogoEmExecucaoException {
+        if (jogoEmExecucao != null) {
+            throw new JogoEmExecucaoException();
+        }
+
+        var jogo = new Jogo();
         jogo.setDataInicio(LocalDateTime.now());
 
+        jogoEmExecucao = jogo;
+
         return jogo;
-
-        // TODO: fazer saves
     }
 
-    public void fecharJogo(Jogo jogo) throws JogoSemApostaException {
-        jogo.setDataFim(LocalDateTime.now());
-
-        var resultado = new Resultado(jogo);
-        var numeros = resultado.getNumeroResultados();
-
-        resultadoRepository.save(resultado);
-
-        var totalPremiado = apostaService.premiarVencedores(jogo.getId(), numeros);
-        var lucroLoterica = jogo.getValorAcumulado() - totalPremiado;
-
-        var loterica = jogo.getLoterica();
-        loterica.depositar(lucroLoterica);
-        lotericaRepository.save(loterica);
+public void fecharJogo(Jogo jogo) throws JogoSemApostaException {
+    if (jogo != jogoEmExecucao) {
+        throw new IllegalArgumentException("O jogo informado não está em execução.");
     }
+
+    jogo.setDataFim(LocalDateTime.now());
+
+    var resultado = new Resultado(jogo);
+    var numeros = resultado.getNumeroResultados();
+
+    resultadoRepository.save(resultado);
+
+    var totalPremiado = apostaService.premiarVencedores(jogo.getId(), numeros);
+    var lucroLoterica = jogo.getValorAcumulado() - totalPremiado;
+
+    var loterica = jogo.getLoterica();
+    loterica.depositar(lucroLoterica);
+    lotericaRepository.save(loterica);
+
+    jogoEmExecucao = null;
+}
+
+
 }
