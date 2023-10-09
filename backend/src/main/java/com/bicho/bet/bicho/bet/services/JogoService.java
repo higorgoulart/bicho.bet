@@ -47,27 +47,25 @@ public class JogoService extends AbstractService<Jogo, Long> {
         return jogo;
     }
 
-public void fecharJogo(Jogo jogo) throws JogoSemApostaException {
-    if (jogo != jogoEmExecucao) {
-        throw new IllegalArgumentException("O jogo informado não está em execução.");
+    public void fecharJogo(Jogo jogo) throws JogoSemApostaException {
+        if (jogo != jogoEmExecucao) {
+            throw new IllegalArgumentException("O jogo informado não está em execução.");
+        }
+
+        jogo.setDataFim(LocalDateTime.now());
+
+        var resultado = new Resultado(jogo);
+        var numeros = resultado.getNumeroResultados();
+
+        resultadoRepository.save(resultado);
+
+        var totalPremiado = apostaService.premiarVencedores(jogo.getId(), numeros);
+        var lucroLoterica = jogo.getValorAcumulado() - totalPremiado;
+
+        var loterica = jogo.getLoterica();
+        loterica.depositar(lucroLoterica);
+        lotericaRepository.save(loterica);
+
+        jogoEmExecucao = null;
     }
-
-    jogo.setDataFim(LocalDateTime.now());
-
-    var resultado = new Resultado(jogo);
-    var numeros = resultado.getNumeroResultados();
-
-    resultadoRepository.save(resultado);
-
-    var totalPremiado = apostaService.premiarVencedores(jogo.getId(), numeros);
-    var lucroLoterica = jogo.getValorAcumulado() - totalPremiado;
-
-    var loterica = jogo.getLoterica();
-    loterica.depositar(lucroLoterica);
-    lotericaRepository.save(loterica);
-
-    jogoEmExecucao = null;
-}
-
-
 }
