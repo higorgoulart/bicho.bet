@@ -2,9 +2,10 @@ package com.bicho.bet.bicho.bet.services;
 
 import java.time.LocalDateTime;
 
+import com.bicho.bet.bicho.bet.enums.StatusJogo;
 import com.bicho.bet.bicho.bet.exceptions.JogoSemApostaException;
 import com.bicho.bet.bicho.bet.exceptions.JogoEmExecucaoException;
-import com.bicho.bet.bicho.bet.repositories.LotericaRepository;
+import com.bicho.bet.bicho.bet.models.jogo.QJogo;
 import com.bicho.bet.bicho.bet.repositories.ResultadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,12 @@ import com.bicho.bet.bicho.bet.models.resultado.Resultado;
 import com.bicho.bet.bicho.bet.repositories.JogoRepository;
 
 @Service
-public class JogoService extends AbstractService<Jogo, Long> {
+public class JogoService extends BaseService<Jogo, Long> {
     @Autowired
     private JogoRepository repository;
 
     @Autowired
-    private LotericaRepository lotericaRepository;
+    private LotericaService lotericaService;
 
     @Autowired
     private ResultadoRepository resultadoRepository;
@@ -32,27 +33,28 @@ public class JogoService extends AbstractService<Jogo, Long> {
     @Autowired
     private ApostaService apostaService;
 
-    private Jogo jogoEmExecucao;
-
-    public Jogo abrirJogo() throws JogoEmExecucaoException {
-        if (jogoEmExecucao != null) {
+    public Jogo abrirJogo(Long idLoterica) throws JogoEmExecucaoException {
+        if (repository.exists(QJogo.jogo.loterica.id.eq(idLoterica)
+                .and(QJogo.jogo.status.eq(StatusJogo.ABERTO)))) {
             throw new JogoEmExecucaoException();
         }
 
         var jogo = new Jogo();
         jogo.setDataInicio(LocalDateTime.now());
-
-        jogoEmExecucao = jogo;
+        jogo.setLoterica(lotericaService.getById(idLoterica));
+        jogo.setStatus(StatusJogo.ABERTO);
 
         return jogo;
     }
 
-    public void fecharJogo(Jogo jogo) throws JogoSemApostaException {
-        if (jogo != jogoEmExecucao) {
+    public Jogo fecharJogo(Jogo jogo) throws JogoSemApostaException {
+        if (!repository.exists(QJogo.jogo.id.eq(jogo.getId())
+                .and(QJogo.jogo.status.eq(StatusJogo.ABERTO)))) {
             throw new IllegalArgumentException("O jogo informado não está em execução.");
         }
 
         jogo.setDataFim(LocalDateTime.now());
+        jogo.setStatus(StatusJogo.FECHADO);
 
         var resultado = new Resultado(jogo);
         var numeros = resultado.getNumeroResultados();
@@ -64,8 +66,7 @@ public class JogoService extends AbstractService<Jogo, Long> {
 
         var loterica = jogo.getLoterica();
         loterica.depositar(lucroLoterica);
-        lotericaRepository.save(loterica);
-
-        jogoEmExecucao = null;
+        lotericaService.update(loterica.getId(), loterica);
+        return update(jogo.getId(), jogo);
     }
 }

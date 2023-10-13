@@ -6,7 +6,7 @@ import com.bicho.bet.bicho.bet.repositories.ApostaRepository;
 import com.bicho.bet.bicho.bet.repositories.ApostadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ApostadorService extends AbstractService<Apostador, Long>{
+public class ApostadorService extends BaseService<Apostador, Long> {
     @Autowired
     private ApostaRepository apostaRepository;
 

@@ -13,7 +13,7 @@ import com.bicho.bet.bicho.bet.models.resultado.NumeroResultado;
 import com.bicho.bet.bicho.bet.repositories.ApostaRepository;
 
 @Service
-public class ApostaService extends AbstractService<Aposta, Long> {
+public class ApostaService extends BaseService<Aposta, Long> {
     @Autowired
     private ApostaRepository repository;
 
@@ -43,7 +43,7 @@ public class ApostaService extends AbstractService<Aposta, Long> {
         return total;
     }
 
-    private List<Aposta> obterApostasJogo(Long idJogo) throws JogoSemApostaException {
+    public List<Aposta> obterApostasJogo(Long idJogo) throws JogoSemApostaException {
         var apostas = repository.findAll(QAposta.aposta.jogo.id.eq(idJogo));
 
         if (apostas.isEmpty()) {
