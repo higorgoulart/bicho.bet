@@ -1,16 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: "#252526",
+          secondary: "#3E3E42",
+        },
+      },
+    ],
   },
   plugins: [require("daisyui")],
-  daisyui: {
-    themes: true,
-    darkTheme: "cyberpunk"
-  },
 }
 
