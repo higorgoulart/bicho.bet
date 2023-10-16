@@ -1,11 +1,18 @@
 package com.bicho.bet.bicho.bet.services;
 
+import com.bicho.bet.bicho.bet.exceptions.NotFoundException;
 import com.bicho.bet.bicho.bet.models.core.EntityId;
+import com.bicho.bet.bicho.bet.utils.StringUtils;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public abstract class BaseService<T extends EntityId, ID> {
+    @Autowired
+    private ModelMapper autoMapper;
+
     protected abstract JpaRepository<T, ID> getRepository();
 
     public List<T> getAll() {
@@ -21,17 +28,22 @@ public abstract class BaseService<T extends EntityId, ID> {
     }
 
     public T update(ID id, T entity) {
-        return getRepository().findById(id)
-                .map(e -> saveAndReturnSavedEntity(entity, e))
-                .orElse(null);
+        var exists = getRepository().findById(id);
+
+        if (exists.isEmpty()) {
+            var object = getRepository().getClass().getName();
+
+            throw new NotFoundException(StringUtils.remove(object, "Repository"));
+        }
+
+        var dbEntity = exists.get();
+
+        autoMapper.map(entity, dbEntity);
+
+        return getRepository().save(dbEntity);
     }
 
     public void delete(ID id) {
         getRepository().deleteById(id);
-    }
-
-    private T saveAndReturnSavedEntity(T entity, T entityFromDB) {
-        entity.setId(entityFromDB.getId());
-        return getRepository().save(entity);
     }
 }

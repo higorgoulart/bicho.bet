@@ -18,13 +18,13 @@ public class ApostadorService extends BaseService<Apostador, Long> {
         return repository;
     }
 
-    public Double sacar(Double valorSaque) throws SaqueInvalidoException {
-        double valorSaldo = repository.getSaldo();
-        double valorAposta = apostaRepository.getValor();
-        if (valorSaque < valorAposta*3.00 || valorSaque > valorSaldo){
-            throw new SaqueInvalidoException();
-        }
-        repository.setSaldo(valorSaldo - valorSaque);
-        return valorSaque;
-    }
+//    public Double sacar(Double valorSaque) throws SaqueInvalidoException {
+//        double valorSaldo = repository.getSaldo();
+//        double valorAposta = apostaRepository.getValor();
+//        if (valorSaque < valorAposta*3.00 || valorSaque > valorSaldo){
+//            throw new SaqueInvalidoException();
+//        }
+//        repository.setSaldo(valorSaldo - valorSaque);
+//        return valorSaque;
+//    }
 }

@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25c940cd-25de-422e-af5a-5778dfbdf4d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/enums/TipoResultado.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/exceptions/JogoSemApostaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/CustomQuerydslPredicateExecutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/LotericaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ResultadoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/exceptions/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/utils/StringUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/enums/Bicho.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/enums/Bicho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Aposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/aposta/Aposta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Conta.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/conta/Conta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/jogo/Jogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/jogo/Jogo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/NumeroResultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/NumeroResultado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/Resultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/models/resultado/Resultado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostadorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/ApostadorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/JogoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/repositories/JogoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/ApostaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/ApostaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/JogoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/JogoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/utils/ListUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/utils/ListUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/ApostadorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/ApostadorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/BaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/services/BaseService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +72,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Git/bicho.bet&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git/agenday-serv&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -102,6 +90,8 @@
       <recent name="com.bicho.bet.bicho.bet.models" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bicho.bet.bicho.bet.services" />
+      <recent name="com.bicho.bet.bicho.bet.controllers" />
       <recent name="com.bicho.bet.bicho.bet.repositories" />
       <recent name="com.bicho.bet.bicho.bet.enums" />
       <recent name="com.bicho.bet.bicho.bet.model" />
@@ -154,6 +144,9 @@
       <workItem from="1696709295070" duration="84000" />
       <workItem from="1696772544058" duration="6578000" />
       <workItem from="1696941647745" duration="12000" />
+      <workItem from="1697206712758" duration="2333000" />
+      <workItem from="1697226741828" duration="24000" />
+      <workItem from="1697496044445" duration="1251000" />
     </task>
     <servers />
   </component>
