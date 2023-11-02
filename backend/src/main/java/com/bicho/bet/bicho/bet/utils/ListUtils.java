@@ -1,6 +1,6 @@
 package com.bicho.bet.bicho.bet.utils;
 
-import com.bicho.bet.bicho.bet.enums.TipoResultado;
+import com.bicho.bet.bicho.bet.resultado.TipoResultado;
 
 import java.util.Arrays;
 import java.util.List;
