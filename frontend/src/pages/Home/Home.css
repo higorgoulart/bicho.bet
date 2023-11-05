@@ -1,0 +1,20 @@
+.card-actions .btn {
+    text-transform: none;
+}
+
+.glow-blue {
+    border: 1px solid #00B2FF;
+    border-radius: 4px;
+    box-shadow: 0 0 15px #00B2FF;
+}
+
+.glow-pink {
+    border: 1px solid #EA0FFD;
+    border-radius: 4px;
+    box-shadow: 0 0 15px #EA0FFD;
+}
+
+.history {
+    display: flex;
+    justify-content: end;
+} 
