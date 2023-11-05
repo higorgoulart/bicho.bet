@@ -22,3 +22,4 @@ Utilizado [dbdiagram](https://dbdiagram.io/), confira o nosso [Modelo Físico](h
 - [@higorgoulart](https://github.com/higorgoulart)
 - [@guilherme-savio](https://github.com/guilherme-savio)
 - [@GabrielGuinzani](https://github.com/GabrielGuinzani)
+- [@phillCD](https://github.com/phillCD)
