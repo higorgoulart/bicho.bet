@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/jogos")
+@RequestMapping("jogos")
 public class JogoController extends BaseController<Jogo, Long> {
     @Autowired
     private JogoService service;

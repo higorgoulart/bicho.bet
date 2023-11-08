@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-function Account() {
+export default function Account() {
     let { id } = useParams();
 
     console.log(id);
@@ -11,5 +11,3 @@ function Account() {
         </div>
     )
 }
-
-export default Account;

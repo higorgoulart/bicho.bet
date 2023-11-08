@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-function Bet() {
+export default function Bet() {
     let { id } = useParams();
 
     return (
@@ -9,5 +9,3 @@ function Bet() {
         </div>
     );
 }
-
-export default Bet;

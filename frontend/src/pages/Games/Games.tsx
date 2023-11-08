@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Games() {
+export default function Games() {
     const [games, setGames] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:8080/jogos")
@@ -9,7 +11,7 @@ function Games() {
             .then((data) => {
                 console.log(data);
                 setGames(data.map((x, i) => (
-                    <tr className="hover">
+                    <tr className="hover cursor-pointer" onClick={() => navigate(`/jogos/${x.id}`)}>
                         <th>{i + 1}</th>
                         <td>{x.loterica.nome}</td>
                         <td>{x.dataInicio}</td>
@@ -24,7 +26,7 @@ function Games() {
     }, []);
 
     return (
-        <div className="flex justify-center mt-[5%]">
+        <div className="flex justify-center">
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
@@ -44,5 +46,3 @@ function Games() {
         </div>
     );
 }
-
-export default Games;

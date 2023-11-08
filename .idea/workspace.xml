@@ -5,30 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25c940cd-25de-422e-af5a-5778dfbdf4d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Account/Account.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Bet/Bet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Games/Games.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Historic/Historic.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Result/Result.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Support/Support.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/apostador/ApostadorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/loterica/LotericaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/resultado/ResultadoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/resultado/ResultadoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/aligator.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/bear.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/bull.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/butterfly.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/camel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/cat.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/cow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/deer.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/dog.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/donkey.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/eagle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/elephant.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/goat.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/horse.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/lion.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/monkey.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/ostrich.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/peacock.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/pig.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/rabbit.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/ram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/rooster.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/snake.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/tiger.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/turkey.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Title.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Game/Game.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/NewBet/Animal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/NewBet/NewBet.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/aposta/ApostaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/aposta/ApostaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/aposta/ApostaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/aposta/ApostaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/exceptions/JogoSemApostaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/exceptions/JogoSemApostaException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/jogo/Jogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/jogo/Jogo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/apostador/ApostadorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/apostador/ApostadorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/jogo/JogoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/jogo/JogoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/resultado/Resultado.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bicho/bet/bicho/bet/resultado/Resultado.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Router.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/DefaultLayout/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/DefaultLayout/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/DefaultLayout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/DefaultLayout/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/History.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home/LinkCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home/Home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Account/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Account/Account.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Bet/Bet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Bet/Bet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Games/Games.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Games/Games.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Historic/Historic.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Historic/Historic.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/Payment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home/Payment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/Results.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home/LinkCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home/LinkCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Result/Result.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Results/Results.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Support/Support.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Support/Support.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +112,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Git/bicho.bet/frontend/src/pages",
+    "last_opened_file_path": "C:/Git/bicho.bet/frontend/src/assets",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -109,17 +131,18 @@
       <recent name="com.bicho.bet.bicho.bet.models" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Git\bicho.bet\frontend\src\assets" />
+      <recent name="C:\Git\bicho.bet\frontend\src\pages\NewBet" />
       <recent name="C:\Git\bicho.bet\frontend\src\pages" />
+      <recent name="C:\Git\bicho.bet\frontend\src\components" />
       <recent name="C:\Git\bicho.bet\frontend\src\pages\Home" />
-      <recent name="C:\Git\bicho.bet\frontend\src\pages\Account" />
-      <recent name="C:\Git\bicho.bet\backend\src\main\java\com\bicho\bet\bicho\bet" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bicho.bet.bicho.bet.resultado" />
+      <recent name="com.bicho.bet.bicho.bet.loterica" />
+      <recent name="com.bicho.bet.bicho.bet.apostador" />
       <recent name="com.bicho.bet.bicho.bet.services" />
       <recent name="com.bicho.bet.bicho.bet.controllers" />
-      <recent name="com.bicho.bet.bicho.bet.repositories" />
-      <recent name="com.bicho.bet.bicho.bet.enums" />
-      <recent name="com.bicho.bet.bicho.bet.model" />
     </key>
   </component>
   <component name="RunManager" selected="Compound.back &amp; frontend">
@@ -174,6 +197,7 @@
       <workItem from="1697496044445" duration="1251000" />
       <workItem from="1697543392129" duration="26000" />
       <workItem from="1699446681487" duration="8939000" />
+      <workItem from="1699474846042" duration="10048000" />
     </task>
     <servers />
   </component>

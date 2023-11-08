@@ -4,7 +4,7 @@ import { LinkCard } from "./LinkCard";
 
 import './Home.css'
 
-function Home() {
+export default function Home() {
     const accountId = 1;
 
     return (
@@ -33,5 +33,3 @@ function Home() {
         </>
     )
 }
-
-export default Home;

@@ -3,6 +3,7 @@ package com.bicho.bet.bicho.bet.resultado;
 import com.bicho.bet.bicho.bet.aposta.BichoType;
 import com.bicho.bet.bicho.bet.core.EntityId;
 import com.bicho.bet.bicho.bet.jogo.Jogo;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Resultado extends EntityId {
     @JoinColumn(name = "jogo_id")
     private Jogo jogo;
 
+    @Getter
     @Column(name = "data")
     private LocalDateTime data;
 
@@ -27,10 +29,6 @@ public class Resultado extends EntityId {
     public Resultado(Jogo jogo) {
         this.jogo = jogo;
         this.numeros = gerarResultado();
-    }
-
-    public LocalDateTime getData() {
-        return data;
     }
 
     public List<NumeroResultado> getNumeroResultados() {
