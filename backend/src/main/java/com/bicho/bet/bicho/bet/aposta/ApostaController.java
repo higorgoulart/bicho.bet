@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/apostas")
+@RequestMapping("apostas")
 public class ApostaController extends BaseController<Aposta, Long> {
     @Autowired
     private ApostaService service;
@@ -22,8 +22,13 @@ public class ApostaController extends BaseController<Aposta, Long> {
         return service;
     }
 
-    @GetMapping("/jogos/{idJogo}")
-    public List<Aposta> obterPorJogo(@PathVariable Long idJogo) throws JogoSemApostaException {
+    @GetMapping("jogos/{idJogo}")
+    public List<Aposta> obterPorJogo(@PathVariable Long idJogo) {
         return service.obterApostasJogo(idJogo);
+    }
+
+    @GetMapping("apostadores/{idApostador}")
+    public List<Aposta> obterPorApostador(@PathVariable Long idApostador) {
+        return service.obterPorApostador(idApostador);
     }
 }

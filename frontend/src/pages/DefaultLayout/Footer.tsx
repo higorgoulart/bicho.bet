@@ -1,8 +1,10 @@
+import secondaryLogo from '../../assets/secondary-logo.svg'
+
 export function Footer() {
     return (
         <footer className="footer p-10 bg-secondary text-base-content">
             <aside>
-                <img src="src/assets/secondary-logo.svg"/>
+                <img src={secondaryLogo} />
                 <p>
                     © 2023 Bicho.bet Todos os direitos reservados.
                     <br />

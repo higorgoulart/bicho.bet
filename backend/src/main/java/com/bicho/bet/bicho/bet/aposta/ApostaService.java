@@ -42,8 +42,18 @@ public class ApostaService extends BaseService<Aposta, Long> {
         return total;
     }
 
-    public List<Aposta> obterApostasJogo(Long idJogo) throws JogoSemApostaException {
+    public List<Aposta> obterApostasJogo(Long idJogo) {
         var apostas = repository.findAll(QAposta.aposta.jogo.id.eq(idJogo));
+
+        if (apostas.isEmpty()) {
+            throw new JogoSemApostaException();
+        }
+
+        return apostas;
+    }
+
+    public List<Aposta> obterPorApostador(Long idApostador) {
+        var apostas = repository.findAll(QAposta.aposta.apostador.id.eq(idApostador));
 
         if (apostas.isEmpty()) {
             throw new JogoSemApostaException();
