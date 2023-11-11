@@ -21,7 +21,15 @@ export default function Games() {
                 )));
             })
             .catch((err) => {
-                setGames([]);
+                setGames([
+                    (<tr className="hover cursor-pointer" onClick={() => navigate(`/jogos/${1}`)}>
+                    <th>{1}</th>
+                    <td>{"TESTE"}</td>
+                    <td>{"01/01/2000"}</td>
+                    <td>{"01/01/2020"}</td>
+                    <td>{"1000"}</td>
+                    </tr>)
+                ]);
             });
     }, []);
 
