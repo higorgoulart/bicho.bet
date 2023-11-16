@@ -2,10 +2,12 @@ package com.bicho.bet.apostador;
 
 import com.bicho.bet.aposta.ApostaRepository;
 import com.bicho.bet.core.BaseService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class ApostadorService extends BaseService<Apostador, Long> {
     @Autowired
     private ApostaRepository apostaRepository;

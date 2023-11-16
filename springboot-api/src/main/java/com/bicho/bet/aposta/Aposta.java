@@ -6,6 +6,7 @@ import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
 import com.bicho.bet.resultado.NumeroResultado;
 import com.bicho.bet.utils.ListUtils;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,8 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Entity
+@Builder
+@Getter
 @NoArgsConstructor
 public class Aposta extends EntityId {
     @ManyToOne
