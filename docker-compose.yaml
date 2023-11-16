@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=bichobet
   spring-api:
     build:
       context: ./springboot-api
