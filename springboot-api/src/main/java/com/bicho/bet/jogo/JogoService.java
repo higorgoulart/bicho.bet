@@ -10,10 +10,12 @@ import com.bicho.bet.resultado.ResultadoRepository;
 import com.bicho.bet.core.BaseService;
 import com.bicho.bet.loterica.LotericaService;
 import com.bicho.bet.resultado.Resultado;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class JogoService extends BaseService<Jogo, Long> {
     @Autowired
     private JogoRepository repository;
