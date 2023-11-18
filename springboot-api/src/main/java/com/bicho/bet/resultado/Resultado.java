@@ -1,6 +1,5 @@
 package com.bicho.bet.resultado;
 
-import com.bicho.bet.aposta.BichoType;
 import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
 import lombok.Getter;

@@ -8,6 +8,7 @@ import com.bicho.bet.resultado.NumeroResultado;
 import com.bicho.bet.utils.ListUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -36,10 +37,11 @@ public class Aposta extends EntityId {
     @Column(name = "tipo")
     private TipoAposta tipo;
 
-    @OneToMany(mappedBy = "aposta")
-    private List<NumeroAposta> numeros = new ArrayList<>();
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private NumeroAposta numeros;
 
-    public Aposta(Apostador apostador, Jogo jogo, Double valor, LocalDateTime data, TipoAposta tipo, List<NumeroAposta> numeros) {
+    public Aposta(Apostador apostador, Jogo jogo, Double valor, LocalDateTime data, TipoAposta tipo, NumeroAposta numeros) {
         this.apostador = apostador;
         this.jogo = jogo;
         this.valor = valor;
@@ -57,38 +59,38 @@ public class Aposta extends EntityId {
 
     private List<TipoResultado> obterPosicoesCorretas(List<NumeroResultado> resultados) {
         var posicoes = new ArrayList<TipoResultado>();
-
-        int i = 1;
-
-        for (var resultado : resultados) {
-            for (var apostado : getNumeros()) {
-                var numeroAposta = apostado.getNumero();
-                boolean acerto;
-
-                if (numeroAposta < 100) {
-                    acerto = resultado.getDezena().equals(numeroAposta);
-                } else if (numeroAposta < 1000) {
-                    acerto = resultado.getCentena().equals(numeroAposta);
-                } else {
-                    acerto = resultado.getNumero().equals(numeroAposta);
-                }
-
-                if (acerto) {
-                    posicoes.add(TipoResultado.valueOf(Integer.toString(i)));
-                } else if (getTipo() == TipoAposta.DEZENA ||
-                           getTipo() == TipoAposta.CENTENA ||
-                           getTipo() == TipoAposta.MILHAR) {
-                    var bichoApostado = BichoType.valueOf(numeroAposta.toString());
-                    var bichoResultado = BichoType.valueOf(resultado.getDezena().toString());
-
-                    if (bichoApostado.equals(bichoResultado)) {
-                        posicoes.add(TipoResultado.BICHO);
-                    }
-                }
-            }
-
-            i++;
-        }
+//
+//        int i = 1;
+//
+//        for (var resultado : resultados) {
+//            for (var apostado : getNumeros()) {
+//                var numeroAposta = apostado.getNumero();
+//                boolean acerto;
+//
+//                if (numeroAposta < 100) {
+//                    acerto = resultado.getDezena().equals(numeroAposta);
+//                } else if (numeroAposta < 1000) {
+//                    acerto = resultado.getCentena().equals(numeroAposta);
+//                } else {
+//                    acerto = resultado.getNumero().equals(numeroAposta);
+//                }
+//
+//                if (acerto) {
+//                    posicoes.add(TipoResultado.valueOf(Integer.toString(i)));
+//                } else if (getTipo() == TipoAposta.DEZENA ||
+//                           getTipo() == TipoAposta.CENTENA ||
+//                           getTipo() == TipoAposta.MILHAR) {
+//                    var bichoApostado = BichoType.valueOf(numeroAposta.toString());
+//                    var bichoResultado = BichoType.valueOf(resultado.getDezena().toString());
+//
+//                    if (bichoApostado.equals(bichoResultado)) {
+//                        posicoes.add(TipoResultado.BICHO);
+//                    }
+//                }
+//            }
+//
+//            i++;
+//        }
 
         return posicoes;
     }

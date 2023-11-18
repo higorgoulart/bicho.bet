@@ -48,7 +48,7 @@ public class Apostador extends Conta {
         this.limite = limite;
     }
 
-    public Long apostar(Jogo jogo, Double valor, TipoAposta tipo, List<NumeroAposta> numeros) throws ContaSemSaldoException {
+    public Long apostar(Jogo jogo, Double valor, TipoAposta tipo, NumeroAposta numeros) throws ContaSemSaldoException {
         if (valor > this.getSaldo()) {
             throw new ContaSemSaldoException();
         }

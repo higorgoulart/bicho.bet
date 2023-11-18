@@ -1,14 +1,12 @@
-package com.bicho.bet.aposta;
+package com.bicho.bet.animais;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class NumeroAposta implements Serializable {
-
+public class BichoNumeros implements Serializable {
     private List<Integer> numero;
 
     public List<Integer> getNumero() {
