@@ -1,5 +1,6 @@
-import primaryLogo from '../../assets/primary-logo.svg'
+import secondaryLogo from '../../assets/monkey_solid_logo.svg'
 import userIcon from '../../assets/user-icon.svg'
+
 
 export function Header() {
     const accountId = 1;
@@ -21,7 +22,7 @@ export function Header() {
             </div>
             <div className="navbar-center">
                 <a href="/">
-                    <img src={primaryLogo} className="w-32" />
+                    <img src={secondaryLogo} className="w-16" />
                 </a>
             </div>
             <div className="navbar-end">
