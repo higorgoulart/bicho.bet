@@ -9,6 +9,7 @@ export default function Home() {
 
     return (
         <>
+        <div>
             <Welcome />
             <div className="flex justify-center my-[5%]">
                 <LinkCard
@@ -30,6 +31,7 @@ export default function Home() {
             <div className="flex justify-center mb-[5%]">
                 <Payment />
             </div>
+        </div>
         </>
     )
 }

@@ -6,7 +6,7 @@ export function Header() {
     const accountId = 1;
 
     return (
-        <div className="navbar bg-primary w-screen">
+        <div className="navbar bg-primary m-auto ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -26,13 +26,13 @@ export function Header() {
                 </a>
             </div>
             <div className="navbar-end">
-                <div className="dropdown dropdown-end pr-4">
+                <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                        <div className="w-8 rounded-full">
+                        <div className=" w-8 rounded-full">
                             <img src={userIcon} />
                         </div>
                     </label>
-                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-secondary rounded-box w-52">
+                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-secondary rounded-box">
                         <li><a className="justify-between" href={`/perfil/${accountId}`}>Perfil</a></li>
                         <li><a>Logout</a></li>
                     </ul>
