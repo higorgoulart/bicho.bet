@@ -1,4 +1,4 @@
-package com.bicho.bet;
+package com.bicho.bet.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

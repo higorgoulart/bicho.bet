@@ -1,4 +1,4 @@
-package com.bicho.bet;
+package com.bicho.bet.config;
 
 import com.bicho.bet.animais.Bicho;
 import org.modelmapper.ModelMapper;
