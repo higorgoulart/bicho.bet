@@ -1,5 +1,6 @@
 package com.bicho.bet.aposta;
 
+import com.bicho.bet.resultado.ResultadoRepresentation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -70,8 +71,8 @@ public interface ApostaRepresentation {
                     .valor(aposta.getValor())
                     .dataHora(aposta.getData())
                     .tipo(aposta.getTipo())
+                    .numeros(aposta.getNumeros().getNumeros().stream().map(ApostaRepresentation.NumeroApostaResponse::from).toList())
                     .build();
-//                    .numeros(aposta.getNumeros().stream().map(NumeroApostaResponse::from).toList())
         }
     }
 
@@ -80,14 +81,12 @@ public interface ApostaRepresentation {
     @NoArgsConstructor
     @Data
     class NumeroApostaResponse {
-        private Long id;
         private Short numero;
 
-//        public static NumeroApostaResponse from(NumeroAposta numero) {
-//            return NumeroApostaResponse.builder()
-//                    .id(numero.getId())
-//                    .numero(numero.getNumero())
-//                    .build();
-//        }
+        public static NumeroApostaResponse from(Short numero) {
+            return NumeroApostaResponse.builder()
+                    .numero(numero)
+                    .build();
+        }
     }
 }

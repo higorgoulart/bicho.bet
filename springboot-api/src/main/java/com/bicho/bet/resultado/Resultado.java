@@ -2,16 +2,23 @@ package com.bicho.bet.resultado;
 
 import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 @Entity
+@Builder
+@Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Resultado extends EntityId {
     @ManyToOne
@@ -22,21 +29,23 @@ public class Resultado extends EntityId {
     @Column(name = "data")
     private LocalDateTime data;
 
-    @OneToMany(mappedBy = "resultado")
-    private List<NumeroResultado> numeros = new ArrayList<>();
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private NumeroResultado numeros;
 
     public Resultado(Jogo jogo) {
         this.jogo = jogo;
         this.numeros = gerarResultado();
     }
 
-    public List<NumeroResultado> getNumeroResultados() {
+    public NumeroResultado getNumeroResultados() {
         return numeros;
     }
 
-    public List<NumeroResultado> gerarResultado() {
+    public NumeroResultado gerarResultado() {
         var bichos = 12;
-        var resultados = new ArrayList<NumeroResultado>();
+        var resultado = new NumeroResultado();
+        var resultados = resultado.getNumeros();
         var random = new Random();
 
         for (var i = 1; i <= 5; i++) {
@@ -51,9 +60,9 @@ public class Resultado extends EntityId {
 
             var milhar = random.nextInt(100) + numeroBicho;
 
-            resultados.add(new NumeroResultado(this, Short.parseShort(milhar)));
+            resultados.add(Short.parseShort(milhar));
         }
 
-        return resultados;
+        return resultado;
     }
 }

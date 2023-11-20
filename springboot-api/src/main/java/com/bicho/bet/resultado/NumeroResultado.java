@@ -1,36 +1,25 @@
 package com.bicho.bet.resultado;
 
-import com.bicho.bet.core.EntityId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.io.Serializable;
+import java.util.List;
 
-@Entity
-public class NumeroResultado extends EntityId {
-    @ManyToOne
-    @JoinColumn(name = "resultado_id")
-    private Resultado resultado;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class NumeroResultado implements Serializable {
+    private List<Short> numeros;
 
-    @Getter
-    @Column(name = "numero")
-    private Short numero;
-
-    public NumeroResultado() {
+    public Short getDezena(Integer index) {
+        return Short.parseShort(numeros.get(index).toString().substring(2));
     }
 
-    public NumeroResultado(Resultado resultado, Short numero) {
-        this.resultado = resultado;
-        this.numero = numero;
-    }
-
-    public Short getDezena() {
-        return Short.parseShort(resultado.toString().substring(2));
-    }
-
-    public Short getCentena() {
-        return Short.parseShort(resultado.toString().substring(1));
+    public Short getCentena(Integer index) {
+        return Short.parseShort(numeros.get(index).toString().substring(1));
     }
 }
