@@ -70,8 +70,8 @@ public interface ApostaRepresentation {
                     .valor(aposta.getValor())
                     .dataHora(aposta.getData())
                     .tipo(aposta.getTipo())
-                    .numeros(aposta.getNumeros().stream().map(NumeroApostaResponse::from).toList())
                     .build();
+//                    .numeros(aposta.getNumeros().stream().map(NumeroApostaResponse::from).toList())
         }
     }
 
@@ -83,11 +83,11 @@ public interface ApostaRepresentation {
         private Long id;
         private Short numero;
 
-        public static NumeroApostaResponse from(NumeroAposta numero) {
-            return NumeroApostaResponse.builder()
-                    .id(numero.getId())
-                    .numero(numero.getNumero())
-                    .build();
-        }
+//        public static NumeroApostaResponse from(NumeroAposta numero) {
+//            return NumeroApostaResponse.builder()
+//                    .id(numero.getId())
+//                    .numero(numero.getNumero())
+//                    .build();
+//        }
     }
 }

@@ -17,7 +17,7 @@ public class ApostaService {
     private ModelMapper modelMapper;
     private ApostaRepository repository;
     private ApostadorService apostadorService;
-    private JogoService jogoService;
+//    private JogoService jogoService;
 
     public List<Aposta> getAll() {
         return repository.findAll();
@@ -30,7 +30,7 @@ public class ApostaService {
     public Aposta add(ApostaRepresentation.ApostaCreateUpdate create) {
         return repository.save(Aposta.builder()
                 .apostador(apostadorService.getById(create.getApostador()))
-                .jogo(jogoService.getById(create.getJogo()))
+//                .jogo(jogoService.getById(create.getJogo()))
                 .valor(create.getValor())
                 .data(create.getData())
                 .tipo(create.getTipo())

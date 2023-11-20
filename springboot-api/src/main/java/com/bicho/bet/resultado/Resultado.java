@@ -35,19 +35,19 @@ public class Resultado extends EntityId {
     }
 
     public List<NumeroResultado> gerarResultado() {
-        var bichos = new ArrayList<BichoType>();
+        var bichos = 12;
         var resultados = new ArrayList<NumeroResultado>();
         var random = new Random();
 
         for (var i = 1; i <= 5; i++) {
             var numeroBicho = Integer.toString(random.nextInt(100));
-            BichoType bichoSorteado;
+//            BichoType bichoSorteado;
+//
+//            do {
+//                bichoSorteado = BichoType.valueOf(numeroBicho);
+//            } while (bichos.contains(bichoSorteado));
 
-            do {
-                bichoSorteado = BichoType.valueOf(numeroBicho);
-            } while (bichos.contains(bichoSorteado));
-
-            bichos.add(bichoSorteado);
+//            bichos.add(bichoSorteado);
 
             var milhar = random.nextInt(100) + numeroBicho;
 

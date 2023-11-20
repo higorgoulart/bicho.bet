@@ -1,7 +1,9 @@
 package com.bicho.bet.jogo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.bicho.bet.aposta.Aposta;
 import com.bicho.bet.aposta.ApostaService;
 import com.bicho.bet.exceptions.JogoSemApostaException;
 import com.bicho.bet.exceptions.JogoEmExecucaoException;
@@ -33,6 +35,10 @@ public class JogoService extends BaseService<Jogo, Long> {
 
     @Autowired
     private ApostaService apostaService;
+
+    public List<Jogo> getAll() {
+        return repository.findAll();
+    }
 
     public Jogo abrirJogo(Long idLoterica) throws JogoEmExecucaoException {
         if (repository.exists(QJogo.jogo.loterica.id.eq(idLoterica)

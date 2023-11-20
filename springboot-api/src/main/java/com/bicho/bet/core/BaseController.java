@@ -1,5 +1,7 @@
 package com.bicho.bet.core;
 
+import com.bicho.bet.jogo.JogoRepresentation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -8,10 +10,10 @@ import java.util.List;
 public abstract class BaseController<T extends EntityId, ID> {
     protected abstract BaseService<T, ID> getService();
 
-    @GetMapping
-    public List<T> getAll() {
-        return getService().getAll();
-    }
+//    @GetMapping
+//    public ResponseEntity<List<JogoRepresentation.JogoResponse>> getAll() {
+//        return getService().getAll();
+//    }
 
     @GetMapping("/{id}")
     public T getById(@PathVariable ID id) {
