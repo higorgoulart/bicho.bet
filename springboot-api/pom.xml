@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.bichobet</groupId>
 	<artifactId>bichobetserv</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>bichobetserv</name>
-	<description>Back end do projeto de &quot;bicho.bet&quot;</description>
+	<description>API SpringBoot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -30,11 +30,6 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
