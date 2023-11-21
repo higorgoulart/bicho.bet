@@ -8,8 +8,7 @@ import com.bicho.bet.exceptions.ContaSemSaldoException;
 import com.bicho.bet.aposta.Aposta;
 import com.bicho.bet.exceptions.SaqueInvalidoException;
 import com.bicho.bet.jogo.Jogo;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Apostador extends Conta {
@@ -28,6 +29,13 @@ public class Apostador extends Conta {
 
     @Column(name = "limite")
     private Double limite;
+
+    public Apostador(String nome, String telefone, String cpf, Double saldo, Double depositado, Double divida, Double limite) {
+        super(nome, telefone, saldo, depositado);
+        this.cpf = cpf;
+        this.divida = divida;
+        this.limite = limite;
+    }
 
     public void sacar(double valor) {
         if (valor > getSaldo() || (getDepositado() * 3) < valor)

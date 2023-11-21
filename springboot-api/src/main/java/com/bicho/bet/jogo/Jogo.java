@@ -24,9 +24,6 @@ public class Jogo extends EntityId {
     @Column(name = "dt_fim")
     private LocalDateTime dataFim;
 
-    @Column(name = "valor_acumulado")
-    private Double valorAcumulado;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatusJogo status;

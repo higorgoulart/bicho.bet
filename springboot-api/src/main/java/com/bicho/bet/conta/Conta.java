@@ -1,13 +1,14 @@
 package com.bicho.bet.conta;
 
 import com.bicho.bet.core.EntityId;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public abstract class Conta extends EntityId {
@@ -18,10 +19,10 @@ public abstract class Conta extends EntityId {
     private String telefone;
 
     @Column(name = "saldo")
-    private double saldo;
+    private Double saldo;
 
     @Column(name = "depositado")
-    private double depositado;
+    private Double depositado;
 
     public void depositar(double valor) {
         this.depositado += valor;
