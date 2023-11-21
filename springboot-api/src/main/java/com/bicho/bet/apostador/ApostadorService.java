@@ -1,18 +1,18 @@
 package com.bicho.bet.apostador;
 
-import com.bicho.bet.aposta.ApostaRepository;
+import com.bicho.bet.aposta.TipoAposta;
 import com.bicho.bet.core.BaseService;
+import com.bicho.bet.core.BetNumber;
+import com.bicho.bet.exceptions.NotFoundException;
+import com.bicho.bet.jogo.Jogo;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class ApostadorService extends BaseService<Apostador, Long> {
-    @Autowired
-    private ApostaRepository apostaRepository;
-
-    @Autowired
     private ApostadorRepository repository;
 
     @Override
@@ -20,13 +20,27 @@ public class ApostadorService extends BaseService<Apostador, Long> {
         return repository;
     }
 
-//    public Double sacar(Double valorSaque) throws SaqueInvalidoException {
-//        double valorSaldo = repository.getSaldo();
-//        double valorAposta = apostaRepository.getValor();
-//        if (valorSaque < valorAposta*3.00 || valorSaque > valorSaldo){
-//            throw new SaqueInvalidoException();
-//        }
-//        repository.setSaldo(valorSaldo - valorSaque);
-//        return valorSaque;
-//    }
+    public void sacar(Long id, double valor) {
+        var apostador = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
+
+        apostador.sacar(valor);
+
+        repository.save(apostador);
+    }
+
+    public void depositar(Long id, double valor) {
+        var apostador = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
+
+        apostador.depositar(valor);
+
+        repository.save(apostador);
+    }
+
+    public void apostar(Long id, Jogo jogo, Double valor, TipoAposta tipo, List<BetNumber> numeros) {
+        var apostador = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
+
+        apostador.apostar(jogo, valor, tipo, numeros);
+
+        repository.save(apostador);
+    }
 }

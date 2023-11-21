@@ -1,5 +1,6 @@
 package com.bicho.bet.resultado;
 
+import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
@@ -15,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -34,12 +37,11 @@ public class Resultado extends EntityId {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private NumeroResultado numeros;
+    private List<BetNumber> numeros = new ArrayList<>();
 
-    public NumeroResultado gerarResultado() {
+    public List<BetNumber> gerarResultado() {
         var bichos = 12;
-        var resultado = new NumeroResultado();
-        var resultados = resultado.getNumeros();
+        var resultados = new ArrayList<BetNumber>();
         var random = new Random();
 
         for (var i = 1; i <= 5; i++) {
@@ -54,9 +56,9 @@ public class Resultado extends EntityId {
 
             var milhar = random.nextInt(100) + numeroBicho;
 
-            resultados.add(Short.parseShort(milhar));
+            resultados.add(BetNumber.parseBetNumber(milhar));
         }
 
-        return resultado;
+        return resultados;
     }
 }

@@ -32,29 +32,12 @@ public class ApostaController {
 
     @PostMapping
     public ResponseEntity<ApostaRepresentation.ApostaResponse> add(
-            @RequestBody ApostaRepresentation.ApostaCreateUpdate entity) {
+            @RequestBody ApostaRepresentation.ApostaCreate entity) {
         var save = service.add(entity, jogoService);
 
         return ResponseEntity
                 .created(URI.create("/" + save.getId()))
                 .body(ApostaRepresentation.ApostaResponse.from(save));
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity<ApostaRepresentation.ApostaResponse> update(
-            @PathVariable Long id, @RequestBody ApostaRepresentation.ApostaCreateUpdate entity) {
-        try {
-            return ResponseEntity.ok().body(ApostaRepresentation.ApostaResponse.from(service.update(id, entity)));
-        } catch (NotFoundException ex) {
-            return ResponseEntity.noContent().build();
-        }
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<ApostaRepresentation.ApostaResponse> delete(@PathVariable Long id) {
-        service.delete(id);
-
-        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("jogos/{idJogo}")

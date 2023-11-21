@@ -43,7 +43,7 @@ public interface ResultadoRepresentation {
                     .id(resultado.getId())
                     .jogo(resultado.getJogo().getId())
                     .data(resultado.getData())
-                    .numeros(resultado.getNumeros().getNumeros())
+                    .numeros(resultado.getNumeros().stream().map(Number::shortValue).toList())
                     .build();
         }
     }

@@ -9,15 +9,11 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
-
 import java.time.Duration;
-
 
 @Configuration
 @EnableCaching
 public class CacheConfig {
-
-
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
@@ -29,16 +25,13 @@ public class CacheConfig {
         jedisClientConfig.connectTimeout(Duration.ofSeconds(60));
         jedisClientConfig.useSsl();
 
-
         return new JedisConnectionFactory(redisConfig, jedisClientConfig.build());
     }
-
 
     @Bean
     public RedisCacheManager cacheManager() {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(2));
-
 
         return RedisCacheManager.builder(jedisConnectionFactory())
                 .cacheDefaults(config)

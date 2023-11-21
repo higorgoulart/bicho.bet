@@ -1,10 +1,10 @@
 package com.bicho.bet.aposta;
 
 import com.bicho.bet.apostador.Apostador;
+import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.resultado.TipoResultado;
 import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
-import com.bicho.bet.resultado.NumeroResultado;
 import com.bicho.bet.utils.ListUtils;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Builder;
@@ -44,9 +44,9 @@ public class Aposta extends EntityId {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private NumeroAposta numeros;
+    private List<BetNumber> numeros = new ArrayList<>();
 
-    public Aposta(Apostador apostador, Jogo jogo, Double valor, LocalDateTime data, TipoAposta tipo, NumeroAposta numeros) {
+    public Aposta(Apostador apostador, Jogo jogo, Double valor, LocalDateTime data, TipoAposta tipo, List<BetNumber> numeros) {
         this.apostador = apostador;
         this.jogo = jogo;
         this.valor = valor;
@@ -55,29 +55,28 @@ public class Aposta extends EntityId {
         this.numeros = numeros;
     }
 
-    public Double obterPremio(NumeroResultado resultados) {
+    public Double obterPremio(List<BetNumber> resultados) {
         var posicoes = obterPosicoesCorretas(resultados);
         var multiplicador = obterMultiplicador(posicoes);
 
         return getValor() * multiplicador;
     }
 
-    private List<TipoResultado> obterPosicoesCorretas(NumeroResultado resultados) {
+    private List<TipoResultado> obterPosicoesCorretas(List<BetNumber> resultados) {
         var posicoes = new ArrayList<TipoResultado>();
 
         int i = 0;
 
-        for (var resultado : resultados.getNumeros()) {
-            for (var apostado : getNumeros().getNumeros()) {
-                var numeroAposta = apostado;
+        for (var resultado : resultados) {
+            for (var apostado : getNumeros()) {
                 boolean acerto;
 
-                if (numeroAposta < 100) {
-                    acerto = resultados.getDezena(i).equals(numeroAposta);
-                } else if (numeroAposta < 1000) {
-                    acerto = resultados.getCentena(i).equals(numeroAposta);
+                if (apostado.lessThan(100)) {
+                    acerto = resultado.getDezena().equals(apostado);
+                } else if (apostado.lessThan(1000)) {
+                    acerto = resultado.getCentena().equals(apostado);
                 } else {
-                    acerto = resultado.equals(numeroAposta);
+                    acerto = resultado.equals(apostado);
                 }
 
                 if (acerto) {

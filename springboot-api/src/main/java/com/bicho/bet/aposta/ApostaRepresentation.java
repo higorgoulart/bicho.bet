@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public interface ApostaRepresentation {
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
-    class ApostaCreateUpdate {
+    class ApostaCreate {
         @NotNull(message = "O apostador não pode ser nulo")
         private Long apostador;
 
@@ -35,7 +34,12 @@ public interface ApostaRepresentation {
         @NotNull(message = "O tipo de aposta não pode ser nulo")
         private TipoAposta tipo;
 
-        private List<Short> numeros = new ArrayList<>();
+        @NotNull(message = "Os números não podem ser nulos")
+        @NotEmpty(message = "Os números não podem ser vazios")
+        private List<
+                @Min(value = 0, message = "O valor deve ser maior ou igual a 0")
+                @Max(value = 9999, message = "O valor deve ser menor ou igual a 9999")
+                Short> numeros = new ArrayList<>();
     }
 
     @Builder
@@ -60,7 +64,7 @@ public interface ApostaRepresentation {
                     .valor(aposta.getValor())
                     .dataHora(aposta.getData())
                     .tipo(aposta.getTipo())
-                    .numeros(aposta.getNumeros().getNumeros())
+                    .numeros(aposta.getNumeros().stream().map(Number::shortValue).toList())
                     .build();
         }
     }
