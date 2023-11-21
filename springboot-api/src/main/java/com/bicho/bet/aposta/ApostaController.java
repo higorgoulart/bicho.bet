@@ -1,6 +1,7 @@
 package com.bicho.bet.aposta;
 
 import com.bicho.bet.exceptions.NotFoundException;
+import com.bicho.bet.jogo.JogoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ApostaController {
     private ApostaService service;
+    private JogoService jogoService;
 
     @GetMapping
     public ResponseEntity<List<ApostaRepresentation.ApostaResponse>> getAll() {
@@ -31,7 +33,7 @@ public class ApostaController {
     @PostMapping
     public ResponseEntity<ApostaRepresentation.ApostaResponse> add(
             @RequestBody ApostaRepresentation.ApostaCreateUpdate entity) {
-        var save = service.add(entity);
+        var save = service.add(entity, jogoService);
 
         return ResponseEntity
                 .created(URI.create("/" + save.getId()))

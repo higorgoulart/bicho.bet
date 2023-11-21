@@ -17,7 +17,6 @@ public class ApostaService {
     private ModelMapper modelMapper;
     private ApostaRepository repository;
     private ApostadorService apostadorService;
-//    private JogoService jogoService;
 
     public List<Aposta> getAll() {
         return repository.findAll();
@@ -27,14 +26,14 @@ public class ApostaService {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Aposta"));
     }
 
-    public Aposta add(ApostaRepresentation.ApostaCreateUpdate create) {
+    public Aposta add(ApostaRepresentation.ApostaCreateUpdate create, JogoService jogoService) {
         return repository.save(Aposta.builder()
                 .apostador(apostadorService.getById(create.getApostador()))
-//                .jogo(jogoService.getById(create.getJogo()))
+                .jogo(jogoService.getById(create.getJogo()))
                 .valor(create.getValor())
                 .data(create.getData())
                 .tipo(create.getTipo())
-//                .numeros(create.getNumeros())
+                .numeros(new NumeroAposta(create.getNumeros()))
                 .build());
     }
 
@@ -50,7 +49,7 @@ public class ApostaService {
         repository.deleteById(id);
     }
 
-    public Double premiarVencedores(Long idJogo, List<NumeroResultado> resultados) throws JogoSemApostaException {
+    public Double premiarVencedores(Long idJogo, NumeroResultado resultados) throws JogoSemApostaException {
         var total = 0.0;
 
         for (Aposta aposta : obterApostasPorJogo(idJogo)) {

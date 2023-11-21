@@ -1,39 +1,31 @@
 package com.bicho.bet.jogo;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import com.bicho.bet.aposta.Aposta;
 import com.bicho.bet.aposta.ApostaService;
-import com.bicho.bet.exceptions.JogoSemApostaException;
-import com.bicho.bet.exceptions.JogoEmExecucaoException;
-import com.bicho.bet.jogo.QJogo;
-import com.bicho.bet.resultado.ResultadoRepository;
 import com.bicho.bet.core.BaseService;
+import com.bicho.bet.exceptions.JogoEmExecucaoException;
 import com.bicho.bet.loterica.LotericaService;
-import com.bicho.bet.resultado.Resultado;
+import com.bicho.bet.resultado.ResultadoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class JogoService extends BaseService<Jogo, Long> {
-    @Autowired
     private JogoRepository repository;
 
-    @Autowired
-    private LotericaService lotericaService;
-
-    @Autowired
     private ResultadoRepository resultadoRepository;
+
+    private LotericaService lotericaService;
 
     @Override
     public JogoRepository getRepository() {
         return repository;
     }
 
-    @Autowired
     private ApostaService apostaService;
 
     public List<Jogo> getAll() {
@@ -52,28 +44,5 @@ public class JogoService extends BaseService<Jogo, Long> {
         jogo.setStatus(StatusJogo.ABERTO);
 
         return jogo;
-    }
-
-    public Jogo fecharJogo(Jogo jogo) throws JogoSemApostaException {
-        if (!repository.exists(QJogo.jogo.id.eq(jogo.getId())
-                .and(QJogo.jogo.status.eq(StatusJogo.ABERTO)))) {
-            throw new IllegalArgumentException("O jogo informado não está em execução.");
-        }
-
-        jogo.setDataFim(LocalDateTime.now());
-        jogo.setStatus(StatusJogo.FECHADO);
-
-        var resultado = new Resultado(jogo);
-        var numeros = resultado.getNumeroResultados();
-
-        resultadoRepository.save(resultado);
-
-        var totalPremiado = apostaService.premiarVencedores(jogo.getId(), numeros);
-        var lucroLoterica = jogo.getValorAcumulado() - totalPremiado;
-
-        var loterica = jogo.getLoterica();
-        loterica.depositar(lucroLoterica);
-        lotericaService.update(loterica.getId(), loterica);
-        return update(jogo.getId(), jogo);
     }
 }

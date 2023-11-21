@@ -2,11 +2,13 @@ package com.bicho.bet.resultado;
 
 import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +22,7 @@ import java.util.Random;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Resultado extends EntityId {
     @ManyToOne
     @JoinColumn(name = "jogo_id")
@@ -32,15 +35,6 @@ public class Resultado extends EntityId {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private NumeroResultado numeros;
-
-    public Resultado(Jogo jogo) {
-        this.jogo = jogo;
-        this.numeros = gerarResultado();
-    }
-
-    public NumeroResultado getNumeroResultados() {
-        return numeros;
-    }
 
     public NumeroResultado gerarResultado() {
         var bichos = 12;

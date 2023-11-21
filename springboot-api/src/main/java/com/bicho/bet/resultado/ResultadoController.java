@@ -2,13 +2,16 @@ package com.bicho.bet.resultado;
 
 import com.bicho.bet.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("resultados")
@@ -17,13 +20,13 @@ public class ResultadoController {
     private ResultadoService service;
 
     @GetMapping
-    public ResponseEntity<List<ResultadoRepresentation.ResultadoResponse>> getAll(
+    public ResponseEntity<Page<ResultadoRepresentation.ResultadoResponse>> getAll(
             @RequestParam(required = false) String filter,
-            @RequestParam(required = false) Integer p
+            @RequestParam(required = false) Optional<Integer> p
     ) {
-        Pageable page = PageRequest.of(p, 2);
+        Pageable page = PageRequest.of(p.orElse(0), 2, Sort.by("data").descending());
 
-        return ResponseEntity.ok(service.getAll(filter, page).stream().map(ResultadoRepresentation.ResultadoResponse::from).toList());
+        return ResponseEntity.ok(service.getAll(filter, page).map(ResultadoRepresentation.ResultadoResponse::from));
     }
 
     @GetMapping("{id}")
@@ -44,5 +47,4 @@ public class ResultadoController {
                 .created(URI.create("/" + save.getId()))
                 .body(ResultadoRepresentation.ResultadoResponse.from(save));
     }
-
 }

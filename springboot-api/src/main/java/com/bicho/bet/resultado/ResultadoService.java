@@ -27,7 +27,7 @@ public class ResultadoService {
         return repository.save(Resultado.builder()
                 .jogo(jogoService.getById(create.getJogo()))
                 .data(create.getData())
-                .numeros(new NumeroResultado(create.getNumeros().stream().map(ResultadoRepresentation.NumeroResultadoCreate::getNumero).toList()))
+                .numeros(new NumeroResultado(create.getNumeros()))
                 .build());
     }
 }

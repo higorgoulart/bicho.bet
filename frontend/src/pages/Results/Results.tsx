@@ -4,37 +4,23 @@ import recentResults from "../../assets/recent-results.svg";
 
 export default function Results() {
     const [results, setResults] = useState([]);
-    const [game, setGame] = useState("");
+    const [date, setDate] = useState("");
+    const [page, setPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        const filter = game !== "" ? "?filter=jogo.id+equal+" + game : ""
+        const filter = date !== "" ? "&filter=data\+equal\+" + date + "T00:00:00" : ""
 
-        fetch(`http://localhost:8080/resultados${filter}`)
+        fetch(`http://localhost:8080/resultados?p=${page}${filter}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                setTotalPages(data.totalPages);
 
-                // TODO: tirar quando tiver trazendo dado a request
-                if (data.length == 0) {
-                    data = [
-                        {
-                            data: new Date(2023, 9, 24),
-                            jogo: 1,
-                            numeros: [
-                                4029,
-                                1697,
-                                7893,
-                                8656,
-                                6753
-                            ]
-                        }
-                    ];
-                }
-                setResults(data.map((x, i) => (
+                setResults(data.content.map((x, i) => (
                     <tr>
                         <th>{i + 1}</th>
-                        <td>{x.data.toLocaleDateString()}</td>
-                        <td>{x.jogo.loterica.nome}</td>
+                        <td>{new Date(x.data).toLocaleDateString()}</td>
+                        <td>{x.jogo}</td>
                         <td>{x.numeros[0]}</td>
                         <td>{x.numeros[1]}</td>
                         <td>{x.numeros[2]}</td>
@@ -46,7 +32,7 @@ export default function Results() {
             .catch((err) => {
                 setResults([]);
             });
-    }, [game]);
+    }, [date, page]);
 
     return (
         <>
@@ -57,9 +43,9 @@ export default function Results() {
                 <div className="flex-row items-center justify-evenly mb-6">
                     <div className="flex-col">
                         <label className="label">
-                            <span className="label-text">Jogo</span>
+                            <span className="label-text">Data</span>
                         </label>
-                        <input type="text" placeholder="Digite aqui" className="input input-bordered w-full max-w-xs" onChange={(e) => setGame(e.target.value)} />
+                        <input type="date" placeholder="Digite aqui" className="input input-bordered w-full max-w-xs" onChange={(e) => setDate(e.target.value)} />
                     </div>
                 </div>
                 <div className="overflow-x-auto">
@@ -77,6 +63,13 @@ export default function Results() {
                             </tr>
                         </thead>
                         <tbody>{results}</tbody>
+                        <tfoot>
+                            <div className="join">
+                                <button onClick={() => page > 0 ? setPage(page - 1) : null} className="join-item btn">«</button>
+                                <div className="join-item btn">{page + 1}</div>
+                                <button onClick={() => page < totalPages - 1 ? setPage(page + 1) : null} className="join-item btn">»</button>
+                            </div>
+                        </tfoot>
                     </table>
                 </div>
             </div>

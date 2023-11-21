@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +24,7 @@ public interface ResultadoRepresentation {
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime data;
 
-        private List<NumeroResultadoCreate> numeros = new ArrayList<>();
-    }
-
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
-    class NumeroResultadoCreate {
-        @NotNull(message = "O número não pode ser nulo")
-        @Positive(message = "O número deve ser maior que zero")
-        private Short numero;
+        private List<Short> numeros = new ArrayList<>();
     }
 
     @Builder
@@ -47,28 +36,14 @@ public interface ResultadoRepresentation {
         private Long jogo;
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime data;
-        private List<NumeroResultadoResponse> numeros = new ArrayList<>();
+        private List<Short> numeros = new ArrayList<>();
 
-        public static ResultadoResponse from(Resultado aposta) {
+        public static ResultadoResponse from(Resultado resultado) {
             return ResultadoResponse.builder()
-                    .id(aposta.getId())
-                    .jogo(aposta.getJogo().getId())
-                    .data(aposta.getData())
-                    .numeros(aposta.getNumeros().getNumeros().stream().map(NumeroResultadoResponse::from).toList())
-                    .build();
-        }
-    }
-
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
-    class NumeroResultadoResponse {
-        private Short numero;
-
-        public static NumeroResultadoResponse from(Short numero) {
-            return NumeroResultadoResponse.builder()
-                    .numero(numero)
+                    .id(resultado.getId())
+                    .jogo(resultado.getJogo().getId())
+                    .data(resultado.getData())
+                    .numeros(resultado.getNumeros().getNumeros())
                     .build();
         }
     }

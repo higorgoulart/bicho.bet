@@ -6,10 +6,12 @@ import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
 import com.bicho.bet.resultado.NumeroResultado;
 import com.bicho.bet.utils.ListUtils;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,6 +22,7 @@ import java.util.List;
 @Builder
 @Getter
 @NoArgsConstructor
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Aposta extends EntityId {
     @ManyToOne
     @JoinColumn(name = "apostador_id")
@@ -52,47 +55,48 @@ public class Aposta extends EntityId {
         this.numeros = numeros;
     }
 
-    public Double obterPremio(List<NumeroResultado> resultados) {
+    public Double obterPremio(NumeroResultado resultados) {
         var posicoes = obterPosicoesCorretas(resultados);
         var multiplicador = obterMultiplicador(posicoes);
 
         return getValor() * multiplicador;
     }
 
-    private List<TipoResultado> obterPosicoesCorretas(List<NumeroResultado> resultados) {
+    private List<TipoResultado> obterPosicoesCorretas(NumeroResultado resultados) {
         var posicoes = new ArrayList<TipoResultado>();
-//
-//        int i = 1;
-//
-//        for (var resultado : resultados) {
-//            for (var apostado : getNumeros()) {
-//                var numeroAposta = apostado.getNumero();
-//                boolean acerto;
-//
-//                if (numeroAposta < 100) {
-//                    acerto = resultado.getDezena().equals(numeroAposta);
-//                } else if (numeroAposta < 1000) {
-//                    acerto = resultado.getCentena().equals(numeroAposta);
-//                } else {
-//                    acerto = resultado.getNumero().equals(numeroAposta);
-//                }
-//
-//                if (acerto) {
-//                    posicoes.add(TipoResultado.valueOf(Integer.toString(i)));
-//                } else if (getTipo() == TipoAposta.DEZENA ||
-//                           getTipo() == TipoAposta.CENTENA ||
-//                           getTipo() == TipoAposta.MILHAR) {
+
+        int i = 0;
+
+        for (var resultado : resultados.getNumeros()) {
+            for (var apostado : getNumeros().getNumeros()) {
+                var numeroAposta = apostado;
+                boolean acerto;
+
+                if (numeroAposta < 100) {
+                    acerto = resultados.getDezena(i).equals(numeroAposta);
+                } else if (numeroAposta < 1000) {
+                    acerto = resultados.getCentena(i).equals(numeroAposta);
+                } else {
+                    acerto = resultado.equals(numeroAposta);
+                }
+
+                if (acerto) {
+                    posicoes.add(TipoResultado.valueOf(Integer.toString(i + 1)));
+                } else if (getTipo() == TipoAposta.DEZENA ||
+                           getTipo() == TipoAposta.CENTENA ||
+                           getTipo() == TipoAposta.MILHAR) {
+                    // TODO: SELECT NA TABELA DE BICHO - FAZER PELO PYTHON
 //                    var bichoApostado = BichoType.valueOf(numeroAposta.toString());
-//                    var bichoResultado = BichoType.valueOf(resultado.getDezena().toString());
+//                    var bichoResultado = BichoType.valueOf(resultados.getDezena(i).toString());
 //
 //                    if (bichoApostado.equals(bichoResultado)) {
 //                        posicoes.add(TipoResultado.BICHO);
 //                    }
-//                }
-//            }
-//
-//            i++;
-//        }
+                }
+            }
+
+            i++;
+        }
 
         return posicoes;
     }

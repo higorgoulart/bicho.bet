@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.PathBuilder;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class BooleanBuilderUtil {
     public static BooleanBuilder buildPredicateFromFilter(String filter, Class<?> classe) {
@@ -15,7 +16,7 @@ public class BooleanBuilderUtil {
         }
 
         BooleanBuilder predicate = new BooleanBuilder();
-        String[] partes = filter.split("\\+");
+        String[] partes = filter.split(" ");
 
         if (partes.length == 3) {
             try {
@@ -26,10 +27,10 @@ public class BooleanBuilderUtil {
 
                 switch (partes[1].toLowerCase()) {
                     case "equal":
-                        predicate.and(campoPath.eq(Expressions.constant(partes[2])));
+                        predicate.and(Expressions.booleanTemplate("{0} = {1}", campoPath, getTipo(tipoCampo, partes[2])));
                         break;
                     case "notequal":
-                        predicate.and(campoPath.ne(Expressions.constant(partes[2])));
+                        predicate.and(Expressions.booleanTemplate("{0} != {1}", campoPath, getTipo(tipoCampo, partes[2])));
                         break;
                     case "greater":
                         predicate.and(Expressions.booleanTemplate("{0} > {1}", campoPath, getTipo(tipoCampo, partes[2])));
@@ -80,14 +81,17 @@ public class BooleanBuilderUtil {
         return predicate;
     }
 
-    public static Expression getTipo(Class<?> tipoCampo, String parte) {
+    public static Expression<?> getTipo(Class<?> tipoCampo, String parte) {
         if (tipoCampo == Integer.class || tipoCampo == int.class) {
             return Expressions.constant(Integer.parseInt(parte));
         } else if (tipoCampo == Double.class || tipoCampo == double.class) {
             return Expressions.constant(Double.parseDouble(parte));
         } else if (tipoCampo == LocalDate.class) {
             return Expressions.constant(LocalDate.parse(parte));
+        } else if (tipoCampo == LocalDateTime.class) {
+            return Expressions.constant(LocalDateTime.parse(parte));
         }
+
         return Expressions.constant(parte);
     }
 

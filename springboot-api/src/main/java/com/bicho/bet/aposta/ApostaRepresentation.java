@@ -1,6 +1,5 @@
 package com.bicho.bet.aposta;
 
-import com.bicho.bet.resultado.ResultadoRepresentation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,17 +35,7 @@ public interface ApostaRepresentation {
         @NotNull(message = "O tipo de aposta não pode ser nulo")
         private TipoAposta tipo;
 
-        private List<NumeroApostaCreateUpdate> numeros = new ArrayList<>();
-    }
-
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
-    class NumeroApostaCreateUpdate {
-        @NotNull(message = "O número não pode ser nulo")
-        @Positive(message = "O número deve ser maior que zero")
-        private Short numero;
+        private List<Short> numeros = new ArrayList<>();
     }
 
     @Builder
@@ -61,7 +50,7 @@ public interface ApostaRepresentation {
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime dataHora;
         private TipoAposta tipo;
-        private List<NumeroApostaResponse> numeros = new ArrayList<>();
+        private List<Short> numeros = new ArrayList<>();
 
         public static ApostaResponse from(Aposta aposta) {
             return ApostaResponse.builder()
@@ -71,21 +60,7 @@ public interface ApostaRepresentation {
                     .valor(aposta.getValor())
                     .dataHora(aposta.getData())
                     .tipo(aposta.getTipo())
-                    .numeros(aposta.getNumeros().getNumeros().stream().map(ApostaRepresentation.NumeroApostaResponse::from).toList())
-                    .build();
-        }
-    }
-
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
-    class NumeroApostaResponse {
-        private Short numero;
-
-        public static NumeroApostaResponse from(Short numero) {
-            return NumeroApostaResponse.builder()
-                    .numero(numero)
+                    .numeros(aposta.getNumeros().getNumeros())
                     .build();
         }
     }
