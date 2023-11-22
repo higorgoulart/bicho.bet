@@ -1,7 +1,7 @@
 package com.bicho.bet.security.services;
 
-import com.bicho.bet.security.User.User;
-import com.bicho.bet.security.User.UserRepository;
+import com.bicho.bet.security.user.User;
+import com.bicho.bet.security.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

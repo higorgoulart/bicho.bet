@@ -1,7 +1,7 @@
 package com.bicho.bet.security.services;
 
 
-import com.bicho.bet.security.User.User;
+import com.bicho.bet.security.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

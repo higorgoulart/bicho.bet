@@ -1,8 +1,8 @@
 package com.bicho.bet.security;
 
 import com.bicho.bet.exceptions.TokenRefreshException;
-import com.bicho.bet.security.User.User;
-import com.bicho.bet.security.User.UserRepository;
+import com.bicho.bet.security.user.User;
+import com.bicho.bet.security.user.UserRepository;
 import com.bicho.bet.security.request.LoginRequest;
 import com.bicho.bet.security.request.SignupRequest;
 import com.bicho.bet.security.request.TokenRefreshRequest;

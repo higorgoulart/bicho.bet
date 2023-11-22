@@ -1,4 +1,4 @@
-package com.bicho.bet.security.User;
+package com.bicho.bet.security.user;
 
 
 import com.bicho.bet.security.role.Role;

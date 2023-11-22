@@ -1,7 +1,6 @@
 package com.bicho.bet.security.token;
 
-import com.bicho.bet.security.User.User;
-import com.bicho.bet.security.token.RefreshToken;
+import com.bicho.bet.security.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
