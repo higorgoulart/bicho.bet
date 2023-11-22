@@ -8,8 +8,8 @@ VALUES
 (4, 'Gabriel Ferreira', 500, '48999999999', '95123647895', 0, 1500),
 (5, 'Max Willian', 300, '48999999999', '65954715204', 0, 900);
 
-INSERT INTO jogo(id, dt_fim, dt_inicio, status, valor_acumulado, loterica_id)
-VALUES (1, '2023-11-27 20:00:00', '2023-11-20 20:00:00', 'ABERTO', 0, 1);
+INSERT INTO jogo(id, dt_fim, dt_inicio, status, loterica_id)
+VALUES (1, '2023-11-27 20:00:00', '2023-11-20 20:00:00', 'ABERTO', 1);
 
 
 INSERT INTO bicho (id, nome, numeros)
