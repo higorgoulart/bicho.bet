@@ -1,4 +1,4 @@
-package com.bicho.bet.security;
+package com.bicho.bet.security.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

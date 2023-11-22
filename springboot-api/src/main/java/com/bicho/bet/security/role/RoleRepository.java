@@ -1,8 +1,6 @@
-package com.bicho.bet.security;
+package com.bicho.bet.security.role;
 
 
-import com.bicho.bet.security.ERole;
-import com.bicho.bet.security.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

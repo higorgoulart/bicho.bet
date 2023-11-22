@@ -1,4 +1,4 @@
-package com.bicho.bet.security;
+package com.bicho.bet.security.response;
 
 public class MessageResponse {
     private String message;

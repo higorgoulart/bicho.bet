@@ -1,6 +1,6 @@
-package com.bicho.bet.security;
+package com.bicho.bet.security.token;
 
-import com.bicho.bet.security.User;
+import com.bicho.bet.security.User.User;
 import lombok.Getter;
 
 import javax.persistence.*;

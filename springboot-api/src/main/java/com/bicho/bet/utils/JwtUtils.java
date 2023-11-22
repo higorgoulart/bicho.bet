@@ -1,4 +1,4 @@
-package com.bicho.bet.security.jwt;
+package com.bicho.bet.utils;
 
 
 import com.bicho.bet.security.services.UserDetailsImpl;

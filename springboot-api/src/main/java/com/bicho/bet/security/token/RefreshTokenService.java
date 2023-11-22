@@ -1,7 +1,7 @@
-package com.bicho.bet.security;
+package com.bicho.bet.security.token;
 
-import com.bicho.bet.security.RefreshToken;
 import com.bicho.bet.exceptions.TokenRefreshException;
+import com.bicho.bet.security.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

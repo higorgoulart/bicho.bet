@@ -1,6 +1,7 @@
 package com.bicho.bet.security.jwt;
 
 import com.bicho.bet.security.services.UserDetailsServiceImpl;
+import com.bicho.bet.utils.JwtUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
