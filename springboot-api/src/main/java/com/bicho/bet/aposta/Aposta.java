@@ -2,9 +2,9 @@ package com.bicho.bet.aposta;
 
 import com.bicho.bet.apostador.Apostador;
 import com.bicho.bet.core.BetNumber;
-import com.bicho.bet.resultado.TipoResultado;
 import com.bicho.bet.core.EntityId;
 import com.bicho.bet.jogo.Jogo;
+import com.bicho.bet.resultado.TipoResultado;
 import com.bicho.bet.utils.ListUtils;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Builder;
@@ -55,52 +55,7 @@ public class Aposta extends EntityId {
         this.numeros = numeros;
     }
 
-    public Double obterPremio(List<BetNumber> resultados) {
-        var posicoes = obterPosicoesCorretas(resultados);
-        var multiplicador = obterMultiplicador(posicoes);
-
-        return getValor() * multiplicador;
-    }
-
-    private List<TipoResultado> obterPosicoesCorretas(List<BetNumber> resultados) {
-        var posicoes = new ArrayList<TipoResultado>();
-
-        int i = 0;
-
-        for (var resultado : resultados) {
-            for (var apostado : getNumeros()) {
-                boolean acerto;
-
-                if (apostado.lessThan(100)) {
-                    acerto = resultado.getDezena().equals(apostado);
-                } else if (apostado.lessThan(1000)) {
-                    acerto = resultado.getCentena().equals(apostado);
-                } else {
-                    acerto = resultado.equals(apostado);
-                }
-
-                if (acerto) {
-                    posicoes.add(TipoResultado.valueOf(Integer.toString(i + 1)));
-                } else if (getTipo() == TipoAposta.DEZENA ||
-                           getTipo() == TipoAposta.CENTENA ||
-                           getTipo() == TipoAposta.MILHAR) {
-                    // TODO: SELECT NA TABELA DE BICHO - FAZER PELO PYTHON
-//                    var bichoApostado = BichoType.valueOf(numeroAposta.toString());
-//                    var bichoResultado = BichoType.valueOf(resultados.getDezena(i).toString());
-//
-//                    if (bichoApostado.equals(bichoResultado)) {
-//                        posicoes.add(TipoResultado.BICHO);
-//                    }
-                }
-            }
-
-            i++;
-        }
-
-        return posicoes;
-    }
-
-    private Double obterMultiplicador(List<TipoResultado> posicoes) {
+    public static Double obterMultiplicador(TipoAposta tipo, List<TipoResultado> posicoes) {
         if (posicoes.isEmpty()) {
             return 0.0;
         }
@@ -117,11 +72,11 @@ public class Aposta extends EntityId {
         };
     }
 
-    private Double obterMultiplicadorGrupo(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorGrupo(List<TipoResultado> posicoes) {
         return posicoes.contains(TipoResultado.PRIMEIRA) ? 12.0 : 3.0;
     }
 
-    private Double obterMultiplicadorDuque(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorDuque(List<TipoResultado> posicoes) {
         return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA)
             ? 95.0
             : posicoes.size() == 2
@@ -129,7 +84,7 @@ public class Aposta extends EntityId {
                 : 1.0;
     }
 
-    private Double obterMultiplicadorTerno(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorTerno(List<TipoResultado> posicoes) {
         return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA)
             ? 700.0
             : posicoes.size() == 3
@@ -139,7 +94,7 @@ public class Aposta extends EntityId {
                     : 0.75;
     }
 
-    private Double obterMultiplicadorQuadra(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorQuadra(List<TipoResultado> posicoes) {
         return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA, TipoResultado.QUARTA)
             ? 4000.0
             : posicoes.size() == 4
@@ -151,7 +106,7 @@ public class Aposta extends EntityId {
                         : 0.2;
     }
 
-    private Double obterMultiplicadorQuina(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorQuina(List<TipoResultado> posicoes) {
         return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA, TipoResultado.QUARTA, TipoResultado.QUINTA)
             ? 17000.0
             : posicoes.size() == 4
@@ -163,19 +118,19 @@ public class Aposta extends EntityId {
                         : 0.2;
     }
 
-    private Double obterMultiplicadorDezena(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorDezena(List<TipoResultado> posicoes) {
         return obterMultiplicadorNumerico(posicoes, 50.0, 7.0);
     }
 
-    private Double obterMultiplicadorCentena(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorCentena(List<TipoResultado> posicoes) {
         return obterMultiplicadorNumerico(posicoes, 500.0, 60.0);
     }
 
-    private Double obterMultiplicadorMilhar(List<TipoResultado> posicoes) {
+    private static Double obterMultiplicadorMilhar(List<TipoResultado> posicoes) {
         return obterMultiplicadorNumerico(posicoes, 5000.0, 600.0);
     }
 
-    private Double obterMultiplicadorNumerico(List<TipoResultado> posicoes, Double valorPrimeiro, Double valorOutro) {
+    private static Double obterMultiplicadorNumerico(List<TipoResultado> posicoes, Double valorPrimeiro, Double valorOutro) {
         return posicoes.contains(TipoResultado.PRIMEIRA)
             ? valorPrimeiro
             : ListUtils.containsAny(posicoes, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA, TipoResultado.QUARTA, TipoResultado.QUINTA)

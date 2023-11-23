@@ -2,7 +2,6 @@ package com.bicho.bet.resultado;
 
 import com.bicho.bet.aposta.Aposta;
 import com.bicho.bet.aposta.ApostaService;
-import com.bicho.bet.apostador.ApostadorService;
 import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.exceptions.NotFoundException;
 import com.bicho.bet.jogo.JogoService;
@@ -45,7 +44,7 @@ public class ResultadoService {
         for (Aposta aposta : apostaService.obterApostasPorJogo(idJogo)) {
             var apostador = aposta.getApostador();
 
-            var premio = aposta.obterPremio(resultados);
+            var premio = apostaService.obterPremio(aposta.getValor(), aposta.getTipo(), aposta.getNumeros(), resultados);
 
             apostador.setSaldo(apostador.getSaldo() + premio);
 

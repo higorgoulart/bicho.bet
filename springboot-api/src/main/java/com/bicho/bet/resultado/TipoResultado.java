@@ -8,7 +8,7 @@ public enum TipoResultado {
     QUINTA(5),
     BICHO(0);
 
-    private final Integer value;
+    public final Integer value;
 
     TipoResultado(Integer val) {
         value = val;
