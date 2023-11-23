@@ -1,6 +1,7 @@
 package com.bicho.bet.security.user;
 
 
+import com.bicho.bet.core.EntityId;
 import com.bicho.bet.security.role.Role;
 import lombok.Getter;
 
@@ -19,7 +20,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class User {
+public class User extends EntityId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

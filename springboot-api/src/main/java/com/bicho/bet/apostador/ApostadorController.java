@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("apostadores")
+@RequestMapping("/apostadores")
 public class ApostadorController extends BaseController<Apostador, Long> {
     @Autowired
     private ApostadorService service;

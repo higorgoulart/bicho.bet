@@ -1,4 +1,4 @@
-package com.bicho.bet.security.request;
+package com.bicho.bet.security.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
