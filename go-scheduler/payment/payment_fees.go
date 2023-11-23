@@ -1,40 +1,40 @@
 package payment
 
-import "fmt"
+import (
+	"scheduler/database"
+	"scheduler/functions"
+	"scheduler/model"
 
-func Payment() {
-	fee := 0.20
-	fmt.Println(fee)
-	// tx, err := database.DB.Begin()
-	// functions.CheckError(err)
-	// defer tx.Rollback()
+	"gorm.io/gorm"
+)
 
-	// rows, err := database.DB.Query("SELECT id, divida FROM apostador WHERE divida < 0")
-	// functions.CheckError(err)
-	// defer rows.Close()
+func PaymentFee() {
+	var apostadores []model.Apostador
+	taxa := 0.20
+	if err := database.DB.Where("divida < ?", 0).Find(&apostadores).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return
+		}
+		functions.SetErrorLog(err, "divida")
+		return
+	}
 
-	// var paymentArray []models.PaymentInfo
-	// for rows.Next() {
-	// 	var apo models.Apostador
-	// 	if err := rows.Scan(&apo.Id, &apo.Divida); err != nil {
-	// 		log.Panic(err)
-	// 	}
+	tx := database.DB.Begin()
+	for _, apostador := range apostadores {
+		juros := apostador.Divida + (apostador.Divida * taxa)
+		juros = functions.RoundToTwoDecimalPlaces(juros)
+		if err := tx.Model(&model.Apostador{}).Where("id = ?", apostador.ID).Update("divida", juros).Error; err != nil {
+			tx.Rollback()
+			functions.SetErrorLog(err, "divida")
+			return
+		}
+	}
+	if err := tx.Commit().Error; err != nil {
+		tx.Rollback()
+		functions.SetErrorLog(err, "divida")
+		return
+	}
 
-	// 	newDivida := apo.Divida.Float64 + (apo.Divida.Float64 * fee)
-	// 	newDividaStr := strconv.FormatFloat(newDivida, 'f', 2, 64)
-
-	// 	cmd := "UPDATE apostador SET divida = $1 WHERE id = $2"
-
-	// 	_, err := tx.Exec(cmd, newDividaStr, apo.Id.Int64)
-	// 	functions.CheckError(err)
-
-	// 	paymentArray = append(paymentArray, models.PaymentInfo{ID: apo.Id.Int64,
-	// 		Divida:           apo.Divida.Float64,
-	// 		DividaAtualizada: newDivida})
-	// }
-
-	// if err := tx.Commit(); err != nil {
-	// 	functions.CheckError(err)
-	// }
-	// functions.SetPaymentFeeLog(paymentArray)
+	database.DB.Where("divida < ?", 0).Find(&apostadores)
+	functions.SetDividaLog(apostadores)
 }

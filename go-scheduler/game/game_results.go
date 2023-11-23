@@ -1,9 +1,9 @@
 package game
 
 import (
-	"fmt"
 	"math/rand"
 	"scheduler/database"
+	"scheduler/functions"
 	"scheduler/model"
 	"time"
 
@@ -11,9 +11,17 @@ import (
 )
 
 func GenerateNumeros() []int64 {
-	var numeros []int64
-	for i := 0; i < 5; i++ {
-		numeros = append(numeros, rand.Int63n(9999))
+	seen := make(map[int64]bool)
+	numeros := make([]int64, 0, 5)
+
+	for len(numeros) < 5 {
+		newNum := rand.Int63n(9999)
+		lastTwoDigits := newNum % 100
+
+		if !seen[lastTwoDigits] {
+			numeros = append(numeros, newNum)
+			seen[lastTwoDigits] = true
+		}
 	}
 
 	return numeros
@@ -37,19 +45,18 @@ func GetIdResultado() int64 {
 
 }
 
-func Game() {
+func GameResult() {
 	var jogo model.Jogo
 
 	tx := database.DB.Begin()
 
-	if err := tx.Where("status = ?", "ABERTO").First(&jogo).Error; err != nil {
+	if err := tx.Where("dt_fim < ? AND status = ?", time.Now(), "ABERTO").First(&jogo).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			tx.Rollback()
-			fmt.Println("Não há jogos abertos")
 			return
 		}
 		tx.Rollback()
-		fmt.Println("Erro ao buscar jogo:", err)
+		functions.SetErrorLog(err, "resultado")
 		return
 	}
 
@@ -65,19 +72,20 @@ func Game() {
 
 	if err := tx.Create(&newResultado).Error; err != nil {
 		tx.Rollback()
-		fmt.Println("Erro ao criar resultado:", err)
+		functions.SetErrorLog(err, "resultado")
 		return
 	}
 
 	if err := tx.Model(&model.Jogo{}).Where("id = ?", jogo.ID).Update("status", "FECHADO").Error; err != nil {
 		tx.Rollback()
-		fmt.Println("Erro ao atualizar status do jogo:", err)
+		functions.SetErrorLog(err, "resultado")
 		return
 	}
 
 	if err := tx.Commit().Error; err != nil {
 		tx.Rollback()
-		fmt.Println("Erro ao realizar commit de transação:", err)
+		functions.SetErrorLog(err, "resultado")
 		return
 	}
+	functions.SetResultadoLog(newResultado, jogo)
 }
