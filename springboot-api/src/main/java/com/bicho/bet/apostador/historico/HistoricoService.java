@@ -1,4 +1,4 @@
-package com.bicho.bet.historico;
+package com.bicho.bet.apostador.historico;
 
 import com.bicho.bet.aposta.ApostaService;
 import lombok.AllArgsConstructor;

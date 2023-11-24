@@ -4,8 +4,8 @@ import com.bicho.bet.conta.Conta;
 import com.bicho.bet.aposta.TipoAposta;
 import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.exceptions.ContaSemCreditoException;
-import com.bicho.bet.exceptions.ContaSemSaldoException;
 import com.bicho.bet.aposta.Aposta;
+import com.bicho.bet.exceptions.ContaSemSaldoException;
 import com.bicho.bet.exceptions.SaqueInvalidoException;
 import com.bicho.bet.jogo.Jogo;
 import lombok.*;
@@ -46,21 +46,39 @@ public class Apostador extends Conta {
     }
 
     public Aposta apostar(Jogo jogo, Double valor, TipoAposta tipo, List<BetNumber> numeros) {
-        if (valor > this.getSaldo()) {
+        if (valor > (this.getSaldo() + (this.getLimite() - this.getDivida()))) {
             throw new ContaSemSaldoException();
+        }
+
+        if (this.getSaldo() >= valor) {
+            this.setSaldo(this.getSaldo() - valor);
+        } else {
+            solicitarEmprestimoMinimo(valor);
         }
 
         return new Aposta(this, jogo, valor, LocalDateTime.now(), tipo, numeros);
     }
 
     public void solicitarEmprestimo(double valorDesejado) {
-        if (valorDesejado > this.getLimite()) {
+        if (valorDesejado > (this.getLimite() - this.getDivida())) {
             throw new ContaSemCreditoException();
         }
 
-        double juros = 0.2;
-        double valorComJuros = valorDesejado * (1 + juros);
+        this.setDivida(getDivida() + obterJuros(valorDesejado));
         this.setSaldo(getSaldo() + valorDesejado);
-        this.setDivida(getDivida() + valorComJuros);
+    }
+
+    private void solicitarEmprestimoMinimo(double valorDesejado) {
+        if (this.getSaldo() > 0) {
+            valorDesejado -= this.getSaldo();
+        }
+
+        this.setDivida(this.getDivida() + obterJuros(valorDesejado));
+        this.setSaldo(0.0);
+    }
+
+    private double obterJuros(double valor) {
+        double juros = 0.2;
+        return valor * (1 + juros);
     }
 }

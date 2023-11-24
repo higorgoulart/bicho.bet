@@ -1,7 +1,7 @@
 package com.bicho.bet.aposta;
 
 import com.bicho.bet.core.CustomQuerydslPredicateExecutor;
-import com.bicho.bet.historico.HistoricoResponse;
+import com.bicho.bet.apostador.historico.HistoricoResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

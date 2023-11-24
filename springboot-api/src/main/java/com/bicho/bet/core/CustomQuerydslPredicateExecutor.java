@@ -13,12 +13,10 @@ public interface CustomQuerydslPredicateExecutor<T> extends QuerydslPredicateExe
     Page<T> findAll(Predicate predicate, Pageable pageable);
 
     default List<T> findAll(String filter, Class<T> entityType) {
-        var booleanBuilder = BooleanBuilderUtil.buildPredicateFromFilter(filter, entityType);
-        return this.findAll(booleanBuilder);
+        return this.findAll(BooleanBuilderUtil.buildPredicateFromFilter(filter, entityType));
     }
 
     default Page<T> findAll(String filter, Class<T> entityType, Pageable pageable) {
-        var booleanBuilder = BooleanBuilderUtil.buildPredicateFromFilter(filter, entityType);
-        return this.findAll(booleanBuilder, pageable);
+        return this.findAll(BooleanBuilderUtil.buildPredicateFromFilter(filter, entityType), pageable);
     }
 }

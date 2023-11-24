@@ -1,4 +1,4 @@
-package com.bicho.bet.historico;
+package com.bicho.bet.apostador.historico;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

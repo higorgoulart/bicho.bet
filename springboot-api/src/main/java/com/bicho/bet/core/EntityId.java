@@ -7,11 +7,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class EntityId {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

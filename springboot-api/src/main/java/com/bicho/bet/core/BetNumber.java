@@ -51,10 +51,7 @@ public class BetNumber extends Number implements Comparable<Number> {
         return switch (o.getClass().getName()) {
             case "Integer" -> (int) value == (int) o;
             case "Short" -> value == (short) o;
-            default -> {
-                BetNumber betNumber = (BetNumber) o;
-                yield value == betNumber.value;
-            }
+            default -> value == ((BetNumber) o).value;
         };
     }
 

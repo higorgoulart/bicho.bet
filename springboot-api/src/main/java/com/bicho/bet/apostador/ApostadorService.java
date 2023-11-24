@@ -63,12 +63,4 @@ public class ApostadorService {
 
         repository.save(apostador);
     }
-
-    public void apostar(Long id, Jogo jogo, Double valor, TipoAposta tipo, List<BetNumber> numeros) {
-        var apostador = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
-
-        apostador.apostar(jogo, valor, tipo, numeros);
-
-        repository.save(apostador);
-    }
 }

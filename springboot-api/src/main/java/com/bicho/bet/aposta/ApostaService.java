@@ -4,7 +4,7 @@ import com.bicho.bet.apostador.ApostadorService;
 import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.exceptions.JogoSemApostaException;
 import com.bicho.bet.exceptions.NotFoundException;
-import com.bicho.bet.historico.HistoricoResponse;
+import com.bicho.bet.apostador.historico.HistoricoResponse;
 import com.bicho.bet.jogo.JogoService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

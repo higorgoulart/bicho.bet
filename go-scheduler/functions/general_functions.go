@@ -1,6 +1,7 @@
 package functions
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"math"
@@ -74,4 +75,48 @@ func FormatNumber(number int64, format int) int64 {
 	}
 
 	return number % 1000
+}
+
+func Contains(slice []model.TipoResultado, item model.TipoResultado) bool {
+	for _, v := range slice {
+		if v == item {
+			return true
+		}
+	}
+	return false
+}
+
+func ContainsAll(slice []model.TipoResultado, items ...model.TipoResultado) bool {
+	for _, item := range items {
+		if !Contains(slice, item) {
+			return false
+		}
+	}
+	return true
+}
+
+func ContainsAny(slice []model.TipoResultado, items ...model.TipoResultado) bool {
+	for _, item := range items {
+		if Contains(slice, item) {
+			return true
+		}
+	}
+	return false
+}
+
+func Int64SliceToJSONB(numbers []int64) model.JSONB {
+	var jsonb model.JSONB
+	for _, num := range numbers {
+		jsonb = append(jsonb, num)
+	}
+	return jsonb
+}
+
+func StringToInt64Slice(s string) ([]int64, error) {
+	var numbers []int64
+	err := json.Unmarshal([]byte(s), &numbers)
+	if err != nil {
+		return nil, err
+	}
+	return numbers, nil
 }
