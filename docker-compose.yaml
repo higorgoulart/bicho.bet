@@ -11,6 +11,14 @@ services:
       - POSTGRES_PASSWORD=123
       - POSTGRES_USER=admin
       - POSTGRES_DB=bichobet
+  spring-api:
+    build:
+      context: ./springboot-api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
   django-server:
     build:
       context: ./django-server
@@ -23,17 +31,21 @@ services:
       - POSTGRES_PASSWORD=123
     depends_on:
       - postgres
-  spring-api:
+      - spring-api
+  go-scheduler:
     build:
-      context: ./springboot-api
+      context: ./go-scheduler
       dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
     depends_on:
       - postgres
+      - spring-api
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
+    depends_on:
+      - spring-api
+      - django-server
+      - go-scheduler
