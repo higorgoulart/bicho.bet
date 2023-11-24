@@ -29,6 +29,7 @@ func PaymentFee() {
 			return
 		}
 	}
+
 	if err := tx.Commit().Error; err != nil {
 		tx.Rollback()
 		functions.SetErrorLog(err, "divida")

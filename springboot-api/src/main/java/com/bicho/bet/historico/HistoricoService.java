@@ -12,11 +12,6 @@ public class HistoricoService {
     private ApostaService apostaService;
 
     public Page<HistoricoResponse> getAll(Long idApostador, Pageable pageable) {
-        var historicos = apostaService.findHistoricosByIdApostador(idApostador, pageable);
-
-        historicos.forEach(x -> x.setGanhos(x.getGanhos() + apostaService.obterPremio(
-                x.getAposta(), x.getTipoAposta(), x.getNumerosAposta(), x.getNumerosResultado())));
-
-        return historicos;
+        return apostaService.findHistoricosByIdApostador(idApostador, pageable);
     }
 }

@@ -17,7 +17,7 @@ public class HistoricoResponse {
     private List<BetNumber> numerosAposta;
     private List<BetNumber> numerosResultado;
     private double aposta;
-    private double ganhos;
+    private double premio;
 
     public HistoricoResponse(
             LocalDateTime data,
@@ -25,7 +25,8 @@ public class HistoricoResponse {
             TipoAposta tipoAposta,
             Object numerosAposta,
             Object numerosResultado,
-            Double valor
+            Double valor,
+            Double premio
     ) {
         this.data = data;
         this.loterica = loterica;
@@ -33,6 +34,6 @@ public class HistoricoResponse {
         this.numerosAposta = (List<BetNumber>) numerosAposta;
         this.numerosResultado = (List<BetNumber>) numerosResultado;
         this.aposta = valor;
-        this.ganhos = 0.0 - valor;
+        this.premio = premio;
     }
 }

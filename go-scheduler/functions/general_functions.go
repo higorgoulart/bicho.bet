@@ -67,3 +67,11 @@ func SetResultadoLog(resultado model.Resultado, jogo model.Jogo) {
 func RoundToTwoDecimalPlaces(value float64) float64 {
 	return math.Round(value*100) / 100
 }
+
+func FormatNumber(number int64, format int) int64 {
+	if format == 2 {
+		return number % 100
+	}
+
+	return number % 1000
+}

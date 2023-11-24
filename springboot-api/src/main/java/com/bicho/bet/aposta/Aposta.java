@@ -7,6 +7,7 @@ import com.bicho.bet.jogo.Jogo;
 import com.bicho.bet.resultado.TipoResultado;
 import com.bicho.bet.utils.ListUtils;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
 @Entity
 @Builder
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Aposta extends EntityId {
@@ -34,6 +36,9 @@ public class Aposta extends EntityId {
 
     @Column(name = "valor")
     private Double valor;
+
+    @Column(name = "premio")
+    private Double premio;
 
     @Column(name = "data")
     private LocalDateTime data;
@@ -53,88 +58,5 @@ public class Aposta extends EntityId {
         this.data = data;
         this.tipo = tipo;
         this.numeros = numeros;
-    }
-
-    public static Double obterMultiplicador(TipoAposta tipo, List<TipoResultado> posicoes) {
-        if (posicoes.isEmpty()) {
-            return 0.0;
-        }
-
-        return switch (tipo) {
-            case GRUPO -> obterMultiplicadorGrupo(posicoes);
-            case DUQUE -> obterMultiplicadorDuque(posicoes);
-            case TERNO -> obterMultiplicadorTerno(posicoes);
-            case QUADRA -> obterMultiplicadorQuadra(posicoes);
-            case QUINA -> obterMultiplicadorQuina(posicoes);
-            case DEZENA -> obterMultiplicadorDezena(posicoes);
-            case CENTENA -> obterMultiplicadorCentena(posicoes);
-            case MILHAR -> obterMultiplicadorMilhar(posicoes);
-        };
-    }
-
-    private static Double obterMultiplicadorGrupo(List<TipoResultado> posicoes) {
-        return posicoes.contains(TipoResultado.PRIMEIRA) ? 12.0 : 3.0;
-    }
-
-    private static Double obterMultiplicadorDuque(List<TipoResultado> posicoes) {
-        return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA)
-            ? 95.0
-            : posicoes.size() == 2
-                ? 12.0
-                : 1.0;
-    }
-
-    private static Double obterMultiplicadorTerno(List<TipoResultado> posicoes) {
-        return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA)
-            ? 700.0
-            : posicoes.size() == 3
-                ? 42.0
-                : posicoes.size() == 2
-                    ? 3.0
-                    : 0.75;
-    }
-
-    private static Double obterMultiplicadorQuadra(List<TipoResultado> posicoes) {
-        return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA, TipoResultado.QUARTA)
-            ? 4000.0
-            : posicoes.size() == 4
-                ? 500.0
-                : posicoes.size() == 3
-                    ? 22.0
-                    : posicoes.size() == 2
-                        ? 1.5
-                        : 0.2;
-    }
-
-    private static Double obterMultiplicadorQuina(List<TipoResultado> posicoes) {
-        return ListUtils.containsAll(posicoes, TipoResultado.PRIMEIRA, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA, TipoResultado.QUARTA, TipoResultado.QUINTA)
-            ? 17000.0
-            : posicoes.size() == 4
-                ? 150.0
-                : posicoes.size() == 3
-                    ? 8.0
-                    : posicoes.size() == 2
-                        ? 1.0
-                        : 0.2;
-    }
-
-    private static Double obterMultiplicadorDezena(List<TipoResultado> posicoes) {
-        return obterMultiplicadorNumerico(posicoes, 50.0, 7.0);
-    }
-
-    private static Double obterMultiplicadorCentena(List<TipoResultado> posicoes) {
-        return obterMultiplicadorNumerico(posicoes, 500.0, 60.0);
-    }
-
-    private static Double obterMultiplicadorMilhar(List<TipoResultado> posicoes) {
-        return obterMultiplicadorNumerico(posicoes, 5000.0, 600.0);
-    }
-
-    private static Double obterMultiplicadorNumerico(List<TipoResultado> posicoes, Double valorPrimeiro, Double valorOutro) {
-        return posicoes.contains(TipoResultado.PRIMEIRA)
-            ? valorPrimeiro
-            : ListUtils.containsAny(posicoes, TipoResultado.SEGUNDA, TipoResultado.TERCEIRA, TipoResultado.QUARTA, TipoResultado.QUINTA)
-                ? valorOutro
-                : 1.0;
     }
 }
