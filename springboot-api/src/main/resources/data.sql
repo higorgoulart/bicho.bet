@@ -1,15 +1,25 @@
 INSERT INTO loterica (id, nome, saldo, telefone, cnpj) VALUES (1, 'Bicho.bet', 10000000, '48999999999', '29961469000179');
 
-INSERT INTO apostador(id, nome, saldo, telefone, cpf, divida, limite)
-VALUES
-(1, 'Guilherme Savio', 300, '48999999999', '15365498725', 0, 900),
-(2, 'Higor Goulart', 500, '48999999999', '15965487365', 0, 1500),
-(3, 'Filipe Milaneze', 300, '48999999999', '45698712302', 0, 900),
-(4, 'Gabriel Ferreira', 500, '48999999999', '95123647895', 0, 1500),
-(5, 'Max Willian', 300, '48999999999', '65954715204', 0, 900);
-
 INSERT INTO jogo(id, dt_fim, dt_inicio, status, loterica_id)
 VALUES (1, '2023-11-27 20:00:00', '2023-11-20 20:00:00', 'ABERTO', 1);
+
+INSERT INTO apostador(id, nome, depositado, saldo, telefone, cpf, divida, limite)
+VALUES
+(1, 'Guilherme Savio',  3000,   300, '48999999999', '15365498725',      0,   100),
+(2, 'Higor Goulart',      20,     0, '48999999999', '15965487365',   -100,     0),
+(3, 'Filipe Milaneze',   300,   200, '48999999999', '45698712302',      0,   100),
+(4, 'Gabriel Ferreira',  200,   100, '48999999999', '95123647895',      0,   100),
+(5, 'Max Willian',       100,     0, '48999999999', '65954715204',   -100,     0);
+
+
+INSERT INTO aposta(id, data, numeros, tipo, valor, apostador_id, jogo_id, premio) 
+VALUES 
+(1, '2023-11-24 12:00', '[24]',            'GRUPO',   100, 1, 1, 0),
+(2, '2023-11-24 12:00', '[15, 19]',        'DUQUE',   100, 2, 1, 0),
+(3, '2023-11-24 12:00', '[1760]',          'MILHAR',  100, 3, 1, 0),
+(4, '2023-11-24 12:00', '[273]',           'CENTENA', 100, 4, 1, 0),
+(5, '2023-11-24 12:00', '[23, 22, 10, 2]', 'QUADRA',  100, 5, 1, 0);
+
 
 INSERT INTO bicho (id, nome, numeros)
 VALUES
