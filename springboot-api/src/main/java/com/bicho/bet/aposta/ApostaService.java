@@ -4,9 +4,11 @@ import com.bicho.bet.apostador.ApostadorService;
 import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.exceptions.JogoSemApostaException;
 import com.bicho.bet.exceptions.NotFoundException;
+import com.bicho.bet.apostador.historico.HistoricoResponse;
 import com.bicho.bet.jogo.JogoService;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +16,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ApostaService {
-    private ModelMapper modelMapper;
     private ApostaRepository repository;
     private ApostadorService apostadorService;
 
@@ -56,5 +57,9 @@ public class ApostaService {
         }
 
         return apostas;
+    }
+
+    public Page<HistoricoResponse> findHistoricosByIdApostador(Long idApostador, Pageable pageable) {
+        return repository.findHistoricosByIdApostador(idApostador, pageable);
     }
 }

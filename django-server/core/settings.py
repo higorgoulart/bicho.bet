@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-lz%k&d(wyl^c#23&7!g=)s#o6@-yaw93tvfzhu0675qf5r1$%5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admindocs',
-    'loterica',
     'rest_framework',
+    'loterica',
 ]
 
 MIDDLEWARE = [
@@ -78,13 +78,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bichobet',
-        'USER': 'admin',
-        'PASSWORD': '123',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
         'HOST': 'postgres',
-        'PORT': '5432',
+        'PORT': 5432,
         'OPTIONS': {
             'options': '-c search_path=public'
         },
@@ -135,7 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
     "site_header": "Bicho.bet",
-    "site_brand": "Bicho.bet",
+    "site_brand": "Administração",
     "site_logo": "bichobet.png",
     "welcome_sign": "Bem-vindo à pagina de administração da Bicho.bet!",
 }

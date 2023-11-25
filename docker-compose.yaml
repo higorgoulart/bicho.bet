@@ -17,9 +17,35 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - postgres
+  django-server:
+    build:
+      context: ./django-server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=bichobet
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123
+    depends_on:
+      - postgres
+      - spring-api
+  go-scheduler:
+    build:
+      context: ./go-scheduler
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - spring-api
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
+    depends_on:
+      - spring-api
+      - django-server
+      - go-scheduler

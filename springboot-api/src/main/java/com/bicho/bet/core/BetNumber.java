@@ -1,10 +1,16 @@
 package com.bicho.bet.core;
 
+import java.util.Objects;
+
 public class BetNumber extends Number implements Comparable<Number> {
     private final short value;
 
     public BetNumber(short value) {
         this.value = value;
+    }
+
+    public BetNumber(int value) {
+        this.value = (short) value;
     }
 
     @Override
@@ -34,7 +40,24 @@ public class BetNumber extends Number implements Comparable<Number> {
 
     @Override
     public int compareTo(Number other) {
-        return Short.compare(this.value, (short) other);
+        return Integer.compare(this.value, (int) other);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass() && o.getClass().getSuperclass() != Number.class) return false;
+
+        return switch (o.getClass().getName()) {
+            case "Integer" -> (int) value == (int) o;
+            case "Short" -> value == (short) o;
+            default -> value == ((BetNumber) o).value;
+        };
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     public boolean greaterThan(Number other) {
