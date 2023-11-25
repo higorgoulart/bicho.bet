@@ -3,13 +3,12 @@ INSERT INTO loterica (id, nome, saldo, telefone, cnpj) VALUES (1, 'Bicho.bet', 1
 INSERT INTO jogo(id, dt_fim, dt_inicio, status, loterica_id)
 VALUES (1, '2023-11-27 20:00:00', '2023-11-20 20:00:00', 'ABERTO', 1);
 
-INSERT INTO apostador(id, nome, depositado, saldo, telefone, cpf, divida, limite)
-VALUES
-(1, 'Guilherme Savio',  3000,   300, '48999999999', '15365498725',      0,   100),
-(2, 'Higor Goulart',      20,     0, '48999999999', '15965487365',   -100,     0),
-(3, 'Filipe Milaneze',   300,   200, '48999999999', '45698712302',      0,   100),
-(4, 'Gabriel Ferreira',  200,   100, '48999999999', '95123647895',      0,   100),
-(5, 'Max Willian',       100,     0, '48999999999', '65954715204',   -100,     0);
+INSERT INTO apostador (id, nome, username, email, "password", cpf, saldo, depositado, divida, limite) VALUES
+(1, 'Guilherme Savio',  'guilherme.savio',  'guilherme.savio@bichobet.com',  '$2a$10$Ra3TENGkNYICgYSnviOVuO0z6CaMf/gtTcA37ujkcS0fEbkA.QItm', '15365498725', 3000, 300,  0,   100),
+(2, 'Higor Goulart',    'higor.goulart',    'higor.goulart@bichobet.com',    '$2a$10$Ra3TENGkNYICgYSnviOVuO0z6CaMf/gtTcA37ujkcS0fEbkA.QItm', '15965487365', 20,   0,  -100,  0),
+(3, 'Filipe Milaneze',  'filipe.milaneze',  'filipe.milaneze@bichobet.com',  '$2a$10$Ra3TENGkNYICgYSnviOVuO0z6CaMf/gtTcA37ujkcS0fEbkA.QItm', '45698712302', 300,  200,  0,   100),
+(4, 'Gabriel Ferreira', 'gabriel.ferreira', 'gabriel.ferreira@bichobet.com', '$2a$10$Ra3TENGkNYICgYSnviOVuO0z6CaMf/gtTcA37ujkcS0fEbkA.QItm', '95123647895', 200,  100,  0,   100),
+(5, 'Max Willian',      'max.willian',      'max.willian@bichobet.com',      '$2a$10$Ra3TENGkNYICgYSnviOVuO0z6CaMf/gtTcA37ujkcS0fEbkA.QItm', '65954715204', 100,  0,   -100, 0);
 
 
 INSERT INTO aposta(id, data, numeros, tipo, valor, apostador_id, jogo_id, premio) 

@@ -30,7 +30,7 @@ public class ApostadorController {
 
     @PostMapping
     public ResponseEntity<ApostadorRepresentation.ApostadorResponse> add(
-            @RequestBody ApostadorRepresentation.ApostadorCreateUpdate entity) {
+            @RequestBody ApostadorRepresentation.ApostadorUpdate entity) {
         var save = service.add(entity);
 
         return ResponseEntity
@@ -40,7 +40,7 @@ public class ApostadorController {
 
     @PutMapping("{id}")
     public ResponseEntity<ApostadorRepresentation.ApostadorResponse> update(
-            @PathVariable Long id, @RequestBody ApostadorRepresentation.ApostadorCreateUpdate entity) {
+            @PathVariable Long id, @RequestBody ApostadorRepresentation.ApostadorUpdate entity) {
         try {
             return ResponseEntity.ok().body(ApostadorRepresentation.ApostadorResponse.from(service.update(id, entity)));
         } catch (NotFoundException ex) {
