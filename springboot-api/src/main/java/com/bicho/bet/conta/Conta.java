@@ -1,8 +1,9 @@
 package com.bicho.bet.conta;
 
 import com.bicho.bet.core.EntityId;
-import com.bicho.bet.security.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -13,16 +14,14 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @Getter
 @Setter
-public abstract class Conta extends User {
+public abstract class Conta extends EntityId {
+    @Column(name = "nome")
+    private String nome;
 
     @Column(name = "saldo")
     private Double saldo;
 
-    @Column(name = "depositado")
-    private Double depositado;
-
     public void depositar(double valor) {
-        this.depositado += valor;
         this.saldo += valor;
     }
 }

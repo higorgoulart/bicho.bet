@@ -1,6 +1,6 @@
 package com.bicho.bet.security.token;
 
-import com.bicho.bet.security.user.User;
+import com.bicho.bet.apostador.Apostador;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -13,20 +13,19 @@ public class RefreshToken {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
-    @JoinColumn(name ="user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Apostador apostador;
     @Column(nullable = false, unique = true)
     private String token;
     @Column(nullable = false)
     private Instant expiryDate;
 
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setApostador(Apostador apostador) {
+        this.apostador = apostador;
     }
 
     public void setToken(String token) {
