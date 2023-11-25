@@ -59,9 +59,6 @@ public class Apostador extends Conta {
     @Column(name = "limite")
     private Double limite;
 
-    @Column(name = "saldo")
-    private Double saldo;
-
     @Column(name = "depositado")
     private Double depositado;
 
