@@ -4,11 +4,11 @@ class Loterica(models.Model):
     def __str__(self):
         return 'Lotérica: ' + self.nome
     
-    id = models.AutoField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True)
     nome = models.CharField(max_length=255, blank=True, null=True)
     saldo = models.FloatField(blank=True, null=True)
-    telefone = models.CharField(max_length=255, blank=True, null=True)
     cnpj = models.CharField(max_length=255, blank=True, null=True)
+    telefone = models.CharField(max_length=255, blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'loterica'
@@ -48,6 +48,7 @@ class Aposta(models.Model):
     id = models.BigIntegerField(primary_key=True)
     data = models.DateTimeField(blank=True, null=True)
     numeros = models.JSONField(blank=True, null=True)
+    premio = models.FloatField(blank=True, null=True)
     tipo = models.CharField(max_length=255, blank=True, null=True)
     valor = models.FloatField(blank=True, null=True)
     jogo = models.ForeignKey(Jogo, models.CASCADE, blank=True, null=True)

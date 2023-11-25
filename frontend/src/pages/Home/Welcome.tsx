@@ -5,7 +5,7 @@ import './Home.css'
 export function Welcome() {
     return (
         <div className="flex justify-center mt-[5%]">
-            <div className="card w-[80%] bg-secondary mt-3 mb-4 p-4">
+            <div className="card w-[80%] bg-secondary mt-3 mb-4 p-4 over overflow-clip">
                 <div className="flex">
                     <div className="card-body flex-4 pr-4">
                         <h1 className="card-title text-white">Bem-vindo ao Bicho.bet!</h1>

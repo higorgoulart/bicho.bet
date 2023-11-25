@@ -1,9 +1,6 @@
 package com.bicho.bet.apostador;
 
-import com.bicho.bet.aposta.TipoAposta;
-import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.exceptions.NotFoundException;
-import com.bicho.bet.jogo.Jogo;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -24,10 +21,12 @@ public class ApostadorService {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
     }
 
-    public Apostador add(ApostadorRepresentation.ApostadorCreateUpdate create) {
+    public Apostador add(ApostadorRepresentation.ApostadorUpdate create) {
         return repository.save(new Apostador(
                 create.getNome(),
-                create.getTelefone(),
+                create.getUsername(),
+                create.getEmail(),
+                create.getPassword(),
                 create.getCpf(),
                 create.getSaldo(),
                 create.getDepositado(),
@@ -36,7 +35,7 @@ public class ApostadorService {
         ));
     }
 
-    public Apostador update(Long id, ApostadorRepresentation.ApostadorCreateUpdate entity) {
+    public Apostador update(Long id, ApostadorRepresentation.ApostadorUpdate entity) {
         var dbEntity = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
 
         modelMapper.map(entity, dbEntity);

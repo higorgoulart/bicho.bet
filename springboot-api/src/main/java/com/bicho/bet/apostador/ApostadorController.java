@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,19 +27,9 @@ public class ApostadorController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<ApostadorRepresentation.ApostadorResponse> add(
-            @RequestBody ApostadorRepresentation.ApostadorCreateUpdate entity) {
-        var save = service.add(entity);
-
-        return ResponseEntity
-                .created(URI.create("/" + save.getId()))
-                .body(ApostadorRepresentation.ApostadorResponse.from(save));
-    }
-
     @PutMapping("{id}")
     public ResponseEntity<ApostadorRepresentation.ApostadorResponse> update(
-            @PathVariable Long id, @RequestBody ApostadorRepresentation.ApostadorCreateUpdate entity) {
+            @PathVariable Long id, @RequestBody ApostadorRepresentation.ApostadorUpdate entity) {
         try {
             return ResponseEntity.ok().body(ApostadorRepresentation.ApostadorResponse.from(service.update(id, entity)));
         } catch (NotFoundException ex) {

@@ -138,4 +138,10 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Administração",
     "site_logo": "bichobet.png",
     "welcome_sign": "Bem-vindo à pagina de administração da Bicho.bet!",
+    # Links to put along the top menu
+    "topmenu_links": [
+
+        # external url that opens in a new window (Permissions can be added)
+        {"name": "Retornar à plataforma", "url": "http://localhost:5173", "new_window": False},
+    ],
 }

@@ -8,19 +8,48 @@ import com.bicho.bet.aposta.Aposta;
 import com.bicho.bet.exceptions.ContaSemSaldoException;
 import com.bicho.bet.exceptions.SaqueInvalidoException;
 import com.bicho.bet.jogo.Jogo;
+import com.bicho.bet.security.role.Role;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "apostador",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Apostador extends Conta {
+    @NotBlank
+    @Size(max = 20)
+    private String username;
+
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(max = 120)
+    private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
     @Column(name = "cpf")
     private String cpf;
 
@@ -30,11 +59,22 @@ public class Apostador extends Conta {
     @Column(name = "limite")
     private Double limite;
 
-    public Apostador(String nome, String telefone, String cpf, Double saldo, Double depositado, Double divida, Double limite) {
-        super(nome, telefone, saldo, depositado);
+    @Column(name = "depositado")
+    private Double depositado;
+
+    public Apostador(String nome, String username, String email, String password, String cpf, Double saldo) {
+        super(nome, saldo);
+        this.username = username;
+        this.email = email;
+        this.password = password;
         this.cpf = cpf;
+    }
+
+    public Apostador(String nome, String username, String email, String password, String cpf, Double saldo, Double depositado, Double divida, Double limite) {
+        this(nome, username, email, password, cpf, saldo);
         this.divida = divida;
         this.limite = limite;
+        this.depositado = depositado;
     }
 
     public void sacar(double valor) {
