@@ -1,11 +1,12 @@
 import './Home.css'
+import { Link } from 'react-router-dom'
 
 export function Breadcrumb() {
     return (
         <div className="text-sm breadcrumbs">
             <ul>
                 <li>
-                    <a>
+                    <Link to="">
                         <svg width="1.8rem" height="1.8rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#727278">
 
                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
@@ -18,10 +19,10 @@ export function Breadcrumb() {
                         <div className='ml-1'>
                             Cadastre-se
                         </div>
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a>
+                    <Link to="">
                         <svg width="1.8rem" height="1.8rem" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 
                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
@@ -34,7 +35,7 @@ export function Breadcrumb() {
                         <div className='ml-1'>
                             Deposite
                         </div>
-                    </a>
+                    </Link>
                 </li>
                 <li>
                     <svg width="1.8rem" height="1.8rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
