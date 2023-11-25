@@ -3,6 +3,7 @@ version: '3'
 services:
   postgres:
     image: postgres:15-alpine
+    container_name: postgres
     ports:
       - 5432:5432
     volumes:
@@ -12,14 +13,14 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_DB=bichobet
   spring-api:
+    container_name: spring-api
     build:
       context: ./springboot-api
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    depends_on:
-      - postgres
   django-server:
+    container_name: django-server
     build:
       context: ./django-server
       dockerfile: Dockerfile
@@ -29,23 +30,15 @@ services:
       - POSTGRES_NAME=bichobet
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=123
-    depends_on:
-      - postgres
-      - spring-api
   go-scheduler:
+    container_name: go-scheduler
     build:
       context: ./go-scheduler
       dockerfile: Dockerfile
-    depends_on:
-      - postgres
-      - spring-api
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
-    depends_on:
-      - spring-api
-      - django-server
-      - go-scheduler
