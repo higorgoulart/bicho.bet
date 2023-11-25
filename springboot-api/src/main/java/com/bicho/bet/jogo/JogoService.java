@@ -1,8 +1,9 @@
 package com.bicho.bet.jogo;
 
 import com.bicho.bet.aposta.ApostaService;
-import com.bicho.bet.core.BaseService;
+import com.bicho.bet.apostador.Apostador;
 import com.bicho.bet.exceptions.JogoEmExecucaoException;
+import com.bicho.bet.exceptions.NotFoundException;
 import com.bicho.bet.loterica.LotericaService;
 import com.bicho.bet.resultado.ResultadoRepository;
 import lombok.AllArgsConstructor;
@@ -14,22 +15,21 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class JogoService extends BaseService<Jogo, Long> {
+public class JogoService {
     private JogoRepository repository;
 
     private ResultadoRepository resultadoRepository;
 
     private LotericaService lotericaService;
 
-    @Override
-    public JogoRepository getRepository() {
-        return repository;
-    }
-
     private ApostaService apostaService;
 
     public List<Jogo> getAll() {
         return repository.findAll();
+    }
+
+    public Jogo getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Jogo"));
     }
 
     public Jogo abrirJogo(Long idLoterica) throws JogoEmExecucaoException {

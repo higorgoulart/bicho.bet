@@ -1,8 +1,6 @@
 package com.bicho.bet.jogo;
 
-import com.bicho.bet.core.BaseController;
 import com.bicho.bet.exceptions.JogoEmExecucaoException;
-import com.bicho.bet.core.BaseService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

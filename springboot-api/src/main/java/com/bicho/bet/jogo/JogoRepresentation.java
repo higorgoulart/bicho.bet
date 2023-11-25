@@ -23,6 +23,7 @@ public interface JogoRepresentation {
         @Enumerated(EnumType.STRING)
         private StatusJogo status;
 
+
         public static JogoResponse from(Jogo jogo) {
             return JogoResponse.builder()
                     .id(jogo.getId())
