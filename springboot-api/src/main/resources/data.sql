@@ -9,7 +9,7 @@ INSERT INTO loterica (id, nome, saldo, telefone, cnpj) VALUES (1, 'Bicho.bet', 1
 
 INSERT INTO jogo(id, dt_fim, dt_inicio, status, loterica_id)
 VALUES
-    (1, '2023-12-04 20:00:00', '2023-12-04 20:00:00', 'ABERTO', 1),
+    (1, '2023-12-04 20:00:00', '2023-12-04 10:00:00', 'ABERTO', 1),
     (2, '2023-11-25 18:00:00', '2023-11-18 18:00:00', 'FECHADO', 1),
     (3, '2023-11-26 15:30:00', '2023-11-19 15:30:00', 'FECHADO', 1),
     (4, '2023-11-21 21:45:00', '2023-11-14 21:45:00', 'FECHADO', 1),
