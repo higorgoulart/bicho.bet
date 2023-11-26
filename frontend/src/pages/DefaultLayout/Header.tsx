@@ -35,6 +35,8 @@ export function Header() {
                     </label>
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-secondary rounded-box">
                         <li><Link className="justify-between" to={`/perfil/${accountId}`}>Perfil</Link></li>
+                        <li><Link className="justify-between" to={`/perfil/deposito/${accountId}`}>Depositar</Link></li>
+                        <li><Link className="justify-between" to={`/perfil/emprestimo/${accountId}`}>Emprestimo</Link></li>
                         <li><Link to="">Logout</Link></li>
                     </ul>
                 </div>

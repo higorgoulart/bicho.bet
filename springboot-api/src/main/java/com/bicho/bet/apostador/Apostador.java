@@ -77,12 +77,18 @@ public class Apostador extends Conta {
         this.depositado = depositado;
     }
 
-    public void sacar(double valor) {
+    public void sacar(Double valor) {
         if (valor > getSaldo() || (getDepositado() * 3) < valor)
             throw new SaqueInvalidoException();
 
         setSaldo(getSaldo() - valor);
         setDepositado(getDepositado() - valor);
+    }
+
+    public void depositar(double valor){
+
+        setSaldo(getSaldo() + valor);
+        setDepositado(getDepositado() + valor);
     }
 
     public Aposta apostar(Jogo jogo, Double valor, TipoAposta tipo, List<BetNumber> numeros) {

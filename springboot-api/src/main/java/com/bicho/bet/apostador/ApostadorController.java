@@ -18,6 +18,7 @@ public class ApostadorController {
         return ResponseEntity.ok(service.getAll().stream().map(ApostadorRepresentation.ApostadorResponse::from).toList());
     }
 
+    @CrossOrigin
     @GetMapping("{id}")
     public ResponseEntity<ApostadorRepresentation.ApostadorResponse> getById(@PathVariable Long id) {
         try {
@@ -26,6 +27,28 @@ public class ApostadorController {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @CrossOrigin
+    @PutMapping("/depositar/{id}")
+    public Apostador depositar(
+            @PathVariable Long id,@RequestBody Double valor){
+        return service.depositar(id, valor);
+    }
+
+    @CrossOrigin
+    @PutMapping("/sacar/{id}")
+    public Apostador sacar(
+            @PathVariable Long id,@RequestBody Double valor){
+        return service.sacar(id, valor);
+    }
+
+    @CrossOrigin
+    @PutMapping("/emprestimo/{id}")
+    public Apostador emprestimo(
+            @PathVariable Long id,@RequestBody Double valor){
+        return service.solicitarEmprestimo(id, valor);
+    }
+
 
     @PutMapping("{id}")
     public ResponseEntity<ApostadorRepresentation.ApostadorResponse> update(

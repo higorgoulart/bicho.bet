@@ -47,19 +47,30 @@ public class ApostadorService {
         repository.deleteById(id);
     }
 
-    public void sacar(Long id, double valor) {
+    public Apostador sacar(Long id, double valor) {
         var apostador = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
 
         apostador.sacar(valor);
 
         repository.save(apostador);
+        return apostador;
     }
 
-    public void depositar(Long id, double valor) {
+    public Apostador depositar(Long id, Double valor) {
         var apostador = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
 
         apostador.depositar(valor);
 
         repository.save(apostador);
+        return apostador;
+    }
+
+    public Apostador solicitarEmprestimo(Long id, Double valor) {
+        var apostador = repository.findById(id).orElseThrow(() -> new NotFoundException("Apostador"));
+
+        apostador.solicitarEmprestimo(valor);
+
+        repository.save(apostador);
+        return apostador;
     }
 }

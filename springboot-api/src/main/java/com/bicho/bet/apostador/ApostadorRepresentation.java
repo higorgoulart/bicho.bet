@@ -78,6 +78,9 @@ public interface ApostadorRepresentation {
         @NotNull(message = "O limite não pode ser nulo")
         @Positive(message = "O limite deve ser maior que zero")
         private Double limite;
+
+        @Positive(message = "O valor deve ser maior que zero")
+        private Double valor;
     }
 
     @Builder

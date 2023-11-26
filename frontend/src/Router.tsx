@@ -14,6 +14,9 @@ import Games from "./pages/Games/Games.tsx";
 import Game from "./pages/Game/Game.tsx";
 import Login from './pages/Login/Login.tsx';
 import * as institucional from './pages/Institucional/Institucional.tsx';
+import Deposit from './pages/Account/Deposit.tsx';
+import Loan from './pages/Account/Loan.tsx';
+import Withdraw from './pages/Account/Withdraw.tsx';
 
 
 export function Router() {
@@ -38,6 +41,9 @@ export function Router() {
                 <Route path="/institucional/politica/" element={<institucional.Politica />} />
                 <Route path="/institucional/dependencia/" element={<institucional.Dependencia />} />
                 <Route path="/institucional/carreira/" element={<institucional.Carreira />} />
+                <Route path="/perfil/deposito/:id" element={<Deposit/>} />
+                <Route path="/perfil/emprestimo/:id" element={<Loan/>}/>
+                <Route path="/perfil/saque/:id" element={<Withdraw/>}/>
                 <Route path="/admin" element={<AdminRedirect/>}/>
             </Route>
         </Routes>
