@@ -11,6 +11,7 @@ import Results from "./pages/Results/Results.tsx";
 import Support from "./pages/Support/Support.tsx";
 import Games from "./pages/Games/Games.tsx";
 import Game from "./pages/Game/Game.tsx";
+import Login from './pages/Login/Login.tsx';
 import * as institucional from './pages/Institucional/Institucional.tsx';
 
 
@@ -27,6 +28,7 @@ export function Router() {
                 <Route path="/historicos/:id" element={<Historic />} />
                 <Route path="/resultados" element={<Results />} />
                 <Route path="/suporte" element={<Support />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/institucional/bicho/" element={<institucional.Bicho />} />
                 <Route path="/institucional/numero/" element={<institucional.Numero />} />
                 <Route path="/institucional/veganos/" element={<institucional.Veganos />} />
