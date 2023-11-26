@@ -1,3 +1,5 @@
+import  Animal  from "../NewBet/Animal";
+
 import abacate from "../../assets/vegan/abacate.svg";
 import abobora from "../../assets/vegan/abobora.svg";
 import alho_poro from "../../assets/vegan/alho_poro.svg";
@@ -23,6 +25,7 @@ import pimenta from "../../assets/vegan/pimenta.svg";
 import pimentao from "../../assets/vegan/pimentao.svg";
 import repolho from "../../assets/vegan/repolho.svg";
 import uva from "../../assets/vegan/uva.svg";
+
 
 const FrutasEVegetais = [
     { title: "Abacate", numbers: "01, 02, 03, 04", src: abacate },
@@ -53,6 +56,26 @@ const FrutasEVegetais = [
 ];
 
 export function Veganos() {
-    return <div></div>
-    
+
+    const renderFruis = () => {
+        return FrutasEVegetais.map(fruta =>
+            <Animal
+                    key={fruta.title}
+                    title={fruta.title}
+                    numbers={fruta.numbers}
+                    src={fruta.src}
+                    onClick={() => {}}
+                    color="black"
+                />
+        );
+    }
+
+
+    return (
+    <div>
+        <div className="flex bg-white flex-wrap py-12 justify-center">
+            {renderFruis()}
+        </div>
+    </div>
+    )
 }
