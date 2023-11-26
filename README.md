@@ -70,7 +70,7 @@ Nesta seção você encontrará os passos para instalar e executar o projeto na 
       ```
    * Criar o super-usuário (você pode modificar como preferir):
       ```sh
-       python manage.py createsuperuser python manage.py createsuperuser --username bichobet --email bichobet.satc@gmail.com --noinput
+       python manage.py createsuperuser --username bichobet --email bichobet.satc@gmail.com --noinput
       ```
 
 7. O restante dos contêineres serão criados baseados nas suas configurações de "produção". Por exemplo, o scheduler esta programado para pegar a data de novos jogos de 12/12h e gerar o resultado e pagamentos conforme a data final cadastrada no jogo, as taxas de empréstimos só serão aplicadas à 00:00 de todos os dias. Caso queria alterar alguma configuração, edite o serviço com a IDE desejada e refaça o processo de instalação. 
