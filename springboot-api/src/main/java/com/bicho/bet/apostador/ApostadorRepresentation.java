@@ -36,6 +36,13 @@ public interface ApostadorRepresentation {
         @NotNull(message = "O CPF não pode ser nulo")
         @NotEmpty(message = "O CPF não pode ser vazio")
         private String cpf;
+
+        private Double saldo;
+
+        private Double depositado;
+
+        private Double divida;
+
     }
 
     @Builder
