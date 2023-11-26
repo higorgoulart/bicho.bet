@@ -73,7 +73,7 @@ export function Veganos() {
 
     return (
     <div>
-        <div className="flex bg-white flex-wrap py-12 justify-center">
+        <div className="flex bg-white flex-wrap py-12 justify-center text-black">
             {renderFruis()}
         </div>
     </div>
