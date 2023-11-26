@@ -4,11 +4,8 @@ import com.bicho.bet.conta.Conta;
 import com.bicho.bet.aposta.TipoAposta;
 import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.core.EntityId;
-import com.bicho.bet.exceptions.ContaSemCreditoException;
+import com.bicho.bet.exceptions.*;
 import com.bicho.bet.aposta.Aposta;
-import com.bicho.bet.exceptions.ContaSemSaldoException;
-import com.bicho.bet.exceptions.MenorQueTresVezesDepositadoException;
-import com.bicho.bet.exceptions.SaldoInsuficienteException;
 import com.bicho.bet.jogo.Jogo;
 import com.bicho.bet.security.role.Role;
 import lombok.*;
@@ -91,8 +88,16 @@ public class Apostador extends Conta {
         setDepositado(0.0);
     }
 
-    public void depositar(double valor){
-        setSaldo(getSaldo() + valor);
+    public void depositar(double valor) {
+        if ((getDivida() * -1) > valor){
+            throw new DividaMaiorQueDepositoException();
+        }
+
+        if (getDivida() < 0){
+            setSaldo(getSaldo() + (valor + getDivida()));
+        } else {
+            setSaldo(getSaldo() + valor);
+        }
         setDepositado(getDepositado() + valor);
     }
 
@@ -117,6 +122,7 @@ public class Apostador extends Conta {
 
         this.setDivida(getDivida() - obterJuros(valorDesejado));
         this.setSaldo(getSaldo() + valorDesejado);
+        this.setLimite(getLimite() - valorDesejado);
     }
 
     private void solicitarEmprestimoMinimo(double valorDesejado) {
