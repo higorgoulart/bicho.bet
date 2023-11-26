@@ -15,11 +15,11 @@ type Aposta struct {
 	ID          int64     `gorm:"column:id;primaryKey" json:"id"`
 	Data        time.Time `gorm:"column:data" json:"data"`
 	Numeros     string    `gorm:"column:numeros" json:"numeros"`
+	Premio      float64   `gorm:"column:premio" json:"premio"`
 	Tipo        string    `gorm:"column:tipo" json:"tipo"`
 	Valor       float64   `gorm:"column:valor" json:"valor"`
 	ApostadorID int64     `gorm:"column:apostador_id" json:"apostador_id"`
 	JogoID      int64     `gorm:"column:jogo_id" json:"jogo_id"`
-	Premio      float64   `gorm:"column:premio" json:"premio"`
 }
 
 // TableName Aposta's table name

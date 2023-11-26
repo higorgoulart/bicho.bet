@@ -15,6 +15,7 @@ export default function Loan(){
       try {
         if (await requestWithToken(url, navigate, 'PUT', inputValue)) {
           setSuccessMessage('Saque realizado com sucesso!');
+          navigate(`/perfil/${id}`);
         }
       } catch (error) {
         setSuccessMessage(JSON.parse(error.message).message);

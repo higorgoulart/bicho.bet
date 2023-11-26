@@ -15,6 +15,7 @@ export default function Deposit() {
       try {
         if (await requestWithToken(url, navigate, 'PUT', inputValue)) {
           setSuccessMessage('Depósito realizado com sucesso!');
+          navigate(`/perfil/${id}`);
         }
       } catch (error) {
         setSuccessMessage(JSON.parse(error.message).message);

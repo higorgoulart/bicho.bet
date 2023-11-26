@@ -25,7 +25,7 @@ public class RestExceptionHandler {
                 .build();
     }
 
-    @ExceptionHandler({ContaSemCreditoException.class, ContaSemSaldoException.class, JogoEmExecucaoException.class, JogoSemApostaException.class, SaldoInsuficienteException.class, MenorQueTresVezesDepositadoException.class})
+    @ExceptionHandler({ContaSemCreditoException.class, ContaSemSaldoException.class, JogoEmExecucaoException.class, JogoSemApostaException.class, SaldoInsuficienteException.class, MenorQueTresVezesDepositadoException.class, DividaMaiorQueDepositoException.class})
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ResponseBody
     public ErrorPayload handleBusinessException(Exception exception, HttpServletRequest request) {

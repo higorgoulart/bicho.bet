@@ -4,11 +4,8 @@ import com.bicho.bet.conta.Conta;
 import com.bicho.bet.aposta.TipoAposta;
 import com.bicho.bet.core.BetNumber;
 import com.bicho.bet.core.EntityId;
-import com.bicho.bet.exceptions.ContaSemCreditoException;
+import com.bicho.bet.exceptions.*;
 import com.bicho.bet.aposta.Aposta;
-import com.bicho.bet.exceptions.ContaSemSaldoException;
-import com.bicho.bet.exceptions.MenorQueTresVezesDepositadoException;
-import com.bicho.bet.exceptions.SaldoInsuficienteException;
 import com.bicho.bet.jogo.Jogo;
 import com.bicho.bet.security.role.Role;
 import lombok.*;
@@ -88,17 +85,26 @@ public class Apostador extends Conta {
             throw new MenorQueTresVezesDepositadoException();
 
         setSaldo(getSaldo() - valor);
-        setDepositado(getDepositado() - valor);
+        setDepositado(0.0);
     }
 
-    public void depositar(double valor){
+    public void depositar(double valor) {
+        if ((getDivida() * -1) > valor){
+            throw new DividaMaiorQueDepositoException();
+        }
 
-        setSaldo(getSaldo() + valor);
+        if (getDivida() < 0){
+            setSaldo(getSaldo() + (valor + getDivida()));
+            setDivida(getDivida() + valor);
+            setLimite(100.00);
+        } else {
+            setSaldo(getSaldo() + valor);
+        }
         setDepositado(getDepositado() + valor);
     }
 
     public Aposta apostar(Jogo jogo, Double valor, TipoAposta tipo, List<BetNumber> numeros) {
-        if (valor > (this.getSaldo() + (this.getLimite() - this.getDivida()))) {
+        if (valor > (this.getSaldo() + (this.getLimite() + this.getDivida()))) {
             throw new ContaSemSaldoException();
         }
 
@@ -116,8 +122,9 @@ public class Apostador extends Conta {
             throw new ContaSemCreditoException();
         }
 
-        this.setDivida(getDivida() + obterJuros(valorDesejado));
+        this.setDivida(getDivida() - obterJuros(valorDesejado));
         this.setSaldo(getSaldo() + valorDesejado);
+        this.setLimite(getLimite() - valorDesejado);
     }
 
     private void solicitarEmprestimoMinimo(double valorDesejado) {
@@ -125,7 +132,7 @@ public class Apostador extends Conta {
             valorDesejado -= this.getSaldo();
         }
 
-        this.setDivida(this.getDivida() + obterJuros(valorDesejado));
+        this.setDivida(this.getDivida() - obterJuros(valorDesejado));
         this.setSaldo(0.0);
     }
 
