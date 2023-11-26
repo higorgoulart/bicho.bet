@@ -10,6 +10,7 @@ import (
 
 const TableNameResultado = "resultado"
 
+// Resultado mapped from table <resultado>
 type Resultado struct {
 	ID      int64     `gorm:"column:id;primaryKey" json:"id"`
 	Data    time.Time `gorm:"column:data" json:"data"`
@@ -17,7 +18,7 @@ type Resultado struct {
 	JogoID  int64     `gorm:"column:jogo_id" json:"jogo_id"`
 }
 
-
+// TableName Resultado's table name
 func (*Resultado) TableName() string {
 	return TableNameResultado
 }
