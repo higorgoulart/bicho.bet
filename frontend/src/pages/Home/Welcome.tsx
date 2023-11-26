@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom'
 import { Breadcrumb } from './Breadcrumb'
 
 import './Home.css'
 
-export function Welcome() {
+export function Welcome({href}) {
     return (
         <div className="flex justify-center mt-[5%]">
             <div className="card w-[80%] bg-secondary mt-3 mb-4 p-4 over overflow-clip">
@@ -11,7 +12,7 @@ export function Welcome() {
                         <h1 className="card-title text-white">Bem-vindo ao Bicho.bet!</h1>
                         <div className='mt-4 mb-4 text-white'>Registre-se agora e ganhe um bônus!</div>
                         <div className="card-actions">
-                            <button className="btn btn-accent text-white glow-blue">Registrar-se</button>
+                            <Link className="btn btn-accent glow-blue text-white" to={href}>Cadastre-se</Link>
                             <button className="btn btn-secondary border-[#5A5A5A]"><img src="src/assets/google-logo.png" className="w-5"/></button>
                             <button className="btn btn-secondary border-[#5A5A5A]"><img src="src/assets/facebook-logo.png" className="w-6"/></button>
                         </div>

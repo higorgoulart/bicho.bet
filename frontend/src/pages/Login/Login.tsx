@@ -90,7 +90,7 @@ const Login = () => {
                     </div>
                     <button
                         type="submit"
-                        className={`w-full bg-${formMode === 'signin' ? 'blue' : 'green'}-500 text-white p-2 rounded-md hover:bg-${formMode === 'signin' ? 'blue' : 'green'}-600 focus:outline-none`}
+                        className="btn w-full text-white rounded-full bg-accent hover:bg-info "
                     >
                         {formMode === 'signin' ? 'Login' : 'Cadastre-se'}
                     </button>

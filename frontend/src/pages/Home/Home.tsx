@@ -10,7 +10,9 @@ export default function Home() {
     return (
         <>
         <div>
-            <Welcome />
+            <Welcome 
+            href = "/login" />
+            
             <div className="flex justify-center my-[5%]">
                 <LinkCard
                     i={1}
