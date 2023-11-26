@@ -13,8 +13,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class EntityId {
+    public static final String SEQUENCE_GENERATOR = "seq";
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_GENERATOR)
     private Long id;
 }

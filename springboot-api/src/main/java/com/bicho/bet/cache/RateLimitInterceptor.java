@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.TimeUnit;
 @Component
 public class RateLimitInterceptor extends HandlerInterceptorAdapter {
-    private static final int MAX_REQUESTS_PER_HOUR = 500;
+    private static final int MAX_REQUESTS_PER_HOUR = 1000;
     private final RedisTemplate<String, String> redisTemplate;
     @Autowired
     public RateLimitInterceptor(RedisTemplate<String, String> redisTemplate) {

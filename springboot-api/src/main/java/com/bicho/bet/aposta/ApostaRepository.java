@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApostaRepository extends JpaRepository<Aposta, Long>, CustomQuerydslPredicateExecutor<Aposta> {
-    @Query("SELECT new com.bicho.bet.apostador.historico.HistoricoResponse(a.data, a.jogo.loterica.nome, a.tipo, a.numeros, r.numeros, a.valor, a.premio) " +
+    @Query("SELECT new com.bicho.bet.apostador.historico.HistoricoResponse(a.data, a.jogo.loterica.nome, a.tipo, a.numeros, COALESCE(r.numeros, '[]'), a.valor, COALESCE(a.premio, 0.0)) " +
             "FROM Aposta a " +
-            "JOIN Resultado r ON a.jogo = r.jogo " +
+            "LEFT JOIN Resultado r ON a.jogo = r.jogo " +
             "WHERE a.apostador.id = :idApostador")
     Page<HistoricoResponse> findHistoricosByIdApostador(@Param("idApostador") Long idApostador, Pageable pageable);
 }

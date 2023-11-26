@@ -1,29 +1,27 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import { requestWithToken } from '../../components/api.tsx';
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Account() {
     let { id } = useParams();
-
-    //TODO pegar a função que o ferreira fez e pegar o token de cada usuário
-    const headers = {'Authorization': '',
-                     'Access-Control-Allow-Origin': '*',
-                     'Access-Control-Allow-Methods': "*"};
-
+    const navigate = useNavigate();
+    
     console.log(id);
 
     const url = `http://localhost:8080/apostadores/${id}`;
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
-        fetch(url, { headers })
-          .then((res) => res.json())
-          .then((d) => {
-            const parsedData = [];
-            parsedData.push(d);
-            setData(parsedData);
-          });
-      }, [id]);
+        fetch();
+    }, [id]);
+
+    const fetch = async () => {
+        const data = await requestWithToken(url, navigate);
+        const parsedData = [];
+        parsedData.push(data);
+        setData(parsedData);
+    }
 
     return (
             <div className="flex justify-center mt-[5%]">
@@ -62,16 +60,11 @@ export default function Account() {
                                     </div>
                                 </div>
                             )
-                        }
-
-                        )}
+                        })}
                     <div className="card-actions">
-                        <button className="btn btn-accent text-white glow-blue">Depositar</button>
-                        <button className="btn btn-info text-white glow-pink mx-5">Saque</button>
-                        <button className="btn btn-accent text-white glow-blue">Emprestimo</button>
-                        
-                        <div>
-                        </div>
+                        <Link to={`/perfil/deposito/${id}`} className="btn btn-accent text-white glow-blue">Depositar</Link>
+                        <Link to={`/perfil/saque/${id}`} className="btn btn-info text-white glow-pink mx-5">Saque</Link>
+                        <Link to={`/perfil/emprestimo/${id}`} className="btn btn-accent text-white glow-blue">Emprestimo</Link>
                     </div>
                 </div>
             </div>

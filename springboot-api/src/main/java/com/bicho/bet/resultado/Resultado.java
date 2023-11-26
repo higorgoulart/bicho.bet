@@ -11,10 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +23,7 @@ import java.util.Random;
 @AllArgsConstructor
 @NoArgsConstructor
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@SequenceGenerator(name = EntityId.SEQUENCE_GENERATOR, sequenceName = "tb_resultado_sequence")
 public class Resultado extends EntityId {
     @ManyToOne
     @JoinColumn(name = "jogo_id")

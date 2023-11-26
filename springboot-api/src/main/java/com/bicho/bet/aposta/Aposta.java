@@ -25,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@SequenceGenerator(name = EntityId.SEQUENCE_GENERATOR, sequenceName = "tb_aposta_sequence")
 public class Aposta extends EntityId {
     @ManyToOne
     @JoinColumn(name = "apostador_id")

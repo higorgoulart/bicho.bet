@@ -1,9 +1,11 @@
 import { Title } from "../../components/Title.tsx";
 import { useEffect, useState } from "react";
 import recentResults from "../../assets/recent-results.svg";
+import { useNavigate } from "react-router-dom";
 import { requestWithToken } from '../../components/api.tsx'; // Adjust the path accordingly
 
 export default function Results() {
+  const navigate = useNavigate();
   const [results, setResults] = useState([]);
   const [date, setDate] = useState("");
   const [page, setPage] = useState(0);
@@ -14,12 +16,12 @@ export default function Results() {
       try {
         const filter = date !== "" ? `&filter=data\+equal\+${date}T00:00:00` : "";
 
-        const data = await requestWithToken(`http://localhost:8080/resultados?p=${page}${filter}`);
+        const data = await requestWithToken(`http://localhost:8080/resultados?p=${page}${filter}`, navigate);
         setTotalPages(data.totalPages);
 
         setResults(data.content.map((x, i) => (
           <tr key={i}>
-            <th>{i + 1}</th>
+            <th>{i + 1 + page}</th>
             <td>{new Date(x.data).toLocaleDateString()}</td>
             <td>{x.jogo}</td>
             <td>{x.numeros[0]}</td>

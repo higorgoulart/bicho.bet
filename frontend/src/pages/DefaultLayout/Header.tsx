@@ -1,10 +1,23 @@
+import { useEffect, useState } from "react";
 import secondaryLogo from '../../assets/monkey_solid_logo.svg'
 import userIcon from '../../assets/user-icon.svg'
 import { Link } from 'react-router-dom';
 
+export function Header() {;
+    const [accountId, setAccountId] = useState(localStorage.getItem('idApostador'));
+    
+    useEffect(() => {
+        const account = localStorage.getItem('idApostador');
 
-export function Header() {
-    const accountId = 1;
+        if (account !== accountId) {
+            setAccountId(account);
+        }
+    }, [localStorage.getItem('idApostador')])
+
+    const logout = () => {
+        localStorage.clear();
+        window.location.reload();
+    }
 
     return (
         <div className="navbar bg-primary  ">
@@ -34,10 +47,18 @@ export function Header() {
                         </div>
                     </label>
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-secondary rounded-box">
-                        <li><Link className="justify-between" to={`/perfil/${accountId}`}>Perfil</Link></li>
-                        <li><Link className="justify-between" to={`/perfil/deposito/${accountId}`}>Depositar</Link></li>
-                        <li><Link className="justify-between" to={`/perfil/emprestimo/${accountId}`}>Emprestimo</Link></li>
-                        <li><Link to="">Logout</Link></li>
+                        {accountId != null && accountId !== "" 
+                            ? (
+                                <>
+                                    <li><Link className="justify-between" to={`/perfil/${accountId}`}>Perfil</Link></li>
+			                        <li><Link className="justify-between" to={`/perfil/deposito/${accountId}`}>Depositar</Link></li>
+			                        <li><Link className="justify-between" to={`/perfil/emprestimo/${accountId}`}>Emprestimo</Link></li>
+			                        <li><Link to="" onClick={logout}>Logout</Link></li>
+                                </>
+                            )
+                            : (
+                                <li><Link to="/login">Login</Link></li>
+                            )}
                     </ul>
                 </div>
             </div>

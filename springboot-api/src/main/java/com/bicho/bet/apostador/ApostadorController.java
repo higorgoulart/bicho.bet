@@ -30,25 +30,24 @@ public class ApostadorController {
 
     @CrossOrigin
     @PutMapping("/depositar/{id}")
-    public Apostador depositar(
+    public ResponseEntity<ApostadorRepresentation.ApostadorResponse> depositar(
             @PathVariable Long id,@RequestBody Double valor){
-        return service.depositar(id, valor);
+        return ResponseEntity.ok(ApostadorRepresentation.ApostadorResponse.from(service.depositar(id, valor)));
     }
 
     @CrossOrigin
     @PutMapping("/sacar/{id}")
-    public Apostador sacar(
+    public ResponseEntity<ApostadorRepresentation.ApostadorResponse> sacar(
             @PathVariable Long id,@RequestBody Double valor){
-        return service.sacar(id, valor);
+        return ResponseEntity.ok(ApostadorRepresentation.ApostadorResponse.from(service.sacar(id, valor)));
     }
 
     @CrossOrigin
     @PutMapping("/emprestimo/{id}")
-    public Apostador emprestimo(
+    public ResponseEntity<ApostadorRepresentation.ApostadorResponse> emprestimo(
             @PathVariable Long id,@RequestBody Double valor){
-        return service.solicitarEmprestimo(id, valor);
+        return ResponseEntity.ok(ApostadorRepresentation.ApostadorResponse.from(service.solicitarEmprestimo(id, valor)));
     }
-
 
     @PutMapping("{id}")
     public ResponseEntity<ApostadorRepresentation.ApostadorResponse> update(

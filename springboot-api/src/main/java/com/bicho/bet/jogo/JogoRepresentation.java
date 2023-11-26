@@ -1,6 +1,7 @@
 package com.bicho.bet.jogo;
 
 import com.bicho.bet.loterica.Loterica;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,9 @@ public interface JogoRepresentation {
     class JogoResponse {
         private Long id;
         private Loterica loterica;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime dataInicio;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime dataFim;
         @Enumerated(EnumType.STRING)
         private StatusJogo status;

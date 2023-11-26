@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-export default function NewNumberBet({ id }) {
+export default function NewNumberBet({ betType, setBetType, setNumbers }) {
     const [number, setNumber] = useState("");
-    const [betType, setBetType] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleTitle = (value) => {
@@ -40,35 +39,11 @@ export default function NewNumberBet({ id }) {
         }
 
         setNumber(value);
-    }
-
-    // TODO: valor em uma próxima tela e request também
-    const bet = async () => {
-        const requestData = {
-            apostador: 0,
-            jogo: id,
-            valor: 0,
-            data: new Date(),
-            tipo: 'NUMERO',
-            numeros: 0
-        };
-
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(requestData),
-            headers: new Headers({
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            }),
-        };
-
-        const response = await (await fetch(`http://localhost:8080/apostas/`, requestOptions)).json();
-
-        console.log(response);
+        setNumbers([value])
     }
 
     return (
-        <div className="flex flex-wrap rounded border-4 border-secondary p-8 basis-[75%]">
+        <>
             <div className="flex flex-col items-center min-w-full">
                 <h1 className="card-title text-white self-center mt-2">{betType}</h1>
                 <input 
@@ -79,13 +54,6 @@ export default function NewNumberBet({ id }) {
                 />
                 <p className="text-red-500 text-xs italic">{errorMessage}</p>
             </div>
-            <div className="flex flex-col justify-end">
-                <button 
-                    className={"btn btn-info glow-pink " + (number === "" || errorMessage !== "" ? " btn-disabled" : "")}
-                >
-                    Confirmar aposta
-                </button>
-            </div>
-        </div>
+        </>
     );
 }

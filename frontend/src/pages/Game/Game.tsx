@@ -2,21 +2,22 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { LinkCard } from "../Home/LinkCard.tsx";
 import bets from "../../assets/bets.svg";
+import { useNavigate } from "react-router-dom";
+import { requestWithToken } from '../../components/api.tsx';
 
 export default function Game() {
     let { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/jogos/${id}`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-
-            })
-            .catch((err) => {
-                
-            });
+        fetch();
     }, [id]);
+
+    const fetch = async () => {
+        const data = await requestWithToken(`http://localhost:8080/jogos/${id}`, navigate);
+        
+        console.log(data);
+    }
 
     return (
         <>

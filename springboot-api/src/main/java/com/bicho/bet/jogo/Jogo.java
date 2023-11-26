@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
+@SequenceGenerator(name = EntityId.SEQUENCE_GENERATOR, sequenceName = "tb_jogo_sequence")
 public class Jogo extends EntityId {
     @ManyToOne
     @JoinColumn(name = "loterica_id")

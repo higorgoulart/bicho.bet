@@ -1,30 +1,24 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { requestWithToken } from '../../components/api.tsx';
+import {  useNavigate } from 'react-router-dom'
 
 export default function Loan(){
     let { id } = useParams();
     const [inputValue, setInputValue] = useState<number>(0);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const navigate = useNavigate();
 
-    const handleButtonClick = () => {
+    const handleButtonClick = async () => {
       const url = `http://localhost:8080/apostadores/emprestimo/${id}`;
       
-      fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': '',
-        },
-        body: JSON.stringify(inputValue),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('PUT request successful:', data);
+      try {
+        if (await requestWithToken(url, navigate, 'PUT', inputValue)) {
           setSuccessMessage('Empréstimo realizado com sucesso!');
-        })
-        .catch((error) => {
-          console.error('Error during PUT request:', error);
-        });
+        }
+      } catch (error) {
+        setSuccessMessage(JSON.parse(error.message).message);
+      }
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

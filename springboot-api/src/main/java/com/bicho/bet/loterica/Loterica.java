@@ -1,6 +1,7 @@
 package com.bicho.bet.loterica;
 
 import com.bicho.bet.conta.Conta;
+import com.bicho.bet.core.EntityId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Getter
 @Setter
+@SequenceGenerator(name = EntityId.SEQUENCE_GENERATOR, sequenceName = "tb_loterica_sequence")
 public class Loterica extends Conta {
     @NotBlank
     @Size(max = 20)

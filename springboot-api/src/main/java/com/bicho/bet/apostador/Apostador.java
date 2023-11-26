@@ -3,10 +3,12 @@ package com.bicho.bet.apostador;
 import com.bicho.bet.conta.Conta;
 import com.bicho.bet.aposta.TipoAposta;
 import com.bicho.bet.core.BetNumber;
+import com.bicho.bet.core.EntityId;
 import com.bicho.bet.exceptions.ContaSemCreditoException;
 import com.bicho.bet.aposta.Aposta;
 import com.bicho.bet.exceptions.ContaSemSaldoException;
-import com.bicho.bet.exceptions.SaqueInvalidoException;
+import com.bicho.bet.exceptions.MenorQueTresVezesDepositadoException;
+import com.bicho.bet.exceptions.SaldoInsuficienteException;
 import com.bicho.bet.jogo.Jogo;
 import com.bicho.bet.security.role.Role;
 import lombok.*;
@@ -30,6 +32,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@SequenceGenerator(name = EntityId.SEQUENCE_GENERATOR, sequenceName = "tb_apostador_sequence")
 public class Apostador extends Conta {
     @NotBlank
     @Size(max = 20)
@@ -78,8 +81,11 @@ public class Apostador extends Conta {
     }
 
     public void sacar(Double valor) {
-        if (valor > getSaldo() || (getDepositado() * 3) < valor)
-            throw new SaqueInvalidoException();
+        if (valor > getSaldo())
+            throw new SaldoInsuficienteException();
+
+        if ((getDepositado() * 3) >= valor)
+            throw new MenorQueTresVezesDepositadoException();
 
         setSaldo(getSaldo() - valor);
         setDepositado(getDepositado() - valor);

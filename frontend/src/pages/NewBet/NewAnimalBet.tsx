@@ -27,52 +27,62 @@ import deer from "../../assets/deer.svg";
 import cow from "../../assets/cow.svg";
 
 const Animals = [
-    { title: "Avestruz", numbers: "01, 02, 03, 04", src: ostrich },
-    { title: "Águia", numbers: "05, 06, 07, 08", src: eagle },
-    { title: "Burro", numbers: "09, 10, 11, 12", src: donkey },
-    { title: "Borboleta", numbers: "13, 14, 15, 16", src: butterfly },
-    { title: "Cachorro", numbers: "16, 18, 19, 20", src: dog },
-    { title: "Cabra", numbers: "21, 22, 23, 24", src: goat },
-    { title: "Carneiro", numbers: "25, 26, 27, 28", src: ram },
-    { title: "Camelo", numbers: "29, 30, 31, 32", src: camel },
-    { title: "Cobra", numbers: "33, 34, 35, 36", src: snake },
-    { title: "Coelho", numbers: "37, 38, 39, 40", src: rabbit },
-    { title: "Cavalo", numbers: "41, 42, 43, 44", src: horse },
-    { title: "Elefante", numbers: "45, 46, 47, 48", src: elephant },
-    { title: "Galo", numbers: "49, 50, 51, 52", src: rooster },
-    { title: "Gato", numbers: "53, 54, 55, 56", src: cat },
-    { title: "Jacaré", numbers: "57, 58, 59, 60", src: aligator },
-    { title: "Leão", numbers: "61, 62, 63, 64", src: lion },
-    { title: "Macaco", numbers: "65, 66, 67, 68", src: monkey },
-    { title: "Porco", numbers: "69, 70, 71, 72", src: pig },
-    { title: "Pavão", numbers: "73, 74, 75, 76", src: peacock },
-    { title: "Peru", numbers: "77, 78, 79, 80", src: turkey },
-    { title: "Touro", numbers: "81, 82, 83, 84", src: bull },
-    { title: "Tigre", numbers: "85, 86, 87, 88", src: tiger },
-    { title: "Urso", numbers: "89, 90, 91, 92", src: bear },
-    { title: "Veado", numbers: "93, 94, 95, 96", src: deer },
-    { title: "Vaca", numbers: "97, 98, 99, 00", src: cow }
+    { id: 1, title: "Avestruz", numbers: "01, 02, 03, 04", src: ostrich },
+    { id: 2, title: "Águia", numbers: "05, 06, 07, 08", src: eagle },
+    { id: 3, title: "Burro", numbers: "09, 10, 11, 12", src: donkey },
+    { id: 4, title: "Borboleta", numbers: "13, 14, 15, 16", src: butterfly },
+    { id: 5, title: "Cachorro", numbers: "16, 18, 19, 20", src: dog },
+    { id: 6, title: "Cabra", numbers: "21, 22, 23, 24", src: goat },
+    { id: 7, title: "Carneiro", numbers: "25, 26, 27, 28", src: ram },
+    { id: 8, title: "Camelo", numbers: "29, 30, 31, 32", src: camel },
+    { id: 9, title: "Cobra", numbers: "33, 34, 35, 36", src: snake },
+    { id: 10, title: "Coelho", numbers: "37, 38, 39, 40", src: rabbit },
+    { id: 11, title: "Cavalo", numbers: "41, 42, 43, 44", src: horse },
+    { id: 12, title: "Elefante", numbers: "45, 46, 47, 48", src: elephant },
+    { id: 13, title: "Galo", numbers: "49, 50, 51, 52", src: rooster },
+    { id: 14, title: "Gato", numbers: "53, 54, 55, 56", src: cat },
+    { id: 15, title: "Jacaré", numbers: "57, 58, 59, 60", src: aligator },
+    { id: 16, title: "Leão", numbers: "61, 62, 63, 64", src: lion },
+    { id: 17, title: "Macaco", numbers: "65, 66, 67, 68", src: monkey },
+    { id: 18, title: "Porco", numbers: "69, 70, 71, 72", src: pig },
+    { id: 19, title: "Pavão", numbers: "73, 74, 75, 76", src: peacock },
+    { id: 20, title: "Peru", numbers: "77, 78, 79, 80", src: turkey },
+    { id: 21, title: "Touro", numbers: "81, 82, 83, 84", src: bull },
+    { id: 22, title: "Tigre", numbers: "85, 86, 87, 88", src: tiger },
+    { id: 23, title: "Urso", numbers: "89, 90, 91, 92", src: bear },
+    { id: 24, title: "Veado", numbers: "93, 94, 95, 96", src: deer },
+    { id: 25, title: "Vaca", numbers: "97, 98, 99, 00", src: cow }
 ];
 
-export default function NewAnimalBet({ id }) {
+export default function NewAnimalBet({ betType, setBetType, numbers, setNumbers }) {
     const [selectedAnimals, setSelectedAnimals] = useState([]);
-    const [betType, setBetType] = useState("");
     
     useEffect(() => { 
         setBetType(handleTitle());
     }, [selectedAnimals]);
 
-    const handleSelectedAnimals = (src) => {
+    const handleSelectedAnimals = (id, src) => {
         const newAnimals = [...selectedAnimals];
-        const index = newAnimals.indexOf(src);
+        const indexAnimals = newAnimals.indexOf(src);
 
-        if (index > -1) {
-            newAnimals.splice(index, 1);
+        if (indexAnimals > -1) {
+            newAnimals.splice(indexAnimals, 1);
         } else if (newAnimals.length < 5) {
             newAnimals.push(src);
         }
 
         setSelectedAnimals(newAnimals);
+
+        const newNumbers = [...numbers];
+        const indexNumbers = newNumbers.indexOf(id);
+
+        if (indexNumbers > -1) {
+            newNumbers.splice(indexNumbers, 1);
+        } else if (newNumbers.length < 5) {
+            newNumbers.push(id);
+        }
+
+        setNumbers(newNumbers);
     }
 
     const renderSelectedAnimals = () => {
@@ -92,11 +102,11 @@ export default function NewAnimalBet({ id }) {
 
     const renderAnimals = () => {
         return Animals.map(x => 
-            <Animal title={x.title} numbers={x.numbers} src={x.src} onClick={handleSelectedAnimals} />)
+            <Animal title={x.title} numbers={x.numbers} src={x.src} onClick={() => handleSelectedAnimals(x.id, x.src)} />)
     }
 
     return (
-        <div className="flex flex-wrap rounded border-4 border-secondary p-8 basis-[75%]">
+        <>
             {renderAnimals()}
             <div className="flex flex-col items-center min-w-full">
                 <h1>Sua aposta:</h1>
@@ -105,13 +115,6 @@ export default function NewAnimalBet({ id }) {
                 </ul>
                 <h1 className="card-title text-white self-center mt-2">{betType}</h1>
             </div>
-            <div className="flex flex-col justify-end">
-                <button 
-                    className={"btn btn-info glow-pink " + (selectedAnimals.length < 1 ? " btn-disabled" : "")}
-                >
-                    Confirmar aposta
-                </button>
-            </div>
-        </div>
+        </>
     );
 }

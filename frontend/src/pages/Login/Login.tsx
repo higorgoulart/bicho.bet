@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
         nome: '',
-        role: [''],
         email: '',
         cpf: '',
     });
@@ -23,25 +24,28 @@ const Login = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    ...formData,
-                    role: [formData.role],
-                }),
+                body: JSON.stringify(formData)
             });
 
             if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(errorMessage);
+                throw new Error(JSON.parse(errorMessage).message);
             }
 
-            const data = await response.json();
-            // Assuming the server returns a JWT in the 'token' property
-            const { token } = data;
+            if (formMode === 'signin') {
+                const data = await response.json();
+            
+                const { token, id } = data;
 
-            // Store the JWT in localStorage or a secure storage mechanism
-            localStorage.setItem('jwtToken', token);
+                localStorage.setItem('idApostador', id);
+                localStorage.setItem('jwtToken', token);
 
-            // Redirect or perform other actions upon successful login or signup
+                navigate('/');
+                window.location.reload();
+            } else {
+                setFormMode('signin');
+            }  
+
             console.log(`${formMode === 'signin' ? 'Login' : 'Signup'} successful`);
         } catch (error) {
             setError(error.message);
@@ -97,7 +101,6 @@ const Login = () => {
                     </div>
                     {formMode === 'signup' && (
                         <>
-                            
                             <div className="mb-4">
                                 <label htmlFor="nome" className="block text-white text-sm font-bold mb-2">
                                     Nome:
@@ -110,20 +113,6 @@ const Login = () => {
                                     onChange={handleInputChange}
                                     className="w-full p-2 border rounded-md"
                                     placeholder=" seu nome completo aqui aqui"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="role" className="block text-white text-sm font-bold mb-2">
-                                    Role:
-                                </label>
-                                <input
-                                    type="text"
-                                    id="role"
-                                    name="role"
-                                    value={formData.role}
-                                    onChange={handleInputChange}
-                                    className="w-full p-2 border rounded-md"
-                                    placeholder=" seu cargo aqui"
                                 />
                             </div>
                             <div className="mb-4">

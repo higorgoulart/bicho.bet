@@ -11,6 +11,7 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@SequenceGenerator(name = EntityId.SEQUENCE_GENERATOR, sequenceName = "tb_bicho_sequence")
 public class Bicho extends EntityId {
     @Column(name = "nome", nullable = false)
     private String nome;
