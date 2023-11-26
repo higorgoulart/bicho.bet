@@ -149,6 +149,7 @@ VALUES
     (78, '2023-12-04 12:00', '[88]', 'DEZENA', 100, 3, 1, 0),
     (79, '2023-12-04 12:00', '[51]', 'DEZENA', 100, 4, 1, 0),
     (80, '2023-12-04 12:00', '[99]', 'DEZENA', 100, 5, 1, 0);
+ALTER TABLE aposta ALTER COLUMN id SET DEFAULT 80;
 
 INSERT INTO bicho (id, nome, numeros)
 VALUES
