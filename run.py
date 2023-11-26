@@ -18,12 +18,12 @@ def main():
     print("Aguardando Django-Server")
     time.sleep(20)
 
-    print("Conectando ao contêiner do Django para realizar o migrate e criar admin")
+    print("Conectando ao contêiner do Django")
     subprocess.call("docker exec -it django-server /bin/bash", shell=True)
-    subprocess.call("python manage.py migrate", shell=True)
-    subprocess.call("export DJANGO_SUPERUSER_PASSWORD=123", shell=True)
-    subprocess.call("python manage.py createsuperuser --username bichobet --email bichobet.satc@gmail.com --noinput", shell=True)
-    subprocess.call("exit", shell=True)
+    print("Para realizar as migrações copie e cole: python manage.py migrate")
+    print("Para iniciar o processo de criação de um super-usuário copie e cole: export DJANGO_SUPERUSER_PASSWORD={sua senha}")
+    print("Para finalizar o processo de criação de um super-usuário copie e cole: python manage.py createsuperuser --username {seu usuario} --email {seu email} --noinput")
+    print("Para sair pressione: CTRL + D")
 
     print("Iniciando Go Scheduler...")
     subprocess.call("docker-compose up -d go-scheduler", shell=True)

@@ -22,7 +22,7 @@ export function Numero() {
                     <span className="font-bold">6. Critérios de Premiação:</span> As premiações variam de acordo com a banca ou localidade, e são determinadas pelas chances de acerto. Quanto mais difícil for acertar o número ou a combinação, maior será o prêmio.
                 </p>
                 <p>
-                    <span className="font-bold">7. Finalidade Recreativa:</span>É importante jogar de maneira responsável, estabelecendo limites financeiros e não apostando mais do que se pode perder.
+                    <span className="font-bold">7. Finalidade Recreativa:</span> É importante jogar de maneira responsável, estabelecendo limites financeiros e não apostando mais do que se pode perder.
                 </p>
             </div>
         </div>

@@ -1,8 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { DefaultLayout } from './pages/DefaultLayout/DefaultLayout'
 
 import Home from './pages/Home/Home'
+import AdminRedirect from './pages/Admin/AdminRedirect.tsx';
 import Account from "./pages/Account/Account.tsx";
 import Bet from "./pages/Bet/Bet.tsx";
 import NewBet from "./pages/NewBet/NewBet.tsx";
@@ -37,6 +38,7 @@ export function Router() {
                 <Route path="/institucional/politica/" element={<institucional.Politica />} />
                 <Route path="/institucional/dependencia/" element={<institucional.Dependencia />} />
                 <Route path="/institucional/carreira/" element={<institucional.Carreira />} />
+                <Route path="/admin" element={<AdminRedirect/>}/>
             </Route>
         </Routes>
     )
