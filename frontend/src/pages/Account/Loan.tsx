@@ -15,6 +15,7 @@ export default function Loan(){
       try {
         if (await requestWithToken(url, navigate, 'PUT', inputValue)) {
           setSuccessMessage('Empréstimo realizado com sucesso!');
+          navigate(`/perfil/${id}`);
         }
       } catch (error) {
         setSuccessMessage(JSON.parse(error.message).message);
@@ -30,7 +31,7 @@ export default function Loan(){
 
         <div className="flex justify-center mt-[5%]">
             <div className="card w-[100%] bg-secondary space-y-5 mt-3 mx-3 px-5 py-12 mb-24 lg:w-[70%] md:w-[90%] md:px-24 md:py-12 ">
-                <h1 className="flex card-title justify-center text-white" >Saque</h1>
+                <h1 className="flex card-title justify-center text-white" >Empréstimo</h1>
                 <h2 className="flex justify-center">Quanto você vai pegar emprestado hoje?</h2>
                 <span>R$</span>
                 <input className="bg-primary py-2 p-2 rounded-md" type="number" value={inputValue} onChange={handleInputChange} min="0"/>
