@@ -17,7 +17,7 @@ export default function Historic() {
     }, [id, page]);
 
     const fetch = async () => {
-        const data = await requestWithToken(`http://localhost:8080/apostadores/${id}/historicos`, navigate);
+        const data = await requestWithToken(`http://localhost:8080/apostadores/${id}/historicos?p=${page}`, navigate);
         console.log(data);
         setTotalPages(data.totalPages);
         setBets(data.content.map((x, i) => (
