@@ -95,6 +95,8 @@ public class Apostador extends Conta {
 
         if (getDivida() < 0){
             setSaldo(getSaldo() + (valor + getDivida()));
+            setDivida(getDivida() + valor);
+            setLimite(100.00);
         } else {
             setSaldo(getSaldo() + valor);
         }
