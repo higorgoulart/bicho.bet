@@ -44,7 +44,7 @@ Nesta seção você encontrará os passos para instalar e executar o projeto na 
    ```sh
    git clone https://github.com/higorgoulart/bicho.bet.git
    ```
-2. Abra o serviço/pasta "springboot-api" com a IDE de sua preferência (recomendamos utilizar o IntelliJ) e realize o build com o Maven pela IDE ou terminal. <strong> O serviço disponibiliza um <a href="https://github.com/higorgoulart/bicho.bet/blob/main/springboot-api/src/main/resources/data.sql">script DML<a/> com apostadores, apostas, jogos e resultados pré-cadastrados para você que deseja uma visualização mais simples da aplicação. Recomendamos que ele seja excluído antes de realizar o build caso queira usufruir da experiência completa de abrir jogos, cadastrar apostadores, realizar apostas, pedir empréstimos e muito mais!. </strong>
+2. Abra o serviço/pasta "springboot-api" com a IDE de sua preferência (recomendamos utilizar o IntelliJ) e realize o build com o Maven pela IDE ou terminal. <strong> O serviço disponibiliza um <a href="https://github.com/higorgoulart/bicho.bet/blob/main/springboot-api/src/main/resources/data.sql">script DML<a/> com uma lotérica e bichos pré-cadastrados para você que deseja uma visualização mais simples da aplicação. Recomendamos que ele seja excluído antes de realizar o build caso queira usufruir da experiência completa de abrir jogos, cadastrar apostadores, realizar apostas, pedir empréstimos e muito mais!. </strong>
     ![image](https://github.com/higorgoulart/bicho.bet/assets/110054084/b18a5c00-94e8-4df7-95ea-d91b9840f35e)
      * Terminal
        ```sh
@@ -77,14 +77,12 @@ Nesta seção você encontrará os passos para instalar e executar o projeto na 
  
 8. Por fim, acesse http://localhost:5173 e divirta-se!
 
-
 ## Rotas
 
 * http://localhost:5173 - Front-end da aplicação onde ocorre todo o funcionamento. 
 * http://localhost:5173/admin ou http://localhost:8000/admin - Painel administrativo para o usuário cadastrar jogos e funcionários. O login é o que você criou no passo 6 da seção <strong>Instalação</strong>.
 * http://localhost:8080 - API SpringBoot.
 * http://localhost:5432 - Endereço do PostgreSQL. Senha e usuário podem ser encontrados no arquivo <a href="https://github.com/higorgoulart/bicho.bet/blob/main/docker-compose.yaml">docker-compose.yaml</a>. Recomendamos que estas credenciais não sejam alteradas sem pleno conhecimento de que poderá gerar erro em algum serviço. Caso ainda deseje alterar, será necessário também modificar os outros serviços dependentes.
-
 
 ## Contato
 
