@@ -4,6 +4,10 @@ const Login = () => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
+        nome: '',
+        role: [''],
+        email: '',
+        cpf: '',
     });
 
     const [error, setError] = useState(null);
@@ -19,7 +23,10 @@ const Login = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    ...formData,
+                    role: [formData.role],
+                }),
             });
 
             if (!response.ok) {
@@ -76,7 +83,7 @@ const Login = () => {
                     </div>
                     <div className="mb-4">
                         <label htmlFor="password" className="block text-white text-sm font-bold mb-2">
-                            Password:
+                            Senha:
                         </label>
                         <input
                             type="password"
@@ -88,6 +95,67 @@ const Login = () => {
                             placeholder=" sua senha aqui"
                         />
                     </div>
+                    {formMode === 'signup' && (
+                        <>
+                            
+                            <div className="mb-4">
+                                <label htmlFor="nome" className="block text-white text-sm font-bold mb-2">
+                                    Nome:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="nome"
+                                    name="nome"
+                                    value={formData.nome}
+                                    onChange={handleInputChange}
+                                    className="w-full p-2 border rounded-md"
+                                    placeholder=" seu nome completo aqui aqui"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="role" className="block text-white text-sm font-bold mb-2">
+                                    Role:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="role"
+                                    name="role"
+                                    value={formData.role}
+                                    onChange={handleInputChange}
+                                    className="w-full p-2 border rounded-md"
+                                    placeholder=" seu cargo aqui"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="email" className="block text-white text-sm font-bold mb-2">
+                                    Email:
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                    className="w-full p-2 border rounded-md"
+                                    placeholder=" seu email aqui"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="cpf" className="block text-white text-sm font-bold mb-2">
+                                    CPF:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="cpf"
+                                    name="cpf"
+                                    value={formData.cpf}
+                                    onChange={handleInputChange}
+                                    className="w-full p-2 border rounded-md"
+                                    placeholder=" seu CPF aqui"
+                                />
+                            </div>
+                        </>
+                    )}
                     <button
                         type="submit"
                         className="btn w-full text-white rounded-full bg-accent hover:bg-info "
