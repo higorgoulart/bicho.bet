@@ -88,17 +88,16 @@ public class Apostador extends Conta {
             throw new MenorQueTresVezesDepositadoException();
 
         setSaldo(getSaldo() - valor);
-        setDepositado(getDepositado() - valor);
+        setDepositado(0.0);
     }
 
     public void depositar(double valor){
-
         setSaldo(getSaldo() + valor);
         setDepositado(getDepositado() + valor);
     }
 
     public Aposta apostar(Jogo jogo, Double valor, TipoAposta tipo, List<BetNumber> numeros) {
-        if (valor > (this.getSaldo() + (this.getLimite() - this.getDivida()))) {
+        if (valor > (this.getSaldo() + (this.getLimite() + this.getDivida()))) {
             throw new ContaSemSaldoException();
         }
 
@@ -116,7 +115,7 @@ public class Apostador extends Conta {
             throw new ContaSemCreditoException();
         }
 
-        this.setDivida(getDivida() + obterJuros(valorDesejado));
+        this.setDivida(getDivida() - obterJuros(valorDesejado));
         this.setSaldo(getSaldo() + valorDesejado);
     }
 
@@ -125,7 +124,7 @@ public class Apostador extends Conta {
             valorDesejado -= this.getSaldo();
         }
 
-        this.setDivida(this.getDivida() + obterJuros(valorDesejado));
+        this.setDivida(this.getDivida() - obterJuros(valorDesejado));
         this.setSaldo(0.0);
     }
 
