@@ -1,7 +1,9 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
 
 export default function AdminRedirect() {
-    const navigate = useNavigate();
+    useEffect(() => {
+        window.location.href = "http://localhost:8000/admin";
+    }, []);
 
-    navigate(`http:/localhost:8000/admin`);
+    return null;
 }
