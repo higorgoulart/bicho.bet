@@ -120,3 +120,75 @@ func StringToInt64Slice(s string) ([]int64, error) {
 	}
 	return numbers, nil
 }
+
+func ObterPosicoesCorretas(tipo model.TipoAposta, apostas []int64, resultados []int64, bichos []model.Bicho) []model.TipoResultado {
+	var posicoes []model.TipoResultado
+
+	i := 0
+
+	for _, resultado := range resultados {
+		for _, apostado := range apostas {
+			var acerto bool
+
+			if tipo == model.DEZENA || tipo == model.CENTENA || tipo == model.MILHAR {
+				if apostado < 100 {
+					acerto = functions.FormatNumber(resultado, 2) == functions.FormatNumber(apostado, 2)
+				} else if apostado < 1000 {
+					acerto = functions.FormatNumber(resultado, 3) == functions.FormatNumber(apostado, 3)
+				} else {
+					acerto = resultado == apostado
+				}
+			} else {
+				acerto = obterBicho(bichos, resultado).ID == apostado
+			}
+
+			if acerto {
+				index := i + 1
+				tipoResultado := model.TipoResultado(index)
+				posicoes = append(posicoes, tipoResultado)
+			} else if tipo == model.DEZENA || tipo == model.CENTENA || tipo == model.MILHAR {
+				bichoApostado := obterBicho(bichos, apostado)
+				bichoResultado := obterBicho(bichos, resultado)
+
+				if bichoApostado.ID == bichoResultado.ID {
+					posicoes = append(posicoes, model.BICHO)
+				}
+			}
+		}
+
+		i++
+	}
+
+	return posicoes
+}
+
+func obterBicho(bichos []model.Bicho, number int64) model.Bicho {
+	for _, bicho := range bichos {
+		numeros, err := functions.StringToInt64Slice(bicho.Numeros)
+
+		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				continue
+			}
+			functions.SetErrorLog(err, "resultado")
+			continue
+		}
+
+		for _, numero := range numeros {
+			if functions.FormatNumber(numero, 2) == functions.FormatNumber(number, 2) {
+				return bicho
+			}
+		}
+	}
+
+	return model.Bicho{}
+}
+
+func ObterMultiplicadorNumerico(posicoes []model.TipoResultado, valorPrimeiro, valorOutro float64) float64 {
+	if functions.Contains(posicoes, model.PRIMEIRA) {
+		return valorPrimeiro
+	} else if functions.ContainsAny(posicoes, model.SEGUNDA, model.TERCEIRA, model.QUARTA, model.QUINTA) {
+		return valorOutro
+	}
+	return 1.0
+}
