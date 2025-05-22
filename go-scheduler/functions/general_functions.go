@@ -132,9 +132,9 @@ func ObterPosicoesCorretas(tipo model.TipoAposta, apostas []int64, resultados []
 
 			if tipo == model.DEZENA || tipo == model.CENTENA || tipo == model.MILHAR {
 				if apostado < 100 {
-					acerto = functions.FormatNumber(resultado, 2) == functions.FormatNumber(apostado, 2)
+					acerto = FormatNumber(resultado, 2) == FormatNumber(apostado, 2)
 				} else if apostado < 1000 {
-					acerto = functions.FormatNumber(resultado, 3) == functions.FormatNumber(apostado, 3)
+					acerto = FormatNumber(resultado, 3) == FormatNumber(apostado, 3)
 				} else {
 					acerto = resultado == apostado
 				}
@@ -164,18 +164,18 @@ func ObterPosicoesCorretas(tipo model.TipoAposta, apostas []int64, resultados []
 
 func obterBicho(bichos []model.Bicho, number int64) model.Bicho {
 	for _, bicho := range bichos {
-		numeros, err := functions.StringToInt64Slice(bicho.Numeros)
+		numeros, err := StringToInt64Slice(bicho.Numeros)
 
 		if err != nil {
 			if err == gorm.ErrRecordNotFound {
 				continue
 			}
-			functions.SetErrorLog(err, "resultado")
+			SetErrorLog(err, "resultado")
 			continue
 		}
 
 		for _, numero := range numeros {
-			if functions.FormatNumber(numero, 2) == functions.FormatNumber(number, 2) {
+			if FormatNumber(numero, 2) == FormatNumber(number, 2) {
 				return bicho
 			}
 		}
@@ -185,9 +185,9 @@ func obterBicho(bichos []model.Bicho, number int64) model.Bicho {
 }
 
 func ObterMultiplicadorNumerico(posicoes []model.TipoResultado, valorPrimeiro, valorOutro float64) float64 {
-	if functions.Contains(posicoes, model.PRIMEIRA) {
+	if Contains(posicoes, model.PRIMEIRA) {
 		return valorPrimeiro
-	} else if functions.ContainsAny(posicoes, model.SEGUNDA, model.TERCEIRA, model.QUARTA, model.QUINTA) {
+	} else if ContainsAny(posicoes, model.SEGUNDA, model.TERCEIRA, model.QUARTA, model.QUINTA) {
 		return valorOutro
 	}
 	return 1.0
