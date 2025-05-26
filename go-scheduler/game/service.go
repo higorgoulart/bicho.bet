@@ -1,12 +1,13 @@
 package game
 
 import (
+	"math/rand"
 	"scheduler/database"
 	"scheduler/functions"
-	"scheduler/model"
 	"scheduler/game/strategy"
-	"errors"
+	"scheduler/model"
 	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -18,7 +19,7 @@ func NewGameService(db *gorm.DB) *GameService {
 	return &GameService{db: db}
 }
 
-func (s *GameService) GameResult() error {
+func (s *GameService) GameResult() {
 	var jogo model.Jogo
 
 	tx := s.db.Begin()
@@ -28,7 +29,6 @@ func (s *GameService) GameResult() error {
 		if err != gorm.ErrRecordNotFound {
 			functions.SetErrorLog(err, "resultado")
 		}
-		return err
 	}
 
 	numeros := generateNumeros()
@@ -44,29 +44,24 @@ func (s *GameService) GameResult() error {
 	if err := tx.Create(&resultado).Error; err != nil {
 		tx.Rollback()
 		functions.SetErrorLog(err, "resultado")
-		return err
 	}
 
 	if err := tx.Model(&model.Jogo{}).Where("id = ?", jogo.ID).Update("status", "FECHADO").Error; err != nil {
 		tx.Rollback()
 		functions.SetErrorLog(err, "resultado")
-		return err
 	}
 
 	if err := s.premiar(tx, jogo.ID, numeros); err != nil {
 		tx.Rollback()
 		functions.SetErrorLog(err, "resultado")
-		return err
 	}
 
 	if err := tx.Commit().Error; err != nil {
 		tx.Rollback()
 		functions.SetErrorLog(err, "resultado")
-		return err
 	}
 
 	functions.SetResultadoLog(resultado, jogo)
-	return nil
 }
 
 func (s *GameService) premiar(tx *gorm.DB, jogoID int64, numeros []int64) error {
@@ -86,7 +81,7 @@ func (s *GameService) premiar(tx *gorm.DB, jogoID int64, numeros []int64) error 
 			return err
 		}
 
-		strategyImpl, err := strategy.getStrategy(model.TipoAposta(aposta.Tipo))
+		strategyImpl, err := strategy.GetStrategy(model.TipoAposta(aposta.Tipo))
 		if err != nil {
 			return err
 		}
@@ -121,4 +116,30 @@ func (s *GameService) premiar(tx *gorm.DB, jogoID int64, numeros []int64) error 
 	}
 
 	return nil
+}
+
+func generateNumeros() []int64 {
+	seen := make(map[int64]bool)
+	numeros := make([]int64, 0, 5)
+
+	for len(numeros) < 5 {
+		newNum := rand.Int63n(9999)
+		lastTwoDigits := newNum % 100
+
+		if !seen[lastTwoDigits] {
+			numeros = append(numeros, newNum)
+			seen[lastTwoDigits] = true
+		}
+	}
+
+	return numeros
+}
+
+func getIdResultado() int64 {
+	var resultado model.Resultado
+	database.DB.Model(&model.Resultado{}).Order("id DESC").Limit(1).Find(&resultado)
+	if resultado.ID == 0 {
+		return 1
+	}
+	return resultado.ID + 1
 }

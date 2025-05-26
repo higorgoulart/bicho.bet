@@ -9,6 +9,7 @@ import (
 	"scheduler/model"
 	"strings"
 	"time"
+	"gorm.io/gorm"
 )
 
 func SetErrorLog(errLog error, operacao string) {

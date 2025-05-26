@@ -1,29 +1,32 @@
 package strategy
 
-import "scheduler/model"
+import (
+	"errors"
+	"scheduler/model"
+)
 
 type PremioStrategy interface {
 	CalcularPremio(valor float64, apostas, resultados []int64, bichos []model.Bicho) float64
 }
 
-func getStrategy(tipo model.TipoAposta) (strategy.PremioStrategy, error) {
+func GetStrategy(tipo model.TipoAposta) (PremioStrategy, error) {
 	switch tipo {
 	case model.GRUPO:
-		return strategy.GrupoStrategy{}, nil
+		return GrupoStrategy{}, nil
 	case model.DUQUE:
-		return strategy.DuqueStrategy{}, nil
+		return DuqueStrategy{}, nil
 	case model.TERNO:
-		return strategy.TernoStrategy{}, nil
+		return TernoStrategy{}, nil
 	case model.QUADRA:
-		return strategy.QuadraStrategy{}, nil
+		return QuadraStrategy{}, nil
 	case model.QUINA:
-		return strategy.QuinaStrategy{}, nil
+		return QuinaStrategy{}, nil
 	case model.DEZENA:
-		return strategy.DezenaStrategy{}, nil
+		return DezenaStrategy{}, nil
 	case model.CENTENA:
-		return strategy.CentenaStrategy{}, nil
+		return CentenaStrategy{}, nil
 	case model.MILHAR:
-		return strategy.MilharStrategy{}, nil
+		return MilharStrategy{}, nil
 	default:
 		return nil, errors.New("tipo de aposta não suportado")
 	}
