@@ -1,0 +1,30 @@
+name: Go Lint
+
+on:
+  push:
+    paths:
+      - "**.go"
+  pull_request:
+    paths:
+      - "**.go"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22" # ajuste conforme sua versão
+
+      - name: Instalar golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+
+      - name: Rodar golangci-lint
+        run: golangci-lint run ./...
