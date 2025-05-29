@@ -3,10 +3,10 @@ name: Go Lint
 on:
   push:
     paths:
-      - "**.go"
+      - "bichobet/go-scheduler/**.go"
   pull_request:
     paths:
-      - "**.go"
+      - "bichobet/go-scheduler/**.go"
 
 jobs:
   lint:
@@ -19,7 +19,7 @@ jobs:
       - name: Instalar Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.22" # ajuste conforme sua versão
+          go-version: "1.22"
 
       - name: Instalar golangci-lint
         uses: golangci/golangci-lint-action@v6
@@ -27,4 +27,6 @@ jobs:
           version: latest
 
       - name: Rodar golangci-lint
-        run: golangci-lint run ./...
+        run: |
+          cd bichobet/go-scheduler
+          golangci-lint run ./...
