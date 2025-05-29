@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17" # ajuste para a versão do seu projeto
+
+      - name: Build com Maven
+        run: mvn clean install
+
+      - name: Rodar testes
+        run: mvn test
