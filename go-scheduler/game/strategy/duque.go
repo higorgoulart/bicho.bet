@@ -8,7 +8,7 @@ import (
 type DuqueStrategy struct{}
 
 func (s DuqueStrategy) CalcularPremio(valor float64, apostas, resultados []int64, bichos []model.Bicho) float64 {
-	posicoes := functions.ObterPosicoesCorretas(model.DUQUE, apostas, resultados, bichos)
+	posicoes := functions.ObterPosicoesCorretasPorBicho(apostas, resultados, bichos)
 	multiplicador := obterMultiplicadorDuque(posicoes)
 	return valor * multiplicador
 }

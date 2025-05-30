@@ -8,7 +8,7 @@ import (
 type QuadraStrategy struct{}
 
 func (s QuadraStrategy) CalcularPremio(valor float64, apostas, resultados []int64, bichos []model.Bicho) float64 {
-	posicoes := functions.ObterPosicoesCorretas(model.QUADRA, apostas, resultados, bichos)
+	posicoes := functions.ObterPosicoesCorretasPorBicho(apostas, resultados, bichos)
 	multiplicador := obterMultiplicadorQuadra(posicoes)
 	return valor * multiplicador
 }

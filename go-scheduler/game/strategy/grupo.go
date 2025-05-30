@@ -8,7 +8,7 @@ import (
 type GrupoStrategy struct{}
 
 func (s GrupoStrategy) CalcularPremio(valor float64, apostas, resultados []int64, bichos []model.Bicho) float64 {
-	posicoes := functions.ObterPosicoesCorretas(model.GRUPO, apostas, resultados, bichos)
+	posicoes := functions.ObterPosicoesCorretasPorBicho(apostas, resultados, bichos)
 	multiplicador := obterMultiplicadorGrupo(posicoes)
 	return valor * multiplicador
 }
