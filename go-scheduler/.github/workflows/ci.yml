@@ -13,13 +13,16 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
-
-      - name: List root directory
-        run: ls -l
+      
+        - name: List root directory
+        run: |
+          echo "Root directory:"
+          ls -l
 
       - name: List go-scheduler directory
-        run: ls -l go-scheduler
-
+        run: |
+          echo "go-scheduler directory:"
+          ls -l go-scheduler
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
