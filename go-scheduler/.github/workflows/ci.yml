@@ -32,6 +32,14 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
+      - name: Install golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+
+      - name: Run linter
+        run: golangci-lint run ./...
+
       - name: Build
         run: go build ./...
 
