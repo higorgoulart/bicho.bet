@@ -9,6 +9,7 @@ import (
 	"scheduler/model"
 	"strings"
 	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -122,38 +123,19 @@ func StringToInt64Slice(s string) ([]int64, error) {
 	return numbers, nil
 }
 
-func ObterPosicoesCorretas(tipo model.TipoAposta, apostas []int64, resultados []int64, bichos []model.Bicho) []model.TipoResultado {
+func ObterPosicoesCorretasPorBicho(apostas []int64, resultados []int64, bichos []model.Bicho) []model.TipoResultado {
 	var posicoes []model.TipoResultado
 
 	i := 0
 
 	for _, resultado := range resultados {
 		for _, apostado := range apostas {
-			var acerto bool
-
-			if tipo == model.DEZENA || tipo == model.CENTENA || tipo == model.MILHAR {
-				if apostado < 100 {
-					acerto = FormatNumber(resultado, 2) == FormatNumber(apostado, 2)
-				} else if apostado < 1000 {
-					acerto = FormatNumber(resultado, 3) == FormatNumber(apostado, 3)
-				} else {
-					acerto = resultado == apostado
-				}
-			} else {
-				acerto = obterBicho(bichos, resultado).ID == apostado
-			}
+			acerto := ObterBicho(bichos, resultado).ID == apostado
 
 			if acerto {
 				index := i + 1
 				tipoResultado := model.TipoResultado(index)
 				posicoes = append(posicoes, tipoResultado)
-			} else if tipo == model.DEZENA || tipo == model.CENTENA || tipo == model.MILHAR {
-				bichoApostado := obterBicho(bichos, apostado)
-				bichoResultado := obterBicho(bichos, resultado)
-
-				if bichoApostado.ID == bichoResultado.ID {
-					posicoes = append(posicoes, model.BICHO)
-				}
 			}
 		}
 
@@ -163,7 +145,7 @@ func ObterPosicoesCorretas(tipo model.TipoAposta, apostas []int64, resultados []
 	return posicoes
 }
 
-func obterBicho(bichos []model.Bicho, number int64) model.Bicho {
+func ObterBicho(bichos []model.Bicho, number int64) model.Bicho {
 	for _, bicho := range bichos {
 		numeros, err := StringToInt64Slice(bicho.Numeros)
 

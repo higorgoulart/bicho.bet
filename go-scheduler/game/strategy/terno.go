@@ -8,7 +8,7 @@ import (
 type TernoStrategy struct{}
 
 func (s TernoStrategy) CalcularPremio(valor float64, apostas, resultados []int64, bichos []model.Bicho) float64 {
-	posicoes := functions.ObterPosicoesCorretas(model.TERNO, apostas, resultados, bichos)
+	posicoes := functions.ObterPosicoesCorretasPorBicho(apostas, resultados, bichos)
 	multiplicador := obterMultiplicadorTerno(posicoes)
 	return valor * multiplicador
 }
