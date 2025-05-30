@@ -1,7 +1,8 @@
-# Mudanças
-
-- Adicionado linter;
-- Adicionado CI;
-- Refatorado criação e premiação do jogo:
-  - Nova classe `GameService`;
-  - Reestruturado premiação com Strategy Pattern,fazendo com que siga o Open/Closed Principle.
+| Data        | Autor             | Mensagem do Commit                                                                 |
+|-------------|-------------------|------------------------------------------------------------------------------------|
+| 2025-05-30  | GabrielGuinzani   | feat: ✨ Add step to list go-scheduler directory                                   |
+| 2025-05-30  | guilherme-savio   | fix: 🐛 Fix Workflow                                                               |
+| 2025-05-30  | guilherme-savio   | feat: ✨ Add tests and update workflow                                             |
+| 2025-05-30  | GabrielGuinzani   | fix: correct working directory for golangci-lint step                              |
+| 2025-05-30  | GabrielGuinzani   | fix: update working directory for CI and lint workflows                            |
+| 2025-05-30  | higorgoulart      | feat: add changelog                                                                |
