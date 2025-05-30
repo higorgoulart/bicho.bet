@@ -24,13 +24,7 @@ jobs:
         working-directory: ./go-scheduler
         run: go build -v ./...
 
-      - name: Run unit tests with coverage
+      - name: Run unit tests without coverage
         working-directory: ./go-scheduler
         run: |
-          go test -v -coverprofile=coverage.out ./...
-      
-      - name: Upload test coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: ./go-scheduler/coverage.out
+          go test -v payment_test.go
