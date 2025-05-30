@@ -1,8 +1,38 @@
-| Data        | Autor             | Mensagem do Commit                                                                 |
-|-------------|-------------------|------------------------------------------------------------------------------------|
-| 2025-05-30  | GabrielGuinzani   | feat: ✨ Add step to list go-scheduler directory                                   |
-| 2025-05-30  | guilherme-savio   | fix: 🐛 Fix Workflow                                                               |
-| 2025-05-30  | guilherme-savio   | feat: ✨ Add tests and update workflow                                             |
-| 2025-05-30  | GabrielGuinzani   | fix: correct working directory for golangci-lint step                              |
-| 2025-05-30  | GabrielGuinzani   | fix: update working directory for CI and lint workflows                            |
-| 2025-05-30  | higorgoulart      | feat: add changelog                                                                |
+# Mudanças
+
+- Adicionado linter;
+- Adicionado CI;
+- Refatorado criação e premiação do jogo:
+  - Nova classe `GameService`;
+  - Reestruturado premiação com Strategy Pattern,fazendo com que siga o Open/Closed Principle.
+
+| Data       | Autor           | Mensagem do Commit                                                                 |
+|------------|-----------------|------------------------------------------------------------------------------------|
+| 2025-05-29 | GabrielGuinzani | feat: Improve CI workflow by adding comments for clarity |
+| 2025-05-29 | GabrielGuinzani | Merge branch 'main' of https://github.com/higorgoulart/bicho.bet |
+| 2025-05-29 | GabrielGuinzani | feat: Add step to list go-scheduler directory in CI workflow |
+| 2025-05-29 | Guilherme       | Update CHANGELOG.md |
+| 2025-05-29 | GabrielGuinzani | feat: :sparkles: Add step to list root directory in CI workflow |
+| 2025-05-29 | GabrielGuinzani | feat: :sparkles: Add step to list go-scheduler directory |
+| 2025-05-29 | Guilherme Savio | fix: :bug: Fix Workflow |
+| 2025-05-29 | Guilherme Savio | feat: :sparkles: Add tests and update workflow |
+| 2025-05-29 | GabrielGuinzani | fix: correct working directory for golangci-lint step |
+| 2025-05-29 | GabrielGuinzani | fix: update working directory for CI and lint workflows |
+| 2025-05-29 | higorgoulart    | feat: add changelog |
+| 2025-05-29 | GabrielGuinzani | Merge branch 'main' of https://github.com/higorgoulart/bicho.bet |
+| 2025-05-29 | higorgoulart    | Merge branch 'main' of https://github.com/higorgoulart/bicho.bet |
+| 2025-05-29 | higorgoulart    | feat: split posicoesCorretas functions |
+| 2025-05-29 | GabrielGuinzani | fix: update cache key to use specific go.sum path |
+| 2025-05-29 | GabrielGuinzani | feat: add golangci-lint installation and execution steps to CI workflow |
+| 2025-05-29 | GabrielGuinzani | feat: update CI workflow to use Go setup and build steps |
+| 2025-05-29 | GabrielGuinzani | fix: correct directory path for golangci-lint execution |
+| 2025-05-29 | GabrielGuinzani | feat: add golangci-lint configuration for code quality checks |
+| 2025-05-29 | GabrielGuinzani | fix: update lint workflow paths to be more specific |
+| 2025-05-29 | GabrielGuinzani | feat: add Go Lint workflow for code quality checks |
+| 2025-05-29 | GabrielGuinzani | feat: add CI workflow for building and testing |
+| 2025-05-29 | higorgoulart    | fix: path |
+| 2025-05-29 | higorgoulart    | feat: change path |
+| 2025-05-29 | higorgoulart    | feat: add workflow |
+| 2025-05-26 | higorgoulart    | fix: change return & imports |
+| 2025-05-22 | higorgoulart    | fix: change credentials |
+| 2025-05-22 | higorgoulart    | feat: add service & strategy |
