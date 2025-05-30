@@ -28,5 +28,5 @@ jobs:
 
       - name: Rodar golangci-lint
         run: |
-          cd bichobet/go-scheduler
+          cd go-scheduler
           golangci-lint run ./...
