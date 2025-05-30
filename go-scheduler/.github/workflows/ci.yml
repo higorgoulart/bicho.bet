@@ -31,17 +31,22 @@ jobs:
 
       - name: Install dependencies
         run: go mod download
+        working-directory: go-scheduler
 
       - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v6
         with:
           version: latest
+          working-directory: go-scheduler
 
       - name: Run linter
         run: golangci-lint run ./...
+        working-directory: go-scheduler
 
       - name: Build
         run: go build ./...
+        working-directory: go-scheduler
 
       - name: Run tests
         run: go test ./...
+        working-directory: go-scheduler

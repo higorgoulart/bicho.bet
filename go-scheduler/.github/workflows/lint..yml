@@ -3,10 +3,10 @@ name: Go Lint
 on:
   push:
     paths:
-      - "bichobet/go-scheduler/**.go"
+      - "go-scheduler/**.go"
   pull_request:
     paths:
-      - "bichobet/go-scheduler/**.go"
+      - "go-scheduler/**.go"
 
 jobs:
   lint:
@@ -15,6 +15,16 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go-scheduler/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
 
       - name: Instalar Go
         uses: actions/setup-go@v5
@@ -27,6 +37,3 @@ jobs:
           version: latest
 
       - name: Rodar golangci-lint
-        run: |
-          cd go-scheduler
-          golangci-lint run ./...
