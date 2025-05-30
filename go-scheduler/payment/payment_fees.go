@@ -39,3 +39,12 @@ func PaymentFee() {
 	database.DB.Where("divida < ?", 0).Find(&apostadores)
 	functions.SetDividaLog(apostadores)
 }
+
+func PaymentFeeLocally(apostador model.Apostador) model.Apostador {
+	taxaJuros := 0.20
+
+	if apostador.Divida < 0 {
+		apostador.Divida = functions.RoundToTwoDecimalPlaces(apostador.Divida + (apostador.Divida * taxaJuros))
+	}
+	return apostador
+}

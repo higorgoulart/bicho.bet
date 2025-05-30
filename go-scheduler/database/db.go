@@ -15,7 +15,7 @@ var (
 )
 
 func Connect() {
-	dsn := "host=postgres user=admin password=123 dbname=bichobet port=5432 sslmode=disable"
+	dsn := "host=localhost user=admin password=123 dbname=bichobet port=5432 sslmode=disable"
 
 	sqlDB, _ := sql.Open("pgx", dsn)
 	DB, err = gorm.Open(postgres.New(postgres.Config{Conn: sqlDB}), &gorm.Config{

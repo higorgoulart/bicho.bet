@@ -1,4 +1,5 @@
 ﻿name: Go Build and Test
+
 on: [push]
 
 jobs:
@@ -7,16 +8,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.24.x'
+
       - name: Install dependencies
         working-directory: ./go-scheduler
-        run: go get .
+        run: |
+          go mod tidy
+          go get .
+
       - name: Build
         working-directory: ./go-scheduler
         run: go build -v ./...
-      - name: Test with the Go CLI
+
+      - name: Run unit tests with coverage
         working-directory: ./go-scheduler
-        run: go test
+        run: |
+          go test -v -coverprofile=coverage.out ./...
+      
+      - name: Upload test coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./go-scheduler/coverage.out

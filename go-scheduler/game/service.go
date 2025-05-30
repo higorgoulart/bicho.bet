@@ -25,7 +25,6 @@ func (s *GameService) GameResult() {
 	tx := s.db.Begin()
 
 	if err := tx.Where("dt_fim < ? AND status = ?", time.Now(), "ABERTO").First(&jogo).Error; err != nil {
-		tx.Rollback()
 		if err != gorm.ErrRecordNotFound {
 			functions.SetErrorLog(err, "resultado")
 		}
